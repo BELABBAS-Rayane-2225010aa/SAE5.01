@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { Benefit } from "~/models/solarPanel/benefit";
+
+// Toast notifications for messages
 const toast = useToast();
+
+//Initialize benefit with default values
 let benefit: Benefit = {
   gasEmissionSaved: {
     co2: 0,
@@ -12,44 +16,53 @@ let benefit: Benefit = {
   lightBulbs: 0,
 };
 
+// Fetch benefit data from the API and handle errors
 try {
   const benefits = await $fetch('/api/solarPanel/v1/benefit', {
     method: 'GET',
   });
-  benefit = benefits.envBenefits;
+  benefit = benefits.envBenefits; // Update benefit with fetched data
 } catch (error) {
-  console.error(error);
+  console.error(error); // Log any errors to the console
   toast.add({
     title: "Une erreur est survenue lors de la récupération de données. Veuillez réessayer plus tard.",
     icon: "i-heroicons-information-circle",
     color: "red",
-  });
+  }); // Show a toast notification for error
 }
 </script>
 
 <template>
   <div class="greenwashing">
+    <!-- Title for the section -->
     <h2 class="font-extrabold text-4xl text-center">Bénéfices environmentaux</h2>
+
+    <!-- Section for emission reductions -->
     <section class="emissions mt-28">
       <h3 class="font-bold text-2xl text-center">Réduction des émissions de CO<sub>2</sub> (en kg)</h3>
       <div class="emissions-data mt-10">
+        <!-- Display CO2 emissions saved -->
         <div class="single-data">
           <h4 class="font-bold text-xl">{{benefit.gasEmissionSaved.co2}} CO<sub>2</sub></h4>
         </div>
 
+        <!-- Display SO2 emissions saved -->
         <div class="single-data">
           <h4 class="font-bold text-xl">{{benefit.gasEmissionSaved.so2}} SO<sub>2</sub></h4>
         </div>
 
+        <!-- Display NOX emissions saved -->
         <div class="single-data">
           <h4 class="font-bold text-xl">{{benefit.gasEmissionSaved.nox}} NOX</h4>
         </div>
       </div>
     </section>
 
+    <!-- Section for equivalent benefits -->
     <section class="equivalent mt-10">
       <h3 class="font-bold text-2xl text-center">C'est comme si...</h3>
       <div class="equivalent-data mt-10">
+        <!-- Display number of trees planted -->
         <div class="single-data">
           <h4 class="text-lg font-medium">On avait planté</h4>
           <div class="flex items-center gap-2">
@@ -58,6 +71,7 @@ try {
           </div>
         </div>
 
+        <!-- Display number of light bulbs saved -->
         <div class="single-data">
           <h4 class="text-lg font-medium">On avait allumé pendant une journée</h4>
           <div class="flex items-center gap-2">
@@ -74,6 +88,7 @@ try {
 </template>
 
 <style scoped>
+/* Styles for the overall container */
 .greenwashing {
   padding: 24px;
   width: 100% !important;
@@ -82,6 +97,7 @@ try {
   color: rgb(9, 121, 9);
 }
 
+/* Responsive padding adjustments */
 .greenwashing {
   padding: 110px 15%;
   transition: 0.3s ease-in-out;
@@ -102,12 +118,14 @@ try {
 h2 {
 }
 
+/* Layout for emissions data section */
 .emissions-data {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
 }
 
+/* Layout for equivalent benefits section */ 
 .equivalent {
   .equivalent-data {
     display: flex;
