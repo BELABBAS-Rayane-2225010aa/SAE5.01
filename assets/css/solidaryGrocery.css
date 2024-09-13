@@ -1,0 +1,10 @@
+.shop-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.introduction {
+  display: flex;
+  width: 100%;
+}
