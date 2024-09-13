@@ -6,7 +6,10 @@ import type { SolarPanelTheoreticalProduction } from "~/models/weatherReport";
 import moment from "moment";
 import colors from "tailwindcss/colors";
 import tailwindConfig from "~/tailwind.config";
+
+// Determine if the device is mobile based on touch points
 const isMobile = navigator?.maxTouchPoints > 0;
+  
 const filters = ref<Filters>({
   // use moment to get the current date minus 7 days
   startDate: isMobile ? moment().subtract(1, 'days').toDate() : moment().subtract(7, "days").toDate(),
@@ -16,7 +19,7 @@ const filters = ref<Filters>({
 });
 
 const { formatDateTime, formatWeatherValue } = useEnergyChartData();
-const toast = useToast();
+const toast = useToast(); // Toast notification for error handling
 
 let energyDetails: EnergyDetails = {
   timeUnit: "HOUR",
@@ -29,6 +32,7 @@ const theoreticalProduction = ref<SolarPanelTheoreticalProduction[]>([{
   production: 0,
 }]);
 
+// Function to fetch data from API and handle responses
 async function getData() {
   let energyDetailsResponse: EnergyDetails = {
     timeUnit: "HOUR",
@@ -42,12 +46,17 @@ async function getData() {
 
   try {
     const results = await Promise.allSettled([
+
+      // Fetch energy details from API
       $fetch<EnergyDetails>(`/api/solarPanel/v1/energyDetails?timeUnit=${filters.value.timeUnit}&startTime=${formatDateTime(filters.value.startDate)}&endTime=${formatDateTime(filters.value.endDate)}`, {
         method: "GET",
       }),
+
+      // Fetch theoretical production values
       formatWeatherValue(filters.value),
     ]);
 
+    // Handle the response for energy details
     if (results[0].status === "fulfilled") {
       energyDetailsResponse = results[0].value as EnergyDetails;
     } else {
@@ -59,6 +68,7 @@ async function getData() {
       });
     }
 
+    // Handle the response for theoretical production
     if (results[1].status === "fulfilled") {
       theoreticalProductionResponse = results[1].value as SolarPanelTheoreticalProduction[];
     } else {
@@ -70,6 +80,7 @@ async function getData() {
       });
     }
   } catch (error) {
+    // Handle other errors
     toast.add({
       title: "Une erreur générale est survenue lors de la récupération des données",
       icon: "i-heroicons-exclamation-circle",
@@ -77,10 +88,12 @@ async function getData() {
     });
   }
 
+  // Update state with fetched data
   energyDetails = energyDetailsResponse;
   theoreticalProduction.value = theoreticalProductionResponse;
 }
 
+// Function to convert time unit to a readable string
 function getStringByTimeUnit(timeUnit: string) {
   switch (timeUnit) {
     case "QUARTER_OF_AN_HOUR":
@@ -100,7 +113,10 @@ function getStringByTimeUnit(timeUnit: string) {
   }
 }
 
+// Function to update chart context with new data
 function updateChartContext() {
+
+  // Prepare data for production, consumption, difference, and theoretical production
   const productionData = energyDetails.meters.find((meter: EnergyDetailsMeter) => meter.type === "Production")?.values.map((v: EnergyDetailsData) => ({
     x: v.date,
     y: v.value ?? 0,
@@ -115,14 +131,17 @@ function updateChartContext() {
     y: v.production,
   }));
 
+  //Update chart datasets with the data prepared
   chartContext.value.datasets[0].data = productionData;
   chartContext.value.datasets[1].data = theoreticalData;
   chartContext.value.datasets[2].data = consumptionData;
   chartContext.value.datasets[3].data = differenceData;
 }
 
+// Initial data fetch
 await getData();
 
+// Initialize chart context with datasets
 const chartContext = ref({
   title: "Production de l'énergie",
   datasets: [
@@ -163,6 +182,7 @@ const chartContext = ref({
   ],
 });
 
+// Watch for changes in filters and update data and chart context
 watch(filters, () => {
   getData().then(() => {
     updateChartContext();
