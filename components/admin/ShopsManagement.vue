@@ -2,21 +2,27 @@
 import type { FormSubmitEvent } from "#ui/types";
 import type { Shop } from "~/models/shop";
 
+// Define the Item type which extends the Shop type with an additional label property
 export type Item = {
   label: string;
 } & Shop;
 
+// Define the props for the component, expecting an array of shops
 const { shops } = defineProps<{
   shops: Shop[];
 }>();
 
+// Use composable functions to get weeks and load state
 const { weeks } = useWeek();
 const { loadState } = useShopManagement();
+
+// Initialize reactive references and state
 const week = ref(weeks[0].value);
 const isLoading = ref<boolean>(false);
 const shopNumber = ref<number>(0);
 const state = reactive<Shop[]>(loadState(shops || []));
 
+// Function to create items from shops, adding a label property
 const createItems = (shops: Shop[]): Item[] => {
   return shops.map((shop: Shop) => ({
     label: shop.name,
@@ -24,8 +30,10 @@ const createItems = (shops: Shop[]): Item[] => {
   }));
 };
 
+// Initialize items with the created items from shops
 const items = ref<Item[]>(createItems(shops || []));
 
+// Array of days
 const days = [
   "Lundi",
   "Mardi",
@@ -36,7 +44,8 @@ const days = [
   "Dimanche",
 ];
 
-//TODO: manage error
+// Function to handle form submission
+// Sends a PUT request to update shop hours and handles loading state and errors
 const onSubmit = async (event: FormSubmitEvent<Shop[]>) => {
   const shopsCopy = [...event.data];
 
@@ -74,6 +83,7 @@ const onSubmit = async (event: FormSubmitEvent<Shop[]>) => {
 
     <p class="shop__select">
       Semaine :
+      <!-- Dropdown to select the week -->
       <USelect
         v-model="week"
         :options="weeks"
@@ -84,6 +94,7 @@ const onSubmit = async (event: FormSubmitEvent<Shop[]>) => {
       />
     </p>
 
+    <!-- Tabs to switch between different shops -->
     <UTabs
       :items="items"
       orientation="vertical"
@@ -94,9 +105,11 @@ const onSubmit = async (event: FormSubmitEvent<Shop[]>) => {
       @change="(e) => (shopNumber = ~~e)"
     >
       <template #item="{ item }">
+        <!-- Form to manage shop hours -->
         <UForm :state="state" @submit="onSubmit">
           <UButton type="submit" :loading="isLoading">Enregistrer</UButton>
 
+          <!-- List of days with their respective management components -->
           <ul class="shop__ul">
             <li v-for="(dayName, index) in days" :key="index">
               <AdminShopManagementDay

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Define the props for the component, expecting an optional title, a value, and a unit
 const props = defineProps<{
   title?: string;
   value: number;
@@ -7,14 +8,18 @@ const props = defineProps<{
 </script>
 
 <template>
-<div class="card-value-w-unit rounded-3xl">
-  <p v-if="title" class="text-white">{{ title }}</p>
-  <p class="font-bold text-white text-4xl">{{ value }}</p>
-  <p class="font-bold text-gray-500 text-2xl">{{ unit }}</p>
-</div>
+  <div class="card-value-w-unit rounded-3xl">
+    <!-- Display the title if it is provided -->
+    <p v-if="title" class="text-white">{{ title }}</p>
+    <!-- Display the value in bold and large font -->
+    <p class="font-bold text-white text-4xl">{{ value }}</p>
+    <!-- Display the unit in bold and slightly smaller font -->
+    <p class="font-bold text-gray-500 text-2xl">{{ unit }}</p>
+  </div>
 </template>
 
 <style scoped>
+/* Styling for the card container */
 .card-value-w-unit {
   margin: 20px;
   display: flex;

@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import type { Day } from "~/models/shop";
 
-// use props instead of descrupturing because we need to watch the week and day props inside the component
+// Define the component's props using defineProps
+// Use props instead of destructuring because we need to watch the week and day props inside the component
 const props = defineProps<{
   dayName: string;
   day: Day;
 }>();
 
-// we descructure the props that are not watching inside the component
+// Destructure the props that do not need to be watched inside the component
 const { dayName } = props;
 
+// Function to handle closing the day
+// If the day is not open, reset the morning and afternoon times
 const toggleClose = (isOpen: boolean): void => {
   if (!isOpen) {
     props.day.morningStart = "";
@@ -19,6 +22,8 @@ const toggleClose = (isOpen: boolean): void => {
   }
 };
 
+// Function to handle the lunch break
+// If the lunch break is not enabled, reset the afternoon times
 const toggleBreak = (withBreak: boolean): void => {
   if (!withBreak) {
     props.day.afternoonStart = "";
@@ -28,9 +33,11 @@ const toggleBreak = (withBreak: boolean): void => {
 </script>
 
 <template>
+  <!-- Display the day name -->
   <label class="font-bold">{{ dayName }}</label>
   <div class="form-container">
     <div class="flex gap-4">
+      <!-- Input fields for morning times -->
       <UInput
         class="w-fit"
         type="time"
@@ -44,8 +51,10 @@ const toggleBreak = (withBreak: boolean): void => {
         :disabled="!props.day.isOpen"
       />
 
+      <!-- Conditionally display the "and" separator if the lunch break is enabled -->
       <span v-if="props.day.withBreak">et</span>
 
+      <!-- Input fields for afternoon times if the lunch break is enabled -->
       <UInput
         class="w-fit"
         v-if="props.day.withBreak"
@@ -62,19 +71,23 @@ const toggleBreak = (withBreak: boolean): void => {
       />
     </div>
 
+    <!-- Toggle switches for lunch break and opening status -->
     <div class="flex gap-3">
       <div class="flex flex-col">
-        <label>Pause déjeuner</label>
+        <!-- Lunch Break -->
+        <label>Lunch Break</label>
         <UToggle v-model="props.day.withBreak" @change="toggleBreak" />
       </div>
 
       <div class="flex flex-col">
-        <label>Ouvert</label>
+        <!-- Open -->
+        <label>Open</label>
         <UToggle v-model="props.day.isOpen" @change="toggleClose" />
       </div>
     </div>
   </div>
 
+  <!-- Divider to separate the days -->
   <UDivider
     orientation="horizontal"
     class="mt-2"
@@ -83,6 +96,7 @@ const toggleBreak = (withBreak: boolean): void => {
 </template>
 
 <style>
+/* Styling for the form container */
 .form-container {
   display: flex;
   flex-direction: row;
