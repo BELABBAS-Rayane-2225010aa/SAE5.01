@@ -2,16 +2,23 @@
 import type { Shop } from "~/models/shop";
 import type { User } from "~/models/user";
 
+// get current user session
 const { getSession } = useAuth();
 
+// Fetch the list of shops from the `/api/shops` endpoint.
+// This makes a GET request to the API and expects the response to be an array of Shop objects.
 const { data: shops } = await useFetch<Shop[]>("/api/shops", {
   method: "GET",
 });
 
+
+// Fetch the list of users from the `/api/users?safe=true` endpoint.
+// This makes a GET request and expects the response to be an array of User objects.
 const { data: users } = await useFetch<User[]>("/api/users?safe=true", {
   method: "GET",
 });
 
+// get current user session
 const session = await getSession();
 
 const items = [
@@ -20,6 +27,8 @@ const items = [
   }
 ]
 
+// check if the current user is an administrator
+// If so, add an additional "Utilisateurs" tab
 if (session.role == 'admin') {
     items.push({
     label: "Utilisateurs"
@@ -30,22 +39,26 @@ if (session.role == 'admin') {
 <template>
   <GlobalWrapper>
     <h2>Administration</h2>
+
+    <!-- A tab is created for every items -->
     <UTabs :items="items">
       <template #item="{ item }">
-        <AdminShopsManagement
-          v-if="shops && item.label === 'Horaires'"
-          :shops="shops"
-          class="animate__animated animate__fadeIn"
-        />
+        <!-- This section is displayed if the current tab is "Horaires" -->
+       <AdminShopsManagement
+         v-if="shops && item.label === 'Horaires'"
+         :shops="shops"
+         class="animate__animated animate__fadeIn"
+       />
 
-        <AdminUsersManagement
-          v-if="users && item.label === 'Utilisateurs' && session.role === 'admin'"
-          :users="users"
-          class="animate__animated animate__fadeIn"
-        />
-      </template>
-    </UTabs>
-  </GlobalWrapper>
+        <!-- This section is displayed if the current tab is "Utilisateurs" -->
+      <AdminUsersManagement
+        v-if="users && item.label === 'Utilisateurs' && session.role === 'admin'"
+        :users="users"
+        class="animate__animated animate__fadeIn"
+      />
+    </template>
+  </UTabs>
+</GlobalWrapper>
 </template>
 
 <style></style>
