@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { definePageMeta } from "#imports";
 
+// page available without authentification
 definePageMeta({
   auth: false
 });
