@@ -2,25 +2,30 @@
 import { definePageMeta } from "#imports";
 import type { Shop } from "~/models/shop";
 
+// page available without authentification
 definePageMeta({
   auth: false,
 });
 
+// Define a custom type `Item` that combines a `label` string with all properties of a `Shop`.
 export type Item = {
   label: string;
 } & Shop;
 
+// Fetch the list of shops from the `/api/shops` endpoint using a GET request.
+// It expects a response of an array of `Shop` objects and stores it in the `shops` variable.
 const { data: shops } = await useFetch<Shop[]>("/api/shops", {
   method: "GET",
 });
 
+// Function to transform an array of `Shop` objects into an array of `Item` objects.
 const createItems = (shops: Shop[]): Item[] => {
   return shops.map((shop: Shop) => ({
     label: shop.name,
     ...shop,
   }));
 };
-
+// Create a reactive `items` reference that stores the transformed shops.
 const items = ref<Item[]>(createItems(shops.value || []));
 </script>
 
