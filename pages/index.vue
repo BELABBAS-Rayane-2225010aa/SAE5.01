@@ -3,10 +3,12 @@ import type { CardInfos } from "~/components/card/Presentation.vue";
 import type { CardNavigationInfos } from "~/components/card/Navigation.vue";
 import { definePageMeta } from "#imports";
 
+// page available without authentification
 definePageMeta({
   auth: false,
 });
 
+// Nav menu options
 const cardsNavigationInfos: CardNavigationInfos[] = [
   {
     title: "Technologies",
@@ -28,6 +30,7 @@ const cardsNavigationInfos: CardNavigationInfos[] = [
   },
 ];
 
+// Info cards
 const cardsInfos: CardInfos[] = [
   {
     title: "Par les étudiants pour les étudiants !",
