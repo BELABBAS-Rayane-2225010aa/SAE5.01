@@ -1,8 +1,11 @@
 <script setup lang="ts">
+
+// page available without authentification
 definePageMeta({
   auth: false,
 });
 
+// init technology info card
 export type TechnoInfos = {
   title: string;
   shortDescription: string;
@@ -15,8 +18,10 @@ export type TechnoInfos = {
   installImage?: string;
 };
 
+// A reactive reference that controls the visibility of the technology navigation
 const isNavigationVisible = ref<boolean>(false);
 
+// show the technology navigation when scrolling
 const onScroll = () => {
   if (window.scrollY > 100) {
     isNavigationVisible.value = true;
@@ -25,6 +30,7 @@ const onScroll = () => {
   }
 };
 
+// When the component is mounted, attach the `onScroll` function to the window's scroll event.
 onMounted(() => {
   window.addEventListener("scroll", onScroll);
 
@@ -33,6 +39,7 @@ onMounted(() => {
   };
 });
 
+// technology info cards
 const technoInfos: TechnoInfos[] = [
   {
     title: "LI-FI",
