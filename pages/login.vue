@@ -8,6 +8,7 @@ const { signIn, token, data, status, lastRefreshedAt } = useAuth();
 const toast = useToast();
 const isLoading = ref<boolean>(false);
 
+//only unauthenticated users can access this page
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
@@ -15,18 +16,22 @@ definePageMeta({
   }
 });
 
+// Define a validation schema using Zod to validate the form data.
 const schema = z.object({
   email: z.string().email("L'adresse mail est invalide").min(1, "Requis"),
   password: z.string().min(1, "Requis")
 });
 
+// Define a type based on the schema output to be used in the form state
 type Schema = z.output<typeof schema>;
 
+// Init the form
 const state = reactive({
   email: undefined,
   password: undefined
 });
 
+// Will trigger when the form is submitted
 const onSubmit = () => {
   isLoading.value = true;
   signIn(
@@ -36,12 +41,14 @@ const onSubmit = () => {
     },
     { callbackUrl: "/administration" }
   )
+    // Success
     .then(() => {
       toast.add({
         title: "Connexion",
         description: "Vous êtes connecté avec succès"
       });
     })
+    // Failed
     .catch((error) => {
       toast.add({
         title: "L'e-mail ou le mot de passe est incorrect",
