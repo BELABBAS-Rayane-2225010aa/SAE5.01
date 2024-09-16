@@ -30,7 +30,7 @@ definePageMeta({
 </template>
 
 <style scoped>
-//graph
+/* graph */
 .chart {
   padding: 24px;
 }
