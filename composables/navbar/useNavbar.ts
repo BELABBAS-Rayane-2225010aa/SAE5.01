@@ -1,3 +1,4 @@
+// defines Link
 type Link = {
   name: string;
   path?: string;
@@ -5,6 +6,7 @@ type Link = {
   onClick?: () => void;
 };
 
+// defines UseNavbarReturn
 type UseNavbarReturn = {
   isMenuOpen: Ref<boolean>;
   refLinks: Ref<Link[]>;
@@ -13,9 +15,11 @@ type UseNavbarReturn = {
   resetMenu: () => void;
 };
 
+//
 export const useNavbar = (): UseNavbarReturn => {
   const isMenuOpen = ref<boolean>(false);
 
+  // Navbar links
   const links: Link[] = [
     {
       name: "Technologies",
@@ -37,6 +41,7 @@ export const useNavbar = (): UseNavbarReturn => {
 
   const refLinks = ref<Link[]>(links);
 
+  // Sublinks for "Photovoltaique"
   const subLinks: Link[] = [
     {
       icon: "i-heroicons-arrow-left-circle",
@@ -53,15 +58,18 @@ export const useNavbar = (): UseNavbarReturn => {
     },
   ];
 
+  // Opens the menu if it's closed / closes it if it's open
   const toggleMenu = (): void => {
     isMenuOpen.value = !isMenuOpen.value;
     refLinks.value = links;
   };
 
+  // Display the subLinks instead of the main links
   const toggleMenuWithSubLinks = (): void => {
     refLinks.value = subLinks;
   };
 
+  // Close the menu
   const resetMenu = (): void => {
     isMenuOpen.value = false;
   };
