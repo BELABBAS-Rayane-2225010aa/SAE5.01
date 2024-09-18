@@ -28,6 +28,12 @@ const cardsNavigationInfos: CardNavigationInfos[] = [
     path: "/epicerie-solidaire",
     iconUrl: "i-heroicons-shopping-cart",
   },
+  {
+    title: "Météo",
+    description: "Consultez la météo",
+    path: "/meteo",
+    iconUrl: "i-heroicons-sun",
+  }
 ];
 
 // Info cards
