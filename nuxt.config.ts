@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     solarPanelApiUrl: "",
     solarPanelApiKey: "",
     solarPanelSiteId: "",
-    jwtSecret: "",
+    jwtSecret: "c18c3f296f0a2088342d1ea3aef0161ecfd465935314f072f24bc599b50ce360",
   },
   pwa: {
     manifest: {
