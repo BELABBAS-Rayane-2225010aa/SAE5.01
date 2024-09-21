@@ -36,6 +36,10 @@ export const useNavbar = (): UseNavbarReturn => {
     {
       name: "Contact",
       path: "/contact",
+    },
+    {
+      name: "Evenements",
+      path: "/evenements",
     }
   ];
 
