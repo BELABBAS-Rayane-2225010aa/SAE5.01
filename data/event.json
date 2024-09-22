@@ -1,5 +1,6 @@
 [
     {
+      "id": 0,
       "title": "Concert de Jazz",
       "description": "Un concert de jazz avec des musiciens de renommée internationale.",
       "images": [
@@ -15,6 +16,7 @@
       "location": "123 Rue de la Musique, Paris, France"
     },
     {
+      "id": 1,
       "title": "Exposition d'Art",
       "description": "Une exposition d'art contemporain avec des œuvres de divers artistes.",
       "images": [
