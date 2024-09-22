@@ -21,4 +21,13 @@ export class EventsRepository {
       throw new Error("Error getting events");
     }
   }
+
+  public static async getEventById(id: number): Promise<Event | undefined> {
+    try {
+      const events = (await JsonConnector.getData(this.filePath)) as Event[];
+      return events.find((event) => event.id === id);
+    } catch (error) {
+      throw new Error("Error getting event by id");
+    }
+  }
 }
