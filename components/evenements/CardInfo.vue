@@ -23,8 +23,9 @@ const { itemInfos } = defineProps<{
             class="cardButtonTechno"
             variant="link"
             :to="`/evenement/${itemInfos.id}`"
-            >Voir plus</UButton
         >
+            Voir plus
+        </UButton>
     </div>
 </template>
 
