@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    apiKey: "",
+    apiKey: "cbbd1d2b11c04e5ab691332586e1026e",
     solarPanelApiUrl: "",
     solarPanelApiKey: "",
     solarPanelSiteId: "",
