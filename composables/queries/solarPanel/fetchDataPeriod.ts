@@ -7,10 +7,12 @@ export const fetchDataPeriod = async (): Promise<DataPeriod> => {
   const siteId = config.solarPanelSiteId;
 
   const response = await fetch(
-    `${apiUrl}/site/${siteId}/dataPeriod?api_key=${apiKey}`,
+    `${apiUrl}/sites/${siteId}/energy?resolution=lifetime`,
     {
       method: "GET",
-      headers: {},
+      headers: {
+        "X-API-Key" : "I4W1QU9682D0DK15CZT3Q6UBVPGOSRJY",
+      },
     },
   );
 

@@ -48,7 +48,7 @@ async function getData() {
     const results = await Promise.allSettled([
 
       // Fetch energy details from API
-      $fetch<EnergyDetails>(`/api/solarPanel/v1/energyDetails?timeUnit=${filters.value.timeUnit}&startTime=${formatDateTime(filters.value.startDate)}&endTime=${formatDateTime(filters.value.endDate)}`, {
+      $fetch<EnergyDetails>(`/api/solarPanel/v1/energyDetails?serialNumber=${serialNumber}&from=${formatDateTime(filters.value.startDate)}&to=${formatDateTime(filters.value.endDate)}&resolution=${filters.value.timeUnit}`, {
         method: "GET",
       }),
 

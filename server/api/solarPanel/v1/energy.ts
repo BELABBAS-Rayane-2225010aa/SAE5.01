@@ -1,15 +1,15 @@
 import { fetchEnergy } from "~/composables/queries/solarPanel/fetchEnergy";
 
 type Query = {
-  timeUnit: string;
+  resolution: string;
   startDate: string;
   endDate: string;
 };
 
 export default defineEventHandler(async (event) => {
-  const { timeUnit, startDate, endDate } = getQuery<Query>(event);
+  const { resolution, startDate, endDate } = getQuery<Query>(event);
 
   return {
-    content: await fetchEnergy(timeUnit, startDate, endDate),
+    content: await fetchEnergy(resolution, startDate, endDate),
   };
 });

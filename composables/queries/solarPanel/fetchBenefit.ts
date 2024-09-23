@@ -7,9 +7,12 @@ export const fetchBenefit = async (): Promise<Benefit> => {
   const siteId = config.solarPanelSiteId;
 
   return await $fetch<Benefit>(
-    `${apiUrl}/site/${siteId}/envBenefits?systemUnits=Metrics&api_key=${apiKey}`,
+    `${apiUrl}/sites/${siteId}/envBenefits?systemUnits=Metrics`,
     {
       method: "GET",
+      headers: {
+        "X-API-Key" : "I4W1QU9682D0DK15CZT3Q6UBVPGOSRJY",
+      },
     },
   );
 }

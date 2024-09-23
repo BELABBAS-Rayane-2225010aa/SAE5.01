@@ -1,5 +1,11 @@
 import { fetchOverview } from "~/composables/queries/solarPanel/fetchOverview";
 
+type Query = {
+  startDate: string;
+  endDate : string;
+};
+
 export default defineEventHandler(async (event) => {
-  return await fetchOverview();
+  const { startDate, endDate } = getQuery<Query>(event);
+  return await fetchOverview(startDate, endDate);
 });

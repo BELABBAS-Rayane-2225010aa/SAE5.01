@@ -1,8 +1,9 @@
 import type { Power } from '~/models/solarPanel/power';
 
 export const fetchPower = async (
-  startTime: string,
-  endTime: string,
+  resolution: string,
+  startDate: string,
+  endDate: string,
 ): Promise<Power> => {
   const config = useRuntimeConfig();
   const apiUrl = config.solarPanelApiUrl;
@@ -10,10 +11,12 @@ export const fetchPower = async (
   const siteId = config.solarPanelSiteId;
 
   const response = await fetch(
-    `${apiUrl}/site/${siteId}/power?startTime=${startTime}&endTime=${endTime}&api_key=${apiKey}`,
+    `${apiUrl}/sites/${siteId}/power?resolution=${resolution}&from=${startDate}&to=${endDate}`,
     {
       method: 'GET',
-      headers: {},
+      headers: {
+        "X-API-Key" : "I4W1QU9682D0DK15CZT3Q6UBVPGOSRJY",
+      },
     },
   );
 

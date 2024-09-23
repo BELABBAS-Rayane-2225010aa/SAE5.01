@@ -1,7 +1,7 @@
 import type { Energy } from "~/models/solarPanel/energy";
 
 export const fetchEnergy = async (
-  timeUnit: string,
+  resolution: string,
   startDate: string,
   endDate: string,
 ): Promise<Energy> => {
@@ -11,10 +11,12 @@ export const fetchEnergy = async (
   const siteId = config.solarPanelSiteId;
 
   const response = await fetch(
-    `${apiUrl}/site/${siteId}/energy?timeUnit=${timeUnit}&startDate=${startDate}&endDate=${endDate}&api_key=${apiKey}`,
+    `${apiUrl}/sites/${siteId}/energy?resolution=${resolution}&from=${startDate}&to=${endDate}`,
     {
       method: "GET",
-      headers: {},
+      headers: {
+        "X-API-Key" : "I4W1QU9682D0DK15CZT3Q6UBVPGOSRJY",
+      },
     },
   );
 
