@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { definePageMeta } from "#imports";
+import type { WeatherData } from "~/models/weatherReport";
 
 // page available without authentification
 definePageMeta({
   auth: false
 });
+
+const { data: weather } = await useFetch<WeatherData[]>("/api/weatherReport", {
+  method: "GET",
+});
+
 </script>
 
 <template>
@@ -18,6 +24,12 @@ definePageMeta({
         <div class="text-wrap flex flex-wrap justify-between">
           <div class="text mt-3 w-full md:w-2/3">
             <p> Lorem Ipsum</p>
+            <ul>
+              <li v-for="(item, index) in weather" :key="index">
+                Temperature: {{ item.date }}, Humidity: {{ item.solarRadiation }}
+              </li>
+            </ul>
+            <p> Lorem Ipsum 2 </p>
           </div>
         </div>
        </section>

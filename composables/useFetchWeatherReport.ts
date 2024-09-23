@@ -41,11 +41,11 @@ export const useFetchWeatherReport = async ({queryParams, apiKey, solarPanelInfo
     const weatherData: WeatherData[] = parseWeatherData(weatherDataRaw.data);
 
     // Calculate the theoretical production of the solar panel based on the weather data
-    /*const solarPanelTheoreticalProduction: SolarPanelTheoreticalProduction[] = weatherData.map((data) => ({
+    const solarPanelTheoreticalProduction: SolarPanelTheoreticalProduction[] = weatherData.map((data) => ({
         date: data.date, // The date of the weather data
         production: data.solarRadiation * parseFloat(solarPanelInfo.nominalPower) * parseFloat(solarPanelInfo.performanceRatio), // The calculated production
-    }));*/
+    }));
 
-    // Return the data
-    return weatherData;
+    // Return the production data
+    return solarPanelTheoreticalProduction;
 }

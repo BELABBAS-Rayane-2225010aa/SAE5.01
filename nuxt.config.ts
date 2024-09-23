@@ -7,9 +7,11 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@sidebase/nuxt-auth"
   ],
+
   build: {
     transpile: ['jsonwebtoken']
   },
+
   auth: {
     baseURL: '/api/auth',
     provider: {
@@ -34,6 +36,7 @@ export default defineNuxtConfig({
       isEnabled: true
     },
   },
+
   runtimeConfig: {
     apiKey: "cbbd1d2b11c04e5ab691332586e1026e",
     solarPanelApiUrl: "",
@@ -41,6 +44,7 @@ export default defineNuxtConfig({
     solarPanelSiteId: "",
     jwtSecret: "c18c3f296f0a2088342d1ea3aef0161ecfd465935314f072f24bc599b50ce360",
   },
+
   pwa: {
     manifest: {
       name: "Magasin Connecté 4.0",
@@ -86,5 +90,10 @@ export default defineNuxtConfig({
       type: "module",
     },
   },
+
   plugins: [],
+
+  devtools: {
+    enabled: false,
+  },
 });
