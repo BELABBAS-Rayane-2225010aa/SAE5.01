@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Shop } from "~/models/shop";
 import type { User } from "~/models/user";
+import type { Event } from "~/models/event";
 
 // get current user session
 const { getSession } = useAuth();
@@ -18,12 +19,21 @@ const { data: users } = await useFetch<User[]>("/api/users?safe=true", {
   method: "GET",
 });
 
+// Fetch the list of events from the `/api/events` endpoint.
+// This makes a GET request to the API and expects the response to be an array of Event objects.
+const { data: events } = await useFetch<Event[]>("/api/events", {
+  method: "GET",
+}); 
+
 // get current user session
 const session = await getSession();
 
 const items = [
   {
     label: "Horaires"
+  },
+  {
+    label: "Evenements"
   }
 ]
 
@@ -49,6 +59,13 @@ if (session.role == 'admin') {
          :shops="shops"
          class="animate__animated animate__fadeIn"
        />
+
+       <!-- This section is displayed if the current tab is "Evenements" -->
+       <AdminEventManagement
+        v-if="events && item.label === 'Evenements'"
+          :events="events"
+          class="animate__animated animate__fadeIn"
+        />
 
         <!-- This section is displayed if the current tab is "Utilisateurs" -->
       <AdminUsersManagement
