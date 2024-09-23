@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "nuxt-time",
     "@nuxt/image",
-    "@sidebase/nuxt-auth"
+    "@sidebase/nuxt-auth",
+    "@nuxt/test-utils/module"
   ],
   build: {
     transpile: ['jsonwebtoken']
