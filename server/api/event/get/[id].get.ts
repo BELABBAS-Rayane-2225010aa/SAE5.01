@@ -1,5 +1,5 @@
 import { Event } from "~/models/event";
-import { EventsRepository } from "../../repository/EventsRepository";
+import { EventsRepository } from "../../../repository/EventsRepository";
 import { getRouterParams } from "h3";
 
 export default defineEventHandler(async (event): Promise<Event | undefined> => {

@@ -21,7 +21,7 @@ const { data: users } = await useFetch<User[]>("/api/users?safe=true", {
 
 // Fetch the list of events from the `/api/events` endpoint.
 // This makes a GET request to the API and expects the response to be an array of Event objects.
-const { data: events } = await useFetch<Event[]>("/api/events", {
+const { data: events } = await useFetch<Event[]>("/api/event/all/events", {
   method: "GET",
 }); 
 

@@ -30,4 +30,16 @@ export class EventsRepository {
       throw new Error("Error getting event by id");
     }
   }
+
+  public static async updateEvent(event: Event): Promise<Event | undefined> {
+    try {
+      const events = (await JsonConnector.getData(this.filePath)) as Event[];
+      const index = events.findIndex((e) => e.id === event.id);
+      events[index] = event;
+      await JsonConnector.saveData(events, this.filePath);
+      return event;
+    } catch (error) {
+      throw new Error("Error updating event");
+    }
+  }
 }

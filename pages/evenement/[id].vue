@@ -12,7 +12,7 @@ const id = route.params.id;
 
 // Fetch the event from the `/api/events/:id` endpoint using a GET request.
 // It expects a response of an `Event` object and stores it in the `event` variable.
-const { data: event, error } = await useFetch<Event>(`/api/event/${id}`, {
+const { data: event, error } = await useFetch<Event>(`/api/event/get/${id}`, {
   method: "GET",
 });
 

@@ -14,8 +14,9 @@ export type Item = {
 
 // Fetch the list of events from the `/api/events` endpoint using a GET request.
 // It expects a response of an array of `Event` objects and stores it in the `events` variable.
-const { data: events, error } = await useFetch<Event[]>("/api/events", {
+const { data: events, error } = await useFetch<Event[]>("/api/event/all/events", {
   method: "GET",
+
 });
 
 // Function to transform an array of `Events` objects into an array of `Item` objects.

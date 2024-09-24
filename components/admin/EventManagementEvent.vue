@@ -12,7 +12,28 @@ const showPopup = ref(false);
 const showConfirmationPopup = ref(false);
 
 const updateEvent = async (updatedEvent: Event) => {
+    await useFetchWithToast<Event>(
+    `/api/event/put/${updatedEvent.id}`,
+    {
+        successMessage: {
+        title: "Event updated",
+        description: "The event has been successfully updated"
+        },
+        errorMessage: {
+        title: "Error",
+        description: "Unable to update the event",
+        },
+    },
+    {
+        method: "PUT",
+        body: JSON.stringify(updatedEvent),
+    },
+    ).then((data: Event | void) => {
+    if (data) {
+        console.log('Événement mis à jour:', data);
+    }
     showPopup.value = false;
+    });
 };
 
 const deleteEvent = () => {
