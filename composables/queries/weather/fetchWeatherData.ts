@@ -9,5 +9,27 @@ export const fetchWeatherData = async (lon: number, lat: number, apiKey: string)
             method: "GET",
         },
     );
-    return await response.json().then((data) => { console.log(data); return data; });
-}
+    
+    const data = await response.json();
+
+    if (data && data.data && data.data.length > 0) {
+        // Mapper les données au modèle Weather
+        const weatherData: Weather = {
+            apiKey: apiKey,
+            lon: data.data[0].lon,
+            lat: data.data[0].lat,
+            cityName: data.data[0].city_name,
+            temperatureValue: data.data[0].temp.toString(),
+            temperatureDescription: data.data[0].weather.description,
+            weatherIcon: [data.data[0].weather.icon],
+            sunRise: data.data[0].sunrise,
+            sunSet: data.data[0].sunset,
+        };
+        
+        return weatherData;
+        
+    } else {
+        throw new Error("Aucune donnée météo trouvée");
+    }
+
+};

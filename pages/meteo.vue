@@ -1,38 +1,38 @@
-<script setup lang="ts">
-import { definePageMeta } from "#imports";
-import type { WeatherData } from "~/models/weatherReport";
+<script lang="ts">
+import { defineComponent, ref, onMounted } from "vue";
 
-// page available without authentification
-definePageMeta({
-  auth: false
+export default defineComponent({
+  name: "WeatherComponent",
+  setup() {
+    const weather = ref(null);
+
+    onMounted(async () => {
+      try {
+        // Appel de l'API interne via $fetch
+        const weatherData = await $fetch('/api/weather', {
+          method: 'GET',
+        });
+        weather.value = weatherData;
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données météo : ", error);
+      }
+    });
+
+    return { weather };
+  },
 });
-
-const { data: weather } = await useFetch<WeatherData[]>("/api/weatherReport", {
-  method: "GET",
-});
-
 </script>
 
-<template>
-  <GlobalWrapper>
-    <div class="container photovoltaique-wrap mx-auto text-lg">
-      <PageHeader image="/photovoltaique/header.png" image-alt="Panneaux photovoltaïques"
-                  title="Données Météo" />
 
-      <section class="mt-5 description">
-        <h2 class="font-extrabold text-3xl text-_primary-500">La météo de Gulli</h2>
-        <div class="text-wrap flex flex-wrap justify-between">
-          <div class="text mt-3 w-full md:w-2/3">
-            <p> Lorem Ipsum</p>
-            <ul>
-              <li v-for="(item, index) in weather" :key="index">
-                Temperature: {{ item.date }}, Humidity: {{ item.solarRadiation }}
-              </li>
-            </ul>
-            <p> Lorem Ipsum 2 </p>
-          </div>
-        </div>
-       </section>
-    </div>
-   </GlobalWrapper>
+<template>
+  <div>
+    <h1>Météo pour {{ weather?.cityName }}</h1>
+    <p>Température : {{ weather?.temperatureValue }}°C</p>
+    <p>Description : {{ weather?.temperatureDescription }}</p>
+    <p>Lever du soleil : {{ weather?.sunRise }}</p>
+    <p>Coucher du soleil : {{ weather?.sunSet }}</p>
+    <img :src="`https://www.weatherbit.io/static/img/icons/${weather?.weatherIcon[0]}.png`" alt="Icon météo" />
+  </div>
 </template>
+
+
