@@ -1,19 +1,22 @@
+// Import necessary modules and types
 import type { Weather } from "~/models/weather";
 
-export const fetchWeatherData = async (lon: number, lat: number, apiKey: string): Promise<Weather> => {
-    
+// Function to fetch weather data from the API
+export const fetchWeatherData = async (apiKey: string, lat: number, lon: number): Promise<Weather> => {
+    // Construct the API URL with the provided latitude, longitude, and API key
     const response = await fetch(
-        `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}&include=minutely&lang=fr
-`,
+        `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}`,
         {
-            method: "GET",
+            method: "GET", // HTTP GET method
         },
     );
     
+    // Parse the JSON response
     const data = await response.json();
 
+    // Check if the response contains valid data
     if (data && data.data && data.data.length > 0) {
-        // Mapper les données au modèle Weather
+        // Map the API response to the Weather type
         const weatherData: Weather = {
             apiKey: apiKey,
             lon: data.data[0].lon,
@@ -26,10 +29,11 @@ export const fetchWeatherData = async (lon: number, lat: number, apiKey: string)
             sunSet: data.data[0].sunset,
         };
         
+        // Return the mapped weather data
         return weatherData;
         
     } else {
+        // Throw an error if no weather data is found
         throw new Error("Aucune donnée météo trouvée");
     }
-
 };

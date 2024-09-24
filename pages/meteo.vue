@@ -1,27 +1,34 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
+import type { Weather } from "~/models/weather";
 
+// Define page metadata
 definePageMeta({
-  auth: false,
+  auth: false, // Page available without authentication
 });
 
 export default defineComponent({
   name: "WeatherComponent",
   setup() {
-    const weather = ref(null);
+    // Reactive variable to store weather data
+    const weather = ref<Weather>();
 
+    // Fetch weather data when the component is mounted
     onMounted(async () => {
       try {
-        // Appel de l'API interne via $fetch
+        // Call the internal API via $fetch
         const weatherData = await $fetch('/api/weather', {
           method: 'GET',
         });
+        // Store the fetched data in the reactive variable
         weather.value = weatherData;
       } catch (error) {
+        // Log any errors that occur during the fetch
         console.error("Erreur lors de la récupération des données météo : ", error);
       }
     });
-
+      
+    // Return the reactive variable to the template
     return { weather };
   },
 });
