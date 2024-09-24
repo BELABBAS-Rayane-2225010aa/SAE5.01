@@ -1,12 +1,25 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import type { Event } from "~/models/event";
 
 // Define the component's props using defineProps
-// Use props instead of destructuring because we need to watch the week and day props inside the component
 const props = defineProps<{
     event: Event
 }>();
 
+const showPopup = ref(false);
+
+const showConfirmationPopup = ref(false);
+
+const updateEvent = async (updatedEvent: Event) => {
+    showPopup.value = false;
+};
+
+const deleteEvent = () => {
+  // Ajoutez ici la logique pour supprimer l'événement
+  console.log('Événement supprimé:', props.event);
+  showConfirmationPopup.value = false;
+};
 </script>
 
 <template>
@@ -16,17 +29,21 @@ const props = defineProps<{
         </div>
         <div class="flex gap-3">
             <div class="flex flex-col">
-                <UButton class="cardButtonTechno">
+                <UButton class="cardButtonTechno" @click="showPopup = true">
                     Modifier
                 </UButton>
             </div>
             <div class="flex flex-col">
-                <UButton class="cardButtonTechno">
+                <UButton class="cardButtonTechno" @click="showConfirmationPopup = true">
                     Supprimer
                 </UButton>
             </div>
         </div>
     </div>
+
+    <AdminPopUpEventModification v-if="showPopup" :event="event" @close="showPopup = false" @submit="updateEvent" />
+
+    <AdminPopUpEventSuppression v-if="showConfirmationPopup" @confirm="deleteEvent" @cancel="showConfirmationPopup = false" />
 
     <!-- Divider to separate the days -->
     <UDivider
