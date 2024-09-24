@@ -1,8 +1,9 @@
-<script setup>
-const emit = defineEmits(['confirm', 'cancel']);
+<script setup lang="ts">
+const emit = defineEmits(['confirm', 'cancel']);  // Emit the event to confirm or cancel the action
 </script>
 
 <template>
+  <!-- Display the confirmation popup -->
   <div class="popup">
     <div class="popup-content">
       <h2>Confirmer la suppression</h2>

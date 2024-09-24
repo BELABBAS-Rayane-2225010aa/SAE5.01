@@ -19,12 +19,13 @@ const { data: users } = await useFetch<User[]>("/api/users?safe=true", {
   method: "GET",
 });
 
-// Fetch the list of events from the `/api/events` endpoint.
+// Fetch the list of events from the `/api/event/all/events` endpoint.
 // This makes a GET request to the API and expects the response to be an array of Event objects.
 const { data: events } = await useFetch<Event[]>("/api/event/all/events", {
   method: "GET",
 });
 
+// Function to update the list of events
 const fetchEvents = async () => {
     const { data, error } = await useFetch<Event[]>('/api/event/all/events', {
         method: 'GET',
@@ -37,8 +38,9 @@ const fetchEvents = async () => {
     }
 };
 
-onMounted(fetchEvents);
+onMounted(fetchEvents); // Fetch the list of events when the component is mounted
 
+// Function to update the list of events
 const updateEventList = () => {
     fetchEvents();
 };

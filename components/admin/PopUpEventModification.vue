@@ -7,8 +7,9 @@ const props = defineProps<{
     event: Event
 }>();
 
-const emit = defineEmits(['close', 'submit']);
+const emit = defineEmits(['close', 'submit']);  // Emit the event to close the popup and submit the form
 
+// Define the form data and methods to handle the form submission
 const formData = ref<Event>({
     title: '',
     date: '',
@@ -18,16 +19,17 @@ const formData = ref<Event>({
     links: [],
 } as unknown as Event);
 
-const imageUrl = ref('');
-const link = ref('');
-const editImageIndex = ref<number | null>(null);
-const editLinkIndex = ref<number | null>(null);
+const imageUrl = ref('');  // Image URL input
+const link = ref(''); // Link URL input
+const editImageIndex = ref<number | null>(null);  // Index of the image being edited
+const editLinkIndex = ref<number | null>(null); // Index of the link being edited
 
-// Remplir le formulaire avec les données de l'événement
+// Watch for changes to the event prop and update the form data
 watch(() => props.event, (newEvent) => {
   formData.value = { ...newEvent };
 }, { immediate: true });
 
+// Add an image to the form data
 const addImage = () => {
   if (imageUrl.value) {
     if (editImageIndex.value !== null) {
@@ -40,15 +42,18 @@ const addImage = () => {
   }
 };
 
+// Edit an image in the form data
 const editImage = (index: number) => {
   imageUrl.value = formData.value.images[index];
   editImageIndex.value = index;
 };
 
+// Delete an image from the form data
 const deleteImage = (index: number) => {
   formData.value.images.splice(index, 1);
 };
 
+// Add a link to the form data
 const addLink = () => {
   if (link.value) {
     if (editLinkIndex.value !== null) {
@@ -61,17 +66,19 @@ const addLink = () => {
   }
 };
 
+// Edit a link in the form data
 const editLink = (index: number) => {
   link.value = formData.value.links[index];
   editLinkIndex.value = index;
 };
 
+// Delete a link from the form data
 const deleteLink = (index: number) => {
   formData.value.links.splice(index, 1);
 };
 
+// Handle the form submission
 const handleSubmit = () => {
-  // Émettre l'événement de soumission avec les données du formulaire
   emit('submit', formData.value);
 };
 </script>
@@ -80,23 +87,30 @@ const handleSubmit = () => {
   <div class="popup">
     <div class="popup-content">
       <h2>Modifier l'événement</h2>
+
+      <!-- Display the form to update the event -->
       <form @submit.prevent="handleSubmit">
+
         <div>
           <label for="title">Titre</label>
           <input type="text" id="title" v-model="formData.title" required />
         </div>
+
         <div>
           <label for="description">Description</label>
           <textarea id="description" v-model="formData.description" required></textarea>
         </div>
+
         <div>
           <label for="date">Date</label>
           <input type="date" id="date" v-model="formData.date" required />
         </div>
+
         <div>
           <label for="location">Lieu</label>
           <input type="text" id="location" v-model="formData.location" required />
         </div>
+
         <div>
           <label for="imageUrl">Ajouter ou modifier une image (URL)</label>
           <input type="text" id="imageUrl" v-model="imageUrl" />
@@ -112,6 +126,7 @@ const handleSubmit = () => {
             </li>
           </ul>
         </div>
+
         <div>
           <label for="link">Ajouter ou modifier un lien (URL)</label>
           <input type="text" id="link" v-model="link" />
@@ -127,6 +142,7 @@ const handleSubmit = () => {
             </li>
           </ul>
         </div>
+        
         <button type="submit">Submit</button>
         <button type="button" @click="$emit('close')">Cancel</button>
       </form>

@@ -2,18 +2,11 @@ import { Event } from "~/models/event";
 import { JsonConnector } from "../connector/JsonConnector";
 
 // Be careful with the path, if the file is not found, it will throw an error
+// All the mothods to get, update, delete and create events are implemented here
 export class EventsRepository {
   static filePath: string = process.cwd() + "/data/event.json";
 
-  public static async saveEvents(events: Event[]): Promise<Event[]> {
-    try {
-      await JsonConnector.saveData(events, this.filePath);
-      return (await JsonConnector.getData(this.filePath)) as Event[];
-    } catch (error) {
-      throw new Error("Error saving events");
-    }
-  }
-
+  // Get all events
   public static async getEvents(): Promise<Event[]> {
     try {
       return (await JsonConnector.getData(this.filePath)) as Event[];
@@ -22,6 +15,7 @@ export class EventsRepository {
     }
   }
 
+  // Get event by id
   public static async getEventById(id: number): Promise<Event | undefined> {
     try {
       const events = (await JsonConnector.getData(this.filePath)) as Event[];
@@ -31,6 +25,7 @@ export class EventsRepository {
     }
   }
 
+  // Update event
   public static async updateEvent(event: Event): Promise<Event | undefined> {
     try {
       const events = (await JsonConnector.getData(this.filePath)) as Event[];
@@ -43,6 +38,7 @@ export class EventsRepository {
     }
   }
 
+  // Delete event by id
   public static async deleteEventById(id: number): Promise<Event | undefined> {
     try {
       const events = (await JsonConnector.getData(this.filePath)) as Event[];
@@ -56,6 +52,7 @@ export class EventsRepository {
     }
   }
 
+  // Create event
   public static async createEvent(event: Event): Promise<Event | undefined> {
     try {
       const events = (await JsonConnector.getData(this.filePath)) as Event[];

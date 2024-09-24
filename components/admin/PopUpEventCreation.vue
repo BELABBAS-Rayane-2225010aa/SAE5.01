@@ -7,8 +7,9 @@ const props = defineProps<{
     event: Event
 }>();
 
-const emit = defineEmits(['close', 'submit']);
+const emit = defineEmits(['close', 'submit']);  // Emit the event to close the popup and submit the form
 
+// Define the form data and methods to handle the form submission
 const formData = ref<Event>({
     title: '',
     date: '',
@@ -18,8 +19,9 @@ const formData = ref<Event>({
     links: [],
 } as unknown as Event);
 
-const imageUrl = ref('');
+const imageUrl = ref('');   // Image URL input
 
+// Add an image to the form data
 const addImage = () => {
   if (imageUrl.value) {
     formData.value.images.push(imageUrl.value);
@@ -27,8 +29,9 @@ const addImage = () => {
   }
 };
 
-const link = ref('');
+const link = ref('');   // Link URL input
 
+// Add a link to the form data
 const addLink = () => {
   if (link.value) {
     formData.value.links.push(link.value);
@@ -36,8 +39,8 @@ const addLink = () => {
   }
 };
 
+// Handle the form submission
 const handleSubmit = () => {
-// Émettre l'événement de soumission avec les données du formulaire
 emit('submit', formData.value);
 };
 </script>
@@ -46,23 +49,30 @@ emit('submit', formData.value);
     <div class="popup">
         <div class="popup-content">
             <h2>Créer un nouvel événement</h2>
+
+            <!-- Display the form to create a new event -->
             <form @submit.prevent="handleSubmit">
+
                 <div>
                     <label for="title">Titre</label>
                     <input type="text" id="title" v-model="formData.title" required />
                 </div>
+
                 <div>
                     <label for="description">Description</label>
                     <textarea id="description" v-model="formData.description" required></textarea>
                 </div>
+
                 <div>
                     <label for="date">Date</label>
                     <input type="date" id="date" v-model="formData.date" required />
                 </div>
+
                 <div>
                     <label for="location">Lieu</label>
                     <input type="text" id="location" v-model="formData.location" required />
                 </div>
+
                 <div>
                     <label for="imageUrl">Ajouter une image (URL)</label>
                     <input type="text" id="imageUrl" v-model="imageUrl" />
@@ -76,6 +86,7 @@ emit('submit', formData.value);
                         </li>
                     </ul>
                 </div>
+
                 <div>
                     <label for="link">Ajouter un lien (URL)</label>
                     <input type="text" id="link" v-model="link" />
@@ -89,6 +100,7 @@ emit('submit', formData.value);
                         </li>
                     </ul>
                 </div>
+                
                 <button type="submit">Submit</button>
                 <button type="button" @click="$emit('close')">Cancel</button>
             </form>

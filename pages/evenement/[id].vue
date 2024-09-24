@@ -23,6 +23,7 @@ if (error.value) {
 </script>
 
 <template>
+  <!-- Display the event details -->
     <GlobalWrapper class="event-wrapper">
         <MainTitle :text="`${event?.title}`" />
         <NuxtImg :src="event?.images[0] ?? ''" />

@@ -2,14 +2,16 @@
 import { ref } from 'vue';
 import type { Event } from "~/models/event";
 
+// Define the component's props using defineProps
 const props = defineProps<{
     events: Event[]
 }>();
 
-const showPopup = ref(false);
+const showPopup = ref(false);   // Show the popup to create a new event
 
-const emit = defineEmits(['updateEventList']);
+const emit = defineEmits(['updateEventList']);  // Emit the event to update the event list
 
+// Add an event to the database using the `/api/event/post/:id` endpoint and update the event list
 const addEvent = async (eventData: Event) => {
     await useFetchWithToast<Event>(
         `/api/event/post/${eventData.id}`,
@@ -29,7 +31,6 @@ const addEvent = async (eventData: Event) => {
         },
     ).then((data: Event | void) => {
         if (data) {
-            console.log('Événement créé:', data);
             emit('updateEventList');
         }
         showPopup.value = false;
@@ -38,12 +39,15 @@ const addEvent = async (eventData: Event) => {
 </script>
 
 <template>
+    <!-- Display a button to create a new event -->
     <UButton class="cardButtonTechno" @click="showPopup = true">
         Créer un événement
     </UButton>
 
-    <AdminPopUpEventCreation v-if="showPopup" @close="showPopup = false" @submit="addEvent" />
+    <!-- Display the popup to create a new event -->
+    <AdminPopUpEventCreation v-if="showPopup" :event="{} as Event" @close="showPopup = false" @submit="addEvent" />
 
+    <!-- Display the list of events -->
     <ul>
         <li v-for="(event, index) in events" :key="index">
             <AdminEventManagementEvent
@@ -55,4 +59,5 @@ const addEvent = async (eventData: Event) => {
 </template>
 
 <style scoped>
+/* Add the CSS styles here */
 </style>
