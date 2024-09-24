@@ -42,4 +42,17 @@ export class EventsRepository {
       throw new Error("Error updating event");
     }
   }
+
+  public static async deleteEventById(id: number): Promise<Event | undefined> {
+    try {
+      const events = (await JsonConnector.getData(this.filePath)) as Event[];
+      const index = events.findIndex((e) => e.id === id);
+      const event = events[index];
+      events.splice(index, 1);
+      await JsonConnector.saveData(events, this.filePath);
+      return event;
+    } catch (error) {
+      throw new Error("Error deleting event by id");
+    }
+  }
 }

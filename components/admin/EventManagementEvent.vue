@@ -7,39 +7,61 @@ const props = defineProps<{
     event: Event
 }>();
 
-const showPopup = ref(false);
+const emit = defineEmits(['updateEventList']);
 
+const showPopup = ref(false);
 const showConfirmationPopup = ref(false);
 
 const updateEvent = async (updatedEvent: Event) => {
     await useFetchWithToast<Event>(
-    `/api/event/put/${updatedEvent.id}`,
-    {
-        successMessage: {
-        title: "Event updated",
-        description: "The event has been successfully updated"
+        `/api/event/put/${updatedEvent.id}`,
+        {
+            successMessage: {
+                title: "Event updated",
+                description: "The event has been successfully updated"
+            },
+            errorMessage: {
+                title: "Error",
+                description: "Unable to update the event",
+            },
         },
-        errorMessage: {
-        title: "Error",
-        description: "Unable to update the event",
+        {
+            method: "PUT",
+            body: JSON.stringify(updatedEvent),
         },
-    },
-    {
-        method: "PUT",
-        body: JSON.stringify(updatedEvent),
-    },
     ).then((data: Event | void) => {
-    if (data) {
-        console.log('Événement mis à jour:', data);
-    }
-    showPopup.value = false;
+        if (data) {
+            console.log('Événement mis à jour:', data);
+            emit('updateEventList');
+        }
+        showPopup.value = false;
     });
 };
 
-const deleteEvent = () => {
-  // Ajoutez ici la logique pour supprimer l'événement
-  console.log('Événement supprimé:', props.event);
-  showConfirmationPopup.value = false;
+const deleteEvent = async () => {
+    await useFetchWithToast<Event>(
+        `/api/event/delete/${props.event.id}`,
+        {
+            successMessage: {
+                title: "Event deleted",
+                description: "The event has been successfully deleted"
+            },
+            errorMessage: {
+                title: "Error",
+                description: "Unable to delete the event",
+            },
+        },
+        {
+            method: "DELETE",
+            body: JSON.stringify(props.event),
+        },
+    ).then((data: Event | void) => {
+        if (data) {
+            console.log('Événement supprimé:', data);
+            emit('updateEventList');
+        }
+        showConfirmationPopup.value = false;
+    });
 };
 </script>
 
@@ -63,7 +85,6 @@ const deleteEvent = () => {
     </div>
 
     <AdminPopUpEventModification v-if="showPopup" :event="event" @close="showPopup = false" @submit="updateEvent" />
-
     <AdminPopUpEventSuppression v-if="showConfirmationPopup" @confirm="deleteEvent" @cancel="showConfirmationPopup = false" />
 
     <!-- Divider to separate the days -->

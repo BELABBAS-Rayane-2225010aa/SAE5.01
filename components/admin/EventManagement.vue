@@ -13,6 +13,8 @@ const addEvent = (eventData: any) => {
   console.log('Nouvel événement ajouté:', eventData);
   showPopup.value = false;
 };
+
+const emit = defineEmits(['updateEventList']);
 </script>
 
 <template>
@@ -26,6 +28,7 @@ const addEvent = (eventData: any) => {
         <li v-for="(event, index) in events" :key="index">
             <AdminEventManagementEvent
                 :event="event"
+                @updateEventList="emit('updateEventList');"
             />
         </li>
     </ul>
