@@ -1,14 +1,22 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
+import type { Event } from "~/models/event";
 
-const formData = ref({
-  title: '',
-  date: '',
-  description: '',
-  location: '',
-  images: [],
-  links: [],
-});
+// Define the component's props using defineProps
+const props = defineProps<{
+    event: Event
+}>();
+
+const emit = defineEmits(['close', 'submit']);
+
+const formData = ref<Event>({
+    title: '',
+    date: '',
+    description: '',
+    location: '',
+    images: [],
+    links: [],
+} as unknown as Event);
 
 const imageUrl = ref('');
 

@@ -8,13 +8,33 @@ const props = defineProps<{
 
 const showPopup = ref(false);
 
-const addEvent = (eventData: any) => {
-  // Ajoutez ici la logique pour ajouter l'événement
-  console.log('Nouvel événement ajouté:', eventData);
-  showPopup.value = false;
-};
-
 const emit = defineEmits(['updateEventList']);
+
+const addEvent = async (eventData: Event) => {
+    await useFetchWithToast<Event>(
+        `/api/event/post/${eventData.id}`,
+        {
+            successMessage: {
+                title: "Event created",
+                description: "The event has been successfully created"
+            },
+            errorMessage: {
+                title: "Error",
+                description: "Unable to create the event",
+            },
+        },
+        {
+            method: "POST",
+            body: JSON.stringify(eventData),
+        },
+    ).then((data: Event | void) => {
+        if (data) {
+            console.log('Événement créé:', data);
+            emit('updateEventList');
+        }
+        showPopup.value = false;
+    });
+};
 </script>
 
 <template>

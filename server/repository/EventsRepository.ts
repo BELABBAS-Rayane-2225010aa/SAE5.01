@@ -55,4 +55,17 @@ export class EventsRepository {
       throw new Error("Error deleting event by id");
     }
   }
+
+  public static async createEvent(event: Event): Promise<Event | undefined> {
+    try {
+      const events = (await JsonConnector.getData(this.filePath)) as Event[];
+      const { id, ...rest } = event;
+      const newEvent = { id: events.length + 1, ...rest };
+      events.push(newEvent);
+      await JsonConnector.saveData(events, this.filePath);
+      return newEvent;
+    } catch (error) {
+      throw new Error("Error creating event");
+    }
+  }
 }
