@@ -1,9 +1,10 @@
-<script setup>
-async function onButtonClick() {
-  // TODO
-}
-</script>
+<script setup lang="ts">
+import type { Weather } from "~/models/weather";
 
-<template>
-  <button @click="onButtonClick">get Station data</button>
-</template>
+const toast = useToast();
+
+
+try {
+  const weathers = await $fetch('/api/weather', {
+    method: 'GET',
+  })}
