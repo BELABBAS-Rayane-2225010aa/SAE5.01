@@ -11,7 +11,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "semantic-release": "semantic-release --branches master"
+    "semantic-release": "semantic-release --branches master",
+    "test": "vitest"
   },
   "dependencies": {
     "@hebilicious/vue-query-nuxt": "^0.3.0",
