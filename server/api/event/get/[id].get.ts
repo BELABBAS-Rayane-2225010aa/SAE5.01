@@ -1,7 +1,8 @@
 import { Event } from "~/models/event";
-import { EventsRepository } from "../../repository/EventsRepository";
+import { EventsRepository } from "../../../repository/EventsRepository";
 import { getRouterParams } from "h3";
 
+// gets event by id
 export default defineEventHandler(async (event): Promise<Event | undefined> => {
     const { id } = getRouterParams(event);
     const eventId = parseInt(id);

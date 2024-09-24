@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Item } from "~/pages/evenements.vue";
 
+// Define the component's props using defineProps
 const { itemInfos } = defineProps<{
   itemInfos: Item;
 }>();
@@ -8,6 +9,7 @@ const { itemInfos } = defineProps<{
 </script>
 
 <template>
+    <!-- Display the card information for the event -->
     <div class="cardTechno">
         <div>
             <NuxtImg class="cardImageTechno" :src="itemInfos.images[0] ?? ''" />
@@ -30,5 +32,6 @@ const { itemInfos } = defineProps<{
 </template>
 
 <style>
+/* Add the CSS for the card information */
 @import url("~/assets/css/technologies/cardInfo.css");
 </style>

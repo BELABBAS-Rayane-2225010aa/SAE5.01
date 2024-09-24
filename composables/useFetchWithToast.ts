@@ -32,7 +32,7 @@ export const useFetchWithToast = async <T>(
       };
       error?: () => void;
     },
-    opts?: { method: "POST" | "PUT" | "GET"; body: string },
+    opts?: { method: "POST" | "PUT" | "GET" | "DELETE"; body: string },
 ) => {
   const toast = useToast();
 
