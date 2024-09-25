@@ -2,8 +2,6 @@ import type { Overview } from '~/models/solarPanel/overview';
 import { parseOverview } from "~/models/solarPanel/overview";
 
 export const fetchOverview = async (
-  startDate: string,
-  endDate: string,
 ): Promise<Overview> => {
 
   const config = useRuntimeConfig();
@@ -12,7 +10,7 @@ export const fetchOverview = async (
   const siteId = config.solarPanelSiteId;
 
   const response = await fetch(
-    `${apiUrl}/sites/${siteId}/overview?from=${startDate}to${endDate}`,
+    `${apiUrl}/sites/${siteId}/overview`,
     {
       method: 'GET',
       headers: {
