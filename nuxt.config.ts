@@ -94,6 +94,6 @@ export default defineNuxtConfig({
   plugins: [],
 
   devtools: {
-    enabled: false,
+    enabled: true,
   },
 });
