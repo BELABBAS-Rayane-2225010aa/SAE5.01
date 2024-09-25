@@ -30,6 +30,10 @@ export const useNavbar = (): UseNavbarReturn => {
       path: "/photovoltaique",
     },
     {
+      name: "Données météo",
+      path: "/meteo",
+    },
+    {
       name: "Epicerie solidaire",
       path: "/epicerie-solidaire",
     },

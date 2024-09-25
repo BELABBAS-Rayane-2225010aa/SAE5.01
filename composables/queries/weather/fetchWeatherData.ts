@@ -1,8 +1,6 @@
 // Import necessary modules and types
 import type { Weather } from "~/models/weather";
 
-const toast = useToast();
-
 // Function to fetch weather data from the API
 export const fetchWeatherData = async (apiKey: string, lat: number, lon: number): Promise<Weather> => {
     // Construct the API URL with the provided latitude, longitude, and API key
