@@ -2,6 +2,8 @@
 import { defineComponent, ref, onMounted } from "vue";
 import type { Weather } from "~/models/weather";
 
+const toast = useToast();
+
 // Define page metadata
 definePageMeta({
   auth: false, // Page available without authentication
@@ -25,6 +27,11 @@ export default defineComponent({
       } catch (error) {
         // Log any errors that occur during the fetch
         console.error("Erreur lors de la récupération des données météo : ", error);
+        toast.add({
+        title: "Une erreur est survenue lors de la récupération des données météorologiques. Veuillez réessayer plus tard.",
+        icon: "i-heroicons-information-circle",
+        color: "red",
+        }); 
       }
     });
       
