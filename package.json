@@ -11,7 +11,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "semantic-release": "semantic-release --branches master"
+    "semantic-release": "semantic-release --branches master",
+    "test": "vitest"
   },
   "dependencies": {
     "@hebilicious/vue-query-nuxt": "^0.3.0",
@@ -35,10 +36,15 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@nuxt/test-utils": "^3.14.2",
     "@types/crypto-js": "^4.2.2",
     "@types/fs-extra": "^11.0.4",
     "@types/jsonwebtoken": "^9.0.6",
     "@vite-pwa/nuxt": "^0.7.0",
-    "prettier": "3.2.5"
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^15.7.4",
+    "playwright-core": "^1.47.2",
+    "prettier": "3.2.5",
+    "vitest": "^2.1.1"
   }
 }
