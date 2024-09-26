@@ -2,6 +2,8 @@
 import { ref, watch } from 'vue';
 import type { Event } from "~/models/event";
 
+// this popup is used to add or update an event
+
 // Define the component's props using defineProps
 const props = defineProps<{
     event: Event
@@ -95,29 +97,34 @@ const handleSubmit = () => {
     <div class="popup-content">
       <p class="popupTitle">{{ props.event.id ? 'Modifier l\'événement' : 'Créer un événement' }}</p>
 
-      <!-- Display the form to update the event -->
+      <!-- Display the form -->
       <form @submit.prevent="handleSubmit">
 
+        <!-- Title field -->
         <div class="form-group">
           <label for="title">Titre : </label>
           <input type="text" id="title" v-model="formData.title" required />
         </div>
 
+        <!-- Description field -->
         <div class="form-group">
           <label for="description">Description : </label>
           <textarea id="description" v-model="formData.description" required></textarea>
         </div>
 
+        <!-- Date field -->
         <div class="form-group">
           <label for="date">Date : </label>
           <input type="date" id="date" v-model="formData.date" required />
         </div>
 
+        <!-- Location field -->
         <div class="form-group">
           <label for="location">Lieu : </label>
           <input type="text" id="location" v-model="formData.location" required />
         </div>
 
+        <!-- Images field -->
         <div class="form-group">
           <label for="imageUrl">Ajouter ou modifier une image (URL) : </label>
           <div class="input-button-group">
@@ -142,6 +149,7 @@ const handleSubmit = () => {
           </table>
         </div>
 
+        <!-- Links field -->
         <div class="form-group">
           <label for="link">Ajouter ou modifier un lien (URL) : </label>
           <div class="input-button-group">
@@ -166,6 +174,7 @@ const handleSubmit = () => {
           </table>
         </div>
         
+        <!-- Submit button -->
         <div class="form-group">
           <UButton type="submit" class="submitBtn">Soumettre</UButton>
           <UButton type="button" @click="$emit('close')" class="submitBtn">Retour</UButton>

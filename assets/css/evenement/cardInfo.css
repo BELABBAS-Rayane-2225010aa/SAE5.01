@@ -1,3 +1,4 @@
+/* the card for the event */
 .cardEvent {
     width: 350px;
     height: 350px;
@@ -14,6 +15,7 @@
     transform: scale(1.02);
 }
 
+/* the first image of the event */
 .cardImageEvent {
     border-radius: 4px;
     width: 100%;
@@ -21,11 +23,14 @@
     object-fit: cover;
 }
 
+/* the text of the event */
 .cardTextEvent {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
+/* the title of the event */
 .cardTextEvent h3 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -37,6 +42,8 @@
     padding-top: 10px;
     word-break: break-word;
 }
+
+/* the button to see more */
 .cardButtonEvent {
     margin: 10px auto;
 }

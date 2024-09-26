@@ -16,18 +16,5 @@
     "date": "2023-12-01",
     "time": "19:00",
     "location": "123 Rue de la Musique, Paris, France"
-  },
-  {
-    "id": 2,
-    "images": [
-      "test"
-    ],
-    "links": [
-      "test"
-    ],
-    "title": "test",
-    "description": "test2",
-    "date": "2024-09-26",
-    "location": "test"
   }
 ]

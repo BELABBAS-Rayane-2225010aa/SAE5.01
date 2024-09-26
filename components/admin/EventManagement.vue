@@ -2,17 +2,22 @@
 import { ref, defineProps, defineEmits } from 'vue';
 import type { Event } from "~/models/event";
 
+// Define the component's props using defineProps
 const props = defineProps<{
     events: Event[]
 }>();
 
-const showPopup = ref(false);
-const showConfirmationPopup = ref(false);
-const isUpdateAction = ref(false);
-const selectedEvent = ref<Event | null>(null);
+const showPopup = ref(false);   // Show the popup to add or update an event
+const showConfirmationPopup = ref(false);   // Show the popup to confirm the deletion of an event
+const isUpdateAction = ref(false);  // Define if the action is an update or an add
+const selectedEvent = ref<Event | null>(null);  // The selected event to update or delete
 
-const emit = defineEmits(['updateEventList']);
+const emit = defineEmits(['updateEventList']);  // Emit the event to update the event list
 
+// add the event to the database using the `/api/event/post/$(eventData.id)` route
+// accept an Event object as a parameter
+// use the useFetchWithToast function to handle the fetch request and display a toast message
+// emit the 'updateEventList' event to update the event list
 const addEvent = async (eventData: Event) => {
     await useFetchWithToast<Event>(
         `/api/event/post/${eventData.id}`,
@@ -38,6 +43,10 @@ const addEvent = async (eventData: Event) => {
     });
 };
 
+// update the event in the database using the `/api/event/put/$(updatedEvent.id)` route
+// accept an Event object as a parameter
+// use the useFetchWithToast function to handle the fetch request and display a toast message
+// emit the 'updateEventList' event to update the event list
 const updateEvent = async (updatedEvent: Event) => {
     await useFetchWithToast<Event>(
         `/api/event/put/${updatedEvent.id}`,
@@ -64,6 +73,9 @@ const updateEvent = async (updatedEvent: Event) => {
     });
 };
 
+// delete the event in the database using the `/api/event/delete/$(selectedEvent.value.id)` route
+// use the useFetchWithToast function to handle the fetch request and display a toast message
+// emit the 'updateEventList' event to update the event list
 const deleteEvent = async () => {
     if (!selectedEvent.value) return;
 
@@ -92,30 +104,35 @@ const deleteEvent = async () => {
     });
 };
 
+// show the popup to update the event
 const handleShowUpdatePopup = (event: Event) => {
-    selectedEvent.value = event;
-    isUpdateAction.value = true;
-    showPopup.value = true;
+    selectedEvent.value = event;    // Set the selected event
+    isUpdateAction.value = true;    // Set the action to update
+    showPopup.value = true;        // Show the popup
 };
 
+// show the popup to confirm the deletion of the event
 const handleShowConfirmationPopup = (event: Event) => {
-    selectedEvent.value = event;
-    showConfirmationPopup.value = true;
+    selectedEvent.value = event;    // Set the selected event
+    showConfirmationPopup.value = true;   // Show the confirmation popup
 };
 
+// show the popup to add a new event
 const handleShowAddPopup = () => {
-    selectedEvent.value = null;
-    isUpdateAction.value = false;
-    showPopup.value = true;
+    selectedEvent.value = null;   // Reset the selected event
+    isUpdateAction.value = false;   // Set the action to add
+    showPopup.value = true;   // Show the popup
 };
 </script>
 
 <template>
     <div>
-        <UButton class="cardButtonTechno" @click="handleShowAddPopup">
+        <!-- Button to create an Event -->
+        <UButton @click="handleShowAddPopup">
             Créer un événement
         </UButton>
 
+        <!-- Popup to add or update an Event -->
         <AdminPopUpEvent 
             v-if="showPopup" 
             @submit="isUpdateAction ? updateEvent($event) : addEvent($event)"
@@ -123,9 +140,11 @@ const handleShowAddPopup = () => {
             :event="selectedEvent || {} as Event"
         />
         
+        <!-- Popup to confirm the deletion of an Event -->
         <AdminPopUpEventSuppression v-if="showConfirmationPopup" @confirm="deleteEvent" @cancel="showConfirmationPopup = false" />
 
-        <div class="form-container">
+        <!-- Table to display the list of Events -->
+        <div class="tab-container">
             <table class="event-table">
                 <thead>
                     <tr>
@@ -137,6 +156,7 @@ const handleShowAddPopup = () => {
                 </thead>
                 <tbody>
                     <tr v-for="event in events" :key="event.id">
+                        <!-- Display the Event -->
                         <AdminEventManagementEvent :event="event" @showPopUpEvent="handleShowUpdatePopup" @showPopUpEventSuppression="handleShowConfirmationPopup" />
                     </tr>
                 </tbody>

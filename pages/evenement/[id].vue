@@ -10,7 +10,7 @@ definePageMeta({
 const route = useRoute();
 const id = route.params.id;
 
-// Fetch the event from the `/api/events/:id` endpoint using a GET request.
+// Fetch the event from the `/api/events/${id}` endpoint using a GET request.
 // It expects a response of an `Event` object and stores it in the `event` variable.
 const { data: event, error } = await useFetch<Event>(`/api/event/get/${id}`, {
   method: "GET",
@@ -28,12 +28,12 @@ if (error.value) {
     <MainTitle :text="`${event?.title}`" class="event-title" />
     <NuxtImg :src="event?.images[0] ?? ''" class="event-titleImage" />
     <div class="event-text">
-      <p class="event-desc">{{ event?.description }}</p>
-      <p class="event-dateTime">{{ event?.date }} {{ event?.time }}</p>
-      <p class="event-loc">{{ event?.location }}</p>
-      <div class="event-links">
+      <p>{{ event?.description }}</p>
+      <p>{{ event?.date }} {{ event?.time }}</p>
+      <p>{{ event?.location }}</p>
+      <div>
         <ul>
-          <li v-for="link in event?.links" :key="link" class="event-link">
+          <li v-for="link in event?.links" :key="link">
             {{ link }}
           </li>
         </ul>

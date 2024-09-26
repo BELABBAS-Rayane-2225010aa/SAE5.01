@@ -12,6 +12,7 @@ const { itemInfos } = defineProps<{
     <!-- Display the card information for the event -->
     <NuxtLink :to="`/evenement/${itemInfos.id}`" class="cardEvent">
         <div>
+            <!-- Display the first image -->
             <NuxtImg class="cardImageEvent" :src="itemInfos.images[0] ?? ''" />
 
             <div class="cardTextEvent">
