@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import type { Event } from "~/models/event";
 
+
 // Define the component's props using defineProps
 const props = defineProps<{
     events: Event[]
@@ -48,16 +49,56 @@ const addEvent = async (eventData: Event) => {
     <AdminPopUpEventCreation v-if="showPopup" :event="{} as Event" @close="showPopup = false" @submit="addEvent" />
 
     <!-- Display the list of events -->
-    <ul>
-        <li v-for="(event, index) in events" :key="index">
-            <AdminEventManagementEvent
-                :event="event"
-                @updateEventList="emit('updateEventList');"
-            />
-        </li>
-    </ul>
+    <div class="form-container">
+        <table class="event-table">
+            <thead>
+                <tr>
+                    <th class="title-column">Title</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="event in events" :key="event.id">
+                    <AdminEventManagementEvent :event="event" @updateEventList="emit('updateEventList')" />
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <style scoped>
-/* Add the CSS styles here */
+.form-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.event-table th,
+.event-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.event-table th {
+  background-color: #555555;
+  font-weight: bold;
+}
+
+.event-table th:not(.title-column) {
+    border-left: 1px solid #e2e8f0;
+}
+
+.title-column {
+  width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>

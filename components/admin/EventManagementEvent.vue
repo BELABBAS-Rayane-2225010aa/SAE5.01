@@ -68,38 +68,44 @@ const deleteEvent = async () => {
 </script>
 
 <template>
-    <!-- Display the event information -->
-    <div class="form-container">
-        <div class="flex gap-4">
-            <p>{{ event?.title }}</p>
-            <p>{{ event?.date }}</p>
-            <p>{{ event?.location }}</p>
-        </div>
-        <div class="flex gap-3">
-            <div class="flex flex-col">
-                <!-- Display the buttons to update and delete the event -->
-                <UButton class="cardButtonTechno" @click="showUpdatePopup = true">
-                    Modifier
-                </UButton>
-            </div>
-            <div class="flex flex-col">
-                <UButton class="cardButtonTechno" @click="showConfirmationPopup = true">
-                    Supprimer
-                </UButton>
-            </div>
-        </div>
-    </div>
-
+    <td class="title">{{ props.event.title }}</td>
+    <td>{{ props.event.date }}</td>
+    <td>{{ props.event.location }}</td>
+    <td>
+      <div class="flex gap-3">
+        <UButton class="cardButtonTechno" @click="showUpdatePopup = true">
+          Modifier
+        </UButton>
+        <UButton class="cardButtonTechno" @click="showConfirmationPopup = true">
+          Supprimer
+        </UButton>
+      </div>
+    </td>
+  
     <!-- Display the popup to update the event -->
-    <AdminPopUpEventModification v-if="showUpdatePopup" :event="event" @close="showUpdatePopup = false" @submit="updateEvent" />
+    <AdminPopUpEventModification v-if="showUpdatePopup" :event="props.event" @close="showUpdatePopup = false" @submit="updateEvent" />
     
     <!-- Display the confirmation popup to delete the event -->
     <AdminPopUpEventSuppression v-if="showConfirmationPopup" @confirm="deleteEvent" @cancel="showConfirmationPopup = false" />
+  </template>
+  
+<style scoped>
+.cardButtonTechno {
+    margin: 0.5rem 0;
+}
 
-    <!-- Divider to separate the days -->
-    <UDivider
-        orientation="horizontal"
-        class="mt-2"
-        icon="i-heroicons-calendar-days"
-    />
-</template>
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+td {
+    padding: 0.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+td:not(.title) {
+    border-left: 1px solid #e2e8f0;
+}
+</style>
