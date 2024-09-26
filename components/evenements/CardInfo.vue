@@ -10,28 +10,26 @@ const { itemInfos } = defineProps<{
 
 <template>
     <!-- Display the card information for the event -->
-    <div class="cardTechno">
+    <NuxtLink :to="`/evenement/${itemInfos.id}`" class="cardEvent">
         <div>
-            <NuxtImg class="cardImageTechno" :src="itemInfos.images[0] ?? ''" />
+            <NuxtImg class="cardImageEvent" :src="itemInfos.images[0] ?? ''" />
 
-            <div class="cardTextTechno">
-            <h3 class="text-xl font-bold text-primary-500">
-                {{ itemInfos.title }}
-            </h3>
+            <div class="cardTextEvent">
+                <h3 class="text-xl font-bold text-primary-500">
+                    {{ itemInfos.title }}
+                </h3>
             </div>
         </div>
-
         <UButton
-            class="cardButtonTechno"
+            class="cardButtonEvent"
             variant="link"
             :to="`/evenement/${itemInfos.id}`"
         >
             Voir plus
         </UButton>
-    </div>
+    </NuxtLink>
 </template>
 
 <style>
-/* Add the CSS for the card information */
-@import url("~/assets/css/technologies/cardInfo.css");
+@import url("~/assets/css/evenement/cardInfo.css");
 </style>
