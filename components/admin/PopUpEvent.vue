@@ -27,6 +27,13 @@ const editLinkIndex = ref<number | null>(null); // Index of the link being edite
 // Watch for changes to the event prop and update the form data
 watch(() => props.event, (newEvent) => {
   formData.value = { ...newEvent };
+  // Ensure images and links are always arrays
+  if (!Array.isArray(formData.value.images)) {
+    formData.value.images = [];
+  }
+  if (!Array.isArray(formData.value.links)) {
+    formData.value.links = [];
+  }
 }, { immediate: true });
 
 // Add an image to the form data
@@ -86,91 +93,88 @@ const handleSubmit = () => {
 <template>
   <div class="popup">
     <div class="popup-content">
-      <h2>Modifier l'événement</h2>
+      <p class="popupTitle">{{ props.event.id ? 'Modifier l\'événement' : 'Créer un événement' }}</p>
 
       <!-- Display the form to update the event -->
       <form @submit.prevent="handleSubmit">
 
-        <div>
-          <label for="title">Titre</label>
+        <div class="form-group">
+          <label for="title">Titre : </label>
           <input type="text" id="title" v-model="formData.title" required />
         </div>
 
-        <div>
-          <label for="description">Description</label>
+        <div class="form-group">
+          <label for="description">Description : </label>
           <textarea id="description" v-model="formData.description" required></textarea>
         </div>
 
-        <div>
-          <label for="date">Date</label>
+        <div class="form-group">
+          <label for="date">Date : </label>
           <input type="date" id="date" v-model="formData.date" required />
         </div>
 
-        <div>
-          <label for="location">Lieu</label>
+        <div class="form-group">
+          <label for="location">Lieu : </label>
           <input type="text" id="location" v-model="formData.location" required />
         </div>
 
-        <div>
-          <label for="imageUrl">Ajouter ou modifier une image (URL)</label>
-          <input type="text" id="imageUrl" v-model="imageUrl" />
-          <button type="button" @click="addImage">{{ editImageIndex !== null ? 'Modifier' : 'Ajouter' }} l'image</button>
+        <div class="form-group">
+          <label for="imageUrl">Ajouter ou modifier une image (URL) : </label>
+          <div class="input-button-group">
+            <input type="text" id="imageUrl" v-model="imageUrl" />
+            <button type="button" @click="addImage">{{ editImageIndex !== null ? 'Modifier' : 'Ajouter' }} l'image</button>
+          </div>
         </div>
-        <div>
-          <h3>Images ajoutées</h3>
-          <ul>
-            <li v-for="(image, index) in formData.images" :key="index">
-              <a :href="image" target="_blank">{{ image }}</a>
-              <button type="button" @click="editImage(index)">Modifier</button>
-              <button type="button" @click="deleteImage(index)">Supprimer</button>
-            </li>
-          </ul>
+        <div class="form-group">
+          <h3>Images ajoutées : </h3>
+          <table class="added-items-table">
+            <tbody>
+              <tr v-for="(image, index) in formData.images" :key="index">
+                <td class="link-cell">
+                  <a :href="image" target="_blank">{{ image }}</a>
+                </td>
+                <td class="button-cell">
+                  <UButton type="button" @click="editImage(index)">Modifier</UButton>
+                  <UButton type="button" @click="deleteImage(index)">Supprimer</UButton>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <div>
-          <label for="link">Ajouter ou modifier un lien (URL)</label>
-          <input type="text" id="link" v-model="link" />
-          <button type="button" @click="addLink">{{ editLinkIndex !== null ? 'Modifier' : 'Ajouter' }} le lien</button>
+        <div class="form-group">
+          <label for="link">Ajouter ou modifier un lien (URL) : </label>
+          <div class="input-button-group">
+            <input type="text" id="link" v-model="link" />
+            <button type="button" @click="addLink">{{ editLinkIndex !== null ? 'Modifier' : 'Ajouter' }} le lien</button>
+          </div>
         </div>
-        <div>
-          <h3>Liens ajoutés</h3>
-          <ul>
-            <li v-for="(link, index) in formData.links" :key="index">
-              <p>{{ link }}</p>
-              <button type="button" @click="editLink(index)">Modifier</button>
-              <button type="button" @click="deleteLink(index)">Supprimer</button>
-            </li>
-          </ul>
+        <div class="form-group">
+          <h3>Liens ajoutés : </h3>
+          <table class="added-items-table">
+            <tbody>
+              <tr v-for="(link, index) in formData.links" :key="index">
+                <td class="link-cell">
+                  <p>{{ link }}</p>
+                </td>
+                <td class="button-cell">
+                  <UButton type="button" @click="editLink(index)">Modifier</UButton>
+                  <UButton type="button" @click="deleteLink(index)">Supprimer</UButton>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         
-        <button type="submit">Submit</button>
-        <button type="button" @click="$emit('close')">Cancel</button>
+        <div class="form-group">
+          <UButton type="submit" class="submitBtn">Soumettre</UButton>
+          <UButton type="button" @click="$emit('close')" class="submitBtn">Retour</UButton>
+        </div>
       </form>
     </div>
   </div>
 </template>
 
 <style scoped>
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-content {
-  background: rgb(0, 0, 0);
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-}
-
-button {
-  margin-top: 10px;
-}
+@import url("~/assets/css/admin/popUpEvent.css");
 </style>

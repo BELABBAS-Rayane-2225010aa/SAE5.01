@@ -39,7 +39,7 @@
 }
 
 #imageUrl, #link {
-    width: 40vw;
+    width: 35vw;
 }
 
 input:not(#imageUrl,#link), textarea {
@@ -52,7 +52,7 @@ input:not(#imageUrl,#link), textarea {
 }
 
 button:not(.submitBtn) {
-    width: 8vw;
+    width: auto;
     margin-top: 0;
 }
 
@@ -62,4 +62,40 @@ button:not(.submitBtn) {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.added-items-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.added-items-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: middle;
+}
+
+.link-cell {
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 0; /* Ajoutez cette ligne */
+}
+
+.link-cell a, .link-cell p {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%; /* Ajoutez cette ligne */
+}
+
+.button-cell {
+    width: 30%;
+    text-align: right;
+}
+
+.button-cell button {
+    margin-left: 5px;
 }
