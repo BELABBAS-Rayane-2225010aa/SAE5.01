@@ -48,38 +48,40 @@ emit('submit', formData.value);
 <template>
     <div class="popup">
         <div class="popup-content">
-            <h2>Créer un nouvel événement</h2>
+            <p class="popupTitle">Créer un nouvel événement</p>
 
             <!-- Display the form to create a new event -->
             <form @submit.prevent="handleSubmit">
 
-                <div>
-                    <label for="title">Titre</label>
+                <div class="form-group">
+                    <label for="title">Titre : </label>
                     <input type="text" id="title" v-model="formData.title" required />
                 </div>
 
-                <div>
-                    <label for="description">Description</label>
+                <div class="form-group">
+                    <label for="description">Description : </label>
                     <textarea id="description" v-model="formData.description" required></textarea>
                 </div>
 
-                <div>
-                    <label for="date">Date</label>
+                <div class="form-group">
+                    <label for="date">Date : </label>
                     <input type="date" id="date" v-model="formData.date" required />
                 </div>
 
-                <div>
-                    <label for="location">Lieu</label>
+                <div class="form-group">
+                    <label for="location">Lieu : </label>
                     <input type="text" id="location" v-model="formData.location" required />
                 </div>
 
-                <div>
-                    <label for="imageUrl">Ajouter une image (URL)</label>
-                    <input type="text" id="imageUrl" v-model="imageUrl" />
-                    <button type="button" @click="addImage">Ajouter l'image</button>
+                <div class="form-group">
+                    <label for="imageUrl">Ajouter une image (URL) : </label>
+                    <div class="input-button-group">
+                        <input type="text" id="imageUrl" v-model="imageUrl" />
+                        <button type="button" @click="addImage">Ajouter l'image</button>
+                    </div>
                 </div>
-                <div>
-                    <h3>Images ajoutées</h3>
+                <div class="form-group">
+                    <h3>Images ajoutées : </h3>
                     <ul>
                         <li v-for="(image, index) in formData.images" :key="index">
                             <a :href="image" target="_blank">{{ image }}</a>
@@ -87,13 +89,15 @@ emit('submit', formData.value);
                     </ul>
                 </div>
 
-                <div>
-                    <label for="link">Ajouter un lien (URL)</label>
-                    <input type="text" id="link" v-model="link" />
-                    <button type="button" @click="addLink">Ajouter le lien</button>
+                <div class="form-group">
+                    <label for="link">Ajouter un lien (URL) : </label>
+                    <div class="input-button-group">
+                        <input type="text" id="link" v-model="link" />
+                        <button type="button" @click="addLink">Ajouter le lien</button>
+                    </div>
                 </div>
-                <div>
-                    <h3>Liens ajoutées</h3>
+                <div class="form-group">
+                    <h3>Liens ajoutés : </h3>
                     <ul>
                         <li v-for="(link, index) in formData.links" :key="index">
                             <p>{{ link }}</p>
@@ -101,34 +105,15 @@ emit('submit', formData.value);
                     </ul>
                 </div>
                 
-                <button type="submit">Submit</button>
-                <button type="button" @click="$emit('close')">Cancel</button>
+                <div class="form-group">
+                    <UButton type="submit" class="submitBtn">Ajouter</UButton>
+                    <UButton type="button" @click="$emit('close')" class="submitBtn">Retour</UButton>
+                </div>
             </form>
         </div>
     </div>
 </template>
   
-  <style scoped>
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .popup-content {
-    background: rgb(0, 0, 0);
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-  }
-  
-  button {
-    margin-top: 10px;
-  }
-  </style>
+<style scoped>
+@import url("~/assets/css/admin/popUpEventCreation.css");
+</style>

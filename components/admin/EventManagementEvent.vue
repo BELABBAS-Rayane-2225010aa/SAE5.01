@@ -90,22 +90,5 @@ const deleteEvent = async () => {
   </template>
   
 <style scoped>
-.cardButtonTechno {
-    margin: 0.5rem 0;
-}
-
-.title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-td {
-    padding: 0.5rem;
-    border-top: 1px solid #e2e8f0;
-}
-
-td:not(.title) {
-    border-left: 1px solid #e2e8f0;
-}
+@import url("~/assets/css/admin/eventManagementEvent.css");
 </style>

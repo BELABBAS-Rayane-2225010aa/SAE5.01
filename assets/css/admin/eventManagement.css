@@ -1,0 +1,32 @@
+.form-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.event-table th,
+.event-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.event-table th {
+  background-color: #555555;
+  font-weight: bold;
+}
+
+.event-table th:not(.title-column) {
+    border-left: 1px solid #e2e8f0;
+}
+
+.title-column {
+  width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
