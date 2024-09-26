@@ -24,28 +24,29 @@ if (error.value) {
 
 <template>
   <!-- Display the event details -->
-    <GlobalWrapper class="event-wrapper">
-        <MainTitle :text="`${event?.title}`" />
-        <NuxtImg :src="event?.images[0] ?? ''" />
-        <p>{{ event?.description }}</p>
-        <p>{{ event?.date }} {{ event?.time }}</p>
-        <p>{{ event?.location }}</p>
-        <p>
-          <ul>
-            <li v-for="link in event?.links">
-              {{ link }}
-            </li>
-          </ul>
-        </p>
-        <p>
-          <ul>
-            <li v-for="(img, index) in event?.images.slice(1)" :key="index">
-              <NuxtImg :src="img ?? ''" />
-            </li>
-          </ul>
-        </p>
-    </GlobalWrapper>
+  <GlobalWrapper class="global-wrapper">
+    <MainTitle :text="`${event?.title}`" class="event-title" />
+    <NuxtImg :src="event?.images[0] ?? ''" class="event-titleImage" />
+    <div class="event-text">
+      <p class="event-desc">{{ event?.description }}</p>
+      <p class="event-dateTime">{{ event?.date }} {{ event?.time }}</p>
+      <p class="event-loc">{{ event?.location }}</p>
+      <div class="event-links">
+        <ul>
+          <li v-for="link in event?.links" :key="link" class="event-link">
+            {{ link }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="event-images">
+      <li v-for="(img, index) in event?.images.slice(1)" :key="index">
+        <NuxtImg :src="img ?? ''" class="event-image" />
+      </li>
+    </div>
+  </GlobalWrapper>
 </template>
   
 <style scoped>
+@import url("~/assets/css/evenement/eventIdPage.css");
 </style>
