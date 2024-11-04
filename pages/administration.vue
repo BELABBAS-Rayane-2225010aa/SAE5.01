@@ -38,8 +38,6 @@ const fetchEvents = async () => {
     }
 };
 
-onMounted(fetchEvents); // Fetch the list of events when the component is mounted
-
 // Function to update the list of events
 const updateEventList = () => {
     fetchEvents();

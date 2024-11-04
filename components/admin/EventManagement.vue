@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref, defineProps, defineEmits, watch, onMounted } from 'vue';
 import type { Event } from "~/models/event";
 
-// Define the component's props using defineProps
 const props = defineProps<{
     events: Event[]
 }>();
 
-const showPopup = ref(false);   // Show the popup to add or update an event
-const showConfirmationPopup = ref(false);   // Show the popup to confirm the deletion of an event
-const isUpdateAction = ref(false);  // Define if the action is an update or an add
-const selectedEvent = ref<Event | null>(null);  // The selected event to update or delete
+const showPopup = ref(false);
+const showConfirmationPopup = ref(false);
+const isUpdateAction = ref(false);
+const selectedEvent = ref<Event | null>(null);
+const searchQuery = ref('');
+const filteredEvents = ref<Event[]>([]);
+const visibleEventsCount = ref(10);
 
-const emit = defineEmits(['updateEventList']);  // Emit the event to update the event list
+const emit = defineEmits(['updateEventList']);
 
-// add the event to the database using the `/api/event/post/$(eventData.id)` route
-// accept an Event object as a parameter
-// use the useFetchWithToast function to handle the fetch request and display a toast message
-// emit the 'updateEventList' event to update the event list
 const addEvent = async (eventData: Event) => {
     await useFetchWithToast<Event>(
         `/api/event/post/${eventData.id}`,
@@ -43,10 +41,6 @@ const addEvent = async (eventData: Event) => {
     });
 };
 
-// update the event in the database using the `/api/event/put/$(updatedEvent.id)` route
-// accept an Event object as a parameter
-// use the useFetchWithToast function to handle the fetch request and display a toast message
-// emit the 'updateEventList' event to update the event list
 const updateEvent = async (updatedEvent: Event) => {
     await useFetchWithToast<Event>(
         `/api/event/put/${updatedEvent.id}`,
@@ -73,9 +67,6 @@ const updateEvent = async (updatedEvent: Event) => {
     });
 };
 
-// delete the event in the database using the `/api/event/delete/$(selectedEvent.value.id)` route
-// use the useFetchWithToast function to handle the fetch request and display a toast message
-// emit the 'updateEventList' event to update the event list
 const deleteEvent = async () => {
     if (!selectedEvent.value) return;
 
@@ -104,33 +95,75 @@ const deleteEvent = async () => {
     });
 };
 
-// show the popup to update the event
+const sortEventsByDate = (events: Event[]) => {
+    return events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+};
+
+const searchEvent = () => {
+    if (searchQuery.value) {
+        filteredEvents.value = props.events.filter(event =>
+            event.title.toLowerCase().includes(searchQuery.value.toLowerCase())
+        );
+    } else {
+        filteredEvents.value = props.events;
+    }
+    filteredEvents.value = sortEventsByDate(filteredEvents.value);
+    visibleEventsCount.value = 10; // Reset visible events count on search
+};
+
 const handleShowUpdatePopup = (event: Event) => {
-    selectedEvent.value = event;    // Set the selected event
-    isUpdateAction.value = true;    // Set the action to update
-    showPopup.value = true;        // Show the popup
+    selectedEvent.value = event;
+    isUpdateAction.value = true;
+    showPopup.value = true;
 };
 
-// show the popup to confirm the deletion of the event
 const handleShowConfirmationPopup = (event: Event) => {
-    selectedEvent.value = event;    // Set the selected event
-    showConfirmationPopup.value = true;   // Show the confirmation popup
+    selectedEvent.value = event;
+    showConfirmationPopup.value = true;
 };
 
-// show the popup to add a new event
 const handleShowAddPopup = () => {
-    selectedEvent.value = null;   // Reset the selected event
-    isUpdateAction.value = false;   // Set the action to add
-    showPopup.value = true;   // Show the popup
+    selectedEvent.value = null;
+    isUpdateAction.value = false;
+    showPopup.value = true;
 };
+
+const showMoreEvents = () => {
+    visibleEventsCount.value += 10;
+};
+
+// Watch for changes in the searchQuery and update filteredEvents accordingly
+watch(searchQuery, () => {
+    searchEvent();
+});
+
+// Watch for changes in the props.events and update filteredEvents accordingly
+watch(() => props.events, (newEvents) => {
+    filteredEvents.value = sortEventsByDate(newEvents);
+});
+
+// Sort events by date on component mount
+onMounted(() => {
+    filteredEvents.value = sortEventsByDate(props.events);
+});
 </script>
 
 <template>
     <div>
-        <!-- Button to create an Event -->
-        <UButton @click="handleShowAddPopup">
-            Créer un événement
-        </UButton>
+        <div class="button-group">
+            <!-- Button to create an Event -->
+            <UButton @click="handleShowAddPopup">
+                Créer un événement
+            </UButton>
+
+            <!-- Search bar -->
+            <div class="search-bar">
+                <input type="text" v-model="searchQuery" placeholder="Rechercher un événement" />
+                <span class="search-icon">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+        </div>
 
         <!-- Popup to add or update an Event -->
         <AdminPopUpEvent 
@@ -155,16 +188,57 @@ const handleShowAddPopup = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="event in events" :key="event.id">
+                    <tr v-for="event in filteredEvents.slice(0, visibleEventsCount)" :key="event.id">
                         <!-- Display the Event -->
                         <AdminEventManagementEvent :event="event" @showPopUpEvent="handleShowUpdatePopup" @showPopUpEventSuppression="handleShowConfirmationPopup" />
                     </tr>
                 </tbody>
             </table>
+            <div v-if="visibleEventsCount < filteredEvents.length" class="show-more-container">
+                <UButton @click="showMoreEvents">
+                    Afficher plus
+                </UButton>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
 @import url("~/assets/css/admin/eventManagement.css");
+
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 300px;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+}
+
+.search-bar .search-icon {
+    color: #333;
+    font-size: 18px;
+}
+
+.show-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
 </style>
