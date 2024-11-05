@@ -40,9 +40,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     apiKey: "cbbd1d2b11c04e5ab691332586e1026e",
-    solarPanelApiUrl: "",
-    solarPanelApiKey: "",
-    solarPanelSiteId: "",
+    solarPanelApiUrl: "https://api.solaredge.com",
+    solarPanelApiKey: "I4W1QU9682D0DK15CZT3Q6UBVPGOSRJY",
+    solarPanelSiteId: "4389155",
     jwtSecret: "c18c3f296f0a2088342d1ea3aef0161ecfd465935314f072f24bc599b50ce360",
   },
 

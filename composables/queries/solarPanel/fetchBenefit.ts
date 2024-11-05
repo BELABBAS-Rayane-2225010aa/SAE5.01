@@ -6,12 +6,14 @@ export const fetchBenefit = async (): Promise<Benefit> => {
   const apiKey = config.solarPanelApiKey;
   const siteId = config.solarPanelSiteId;
 
+  console.log(`Fetching from URL: ${apiUrl}/sites/${siteId}/envBenefits?systemUnits=Metrics`);
+
   return await $fetch<Benefit>(
     `${apiUrl}/sites/${siteId}/envBenefits?systemUnits=Metrics`,
     {
       method: "GET",
       headers: {
-        "X-API-Key" : "I4W1QU9682D0DK15CZT3Q6UBVPGOSRJY",
+        "X-API-Key" : apiKey,
       },
     },
   );
