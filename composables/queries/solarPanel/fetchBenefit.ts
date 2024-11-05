@@ -6,10 +6,10 @@ export const fetchBenefit = async (): Promise<Benefit> => {
   const apiKey = config.solarPanelApiKey;
   const siteId = config.solarPanelSiteId;
 
-  console.log(`Fetching from URL: ${apiUrl}/sites/${siteId}/envBenefits?systemUnits=Metrics`);
+  console.log(`Fetching from URL: ${apiUrl}/v2/sites/${siteId}/envBenefits?systemUnits=Metrics`);
 
   return await $fetch<Benefit>(
-    `${apiUrl}/sites/${siteId}/envBenefits?systemUnits=Metrics`,
+    `${apiUrl}/v2/sites/${siteId}/envBenefits?systemUnits=Metrics`,
     {
       method: "GET",
       headers: {
