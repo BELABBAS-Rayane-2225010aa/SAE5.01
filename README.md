@@ -1,8 +1,35 @@
-# SAE5.01
+# PWA Starter
 
-## liens utiles
-Journal de Bord : https://docs.google.com/document/d/1hdwfK0HJaW9KNBpB3gMVHDAx2K1jUyk38fVRkIgJxes/edit?usp=sharing
+[**Straight to Full Documentation**](https://docs.pwabuilder.com/#/starter/quick-start)
 
-Trello : https://trello.com/invite/66dec42cb2b579feae1fbbf4/ATTIddbd83d2b4d2ccd127295e4569c5ef3fA26BC1B4
+The PWABuilder pwa-starter is our opinionated, best practices, production tested starter that we use to build all of our PWAs, including [PWABuilder itself](https://blog.pwabuilder.com/posts/introducing-the-brand-new-pwa-builder/)! The pwa-starter is a starter codebase, just like create-react-app or the Angular CLI can generate, that uses the PWABuilder team&#39;s preferred front-end tech stack. We also have a CLI tool to allow you to create a PWA template from the command line.
 
-GitHub du groupe de l'année dernière : https://github.com/MattiasGervilliers/MagasinConnecte4.0
+## Jump Right In
+
+Install the PWABuilder CLI:
+
+`npm i -g @pwabuilder/cli`
+
+And create a new app with this command:
+
+`pwa create`
+
+And start your app locally with:
+
+`pwa start`
+
+And that's it! Good luck on your Progressive Web App adventure!
+
+## More Info
+
+[![Get started with the pwa-starter!](https://img.youtube.com/vi/u3pWKpmic_k/0.jpg)](https://www.youtube.com/watch?v=u3pWKpmic_k)
+
+With it you get an app that:
+- Has no build system to set up and no boilerplate code to add. Everything is included out of the box.
+- Has a Service Worker system using [Workbox](https://developers.google.com/web/tools/workbox/)
+- Scores close to 100 on Lighthouse out of the box
+- Has everything needed to be installable in the browser
+- Is ready to be package for the app stores using [PWABuilder](https://www.pwabuilder.com)
+- Uses the [Azure Static Web Apps CLI](https://azure.github.io/static-web-apps-cli) which enables emulating your production environment locally, and gets you ready for deploying to Azure Static Web Apps!
+
+and all with just a few button clicks 😊.
