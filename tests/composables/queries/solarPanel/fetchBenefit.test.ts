@@ -1,4 +1,4 @@
-import { fetchBenefit } from "@/composables/queries/solarPanel/fetchBenefit";
+import { fetchBenefit } from "~/composables/queries/solarPanel/fetchBenefit";
 import { describe, expect, it, vi } from "vitest";
 
 // Mock pour `useRuntimeConfig` qui retourne les valeurs de configuration nécessaires
