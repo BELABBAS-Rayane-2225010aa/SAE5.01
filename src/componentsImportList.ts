@@ -4,6 +4,9 @@ import './components/header';
 import './styles/global.css';
 
 //Components added
+import './components/navbar';
+import './components/footer';
+
 import './components/card/cardPresentation';
 import './components/card/cardNavigation';
 import './components/defaultBackground';

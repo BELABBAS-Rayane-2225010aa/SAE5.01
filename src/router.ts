@@ -19,7 +19,10 @@ export const router = new Router({
       {
         path: resolveRouterPath(),
         title: 'Home',
-        render: () => html`<app-home></app-home>`
+        render: () => html`
+        <app-navbar></app-navbar>
+        <app-home></app-home>
+        <app-footer></app-footer>`
       },
       {
         path: resolveRouterPath('about'),
@@ -27,7 +30,10 @@ export const router = new Router({
         plugins: [
           lazy(() => import('./pages/app-about/app-about.js')),
         ],
-        render: () => html`<app-about></app-about>`
+        render: () => html`
+        <app-navbar></app-navbar>
+        <app-about></app-about>
+        <app-footer></app-footer>`
       }
     ]
   });
