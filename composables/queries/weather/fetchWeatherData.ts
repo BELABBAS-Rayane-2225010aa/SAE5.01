@@ -5,7 +5,7 @@ import type { Weather } from "~/models/weather";
 export const fetchWeatherData = async (apiKey: string, lat: number, lon: number): Promise<Weather> => {
     // Construct the API URL with the provided latitude, longitude, and API key
     const response = await fetch(
-        `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}&lang=fr&include=minutely`,
+        `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}&lang=fr&include=hourly`,
         {
             method: "GET", // HTTP GET method
         },
