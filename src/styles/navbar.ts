@@ -16,30 +16,40 @@ export const style = css`
     box-sizing: border-box;
     z-index: 10;
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0); /* Initial transparent background */
   }
 
   .navbar-scrolled {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  .bg-white {
+    background-color: white;
+  }
+
+  .dark .bg-black {
+    background-color: black;
   }
 
   .navbar-scrolled h1 {
-    color: theme("colors.black");
+    color: black;
   }
 
   html.dark .navbar-scrolled h1 {
-    color: theme("colors.white");
+    color: white;
   }
 
   .navbar-scrolled .menu-icon {
-    color: theme("colors.black");
+    color: black;
   }
 
   html.dark .navbar-scrolled .menu-icon {
-    color: theme("colors.white");
+    color: white;
   }
 
   .menu-icon {
-    color: theme("colors.white");
+    color: white;
   }
 
   .navbar-menu-container {
@@ -67,19 +77,18 @@ export const style = css`
       left: 50%;
       width: 100%;
       position: fixed;
-      background-color: theme("colors.white");
+      background-color: white;
       z-index: 10;
-      /* bottom box shadow */
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
       overflow: hidden;
     }
 
     html.dark .menu {
-      background-color: theme("colors.black");
+      background-color: black;
     }
 
     .menu {
-      color: theme("colors.black");
+      color: black;
     }
   }
 `;

@@ -5,30 +5,51 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/tooltip/tooltip.js';
-import { style } from '../styles/navbar';
+import { style } from '../../styles/navbar';
+import { Link, NavbarState } from './useNavbar';
+import { BackgroundState } from './useBackground';
 
 @customElement('app-navbar')
 export class Navbar extends LitElement {
+
+  private navbarState = new NavbarState();
+
   @state() isMenuOpen = false;
-  @state() refLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Technologies', path: '/technologies' },
-    { name: 'Photovoltaïque', path: '/photovoltaique' },
-    { name: 'Epicerie solidaire', path: '/epicerie-solidaire' },
-    { name: 'Météo', path: '/meteo' },
-    { name: 'Retour', icon: 'arrow-left', onClick: () => this.toggleMenu() }
-  ];
+  @state() refLinks: Link[] = [];
 
   @property({ type: Boolean }) authenticated = false;
 
   static styles = style;
+  private backgroundState: BackgroundState | null = null;
 
-  private toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+  constructor() {
+    super();
+    this.refLinks = this.navbarState.refLinks;
+    this.navbarState.addObserver(() => {
+      this.isMenuOpen = this.navbarState.isMenuOpen;
+      this.refLinks = this.navbarState.refLinks;
+    });
+
+    // Add animate.css dynamically
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css';
+    document.head.appendChild(link);
   }
 
-  private toggleMenuWithSubLinks() {
-    // Implement the logic for toggling menu with sub-links
+  firstUpdated() {
+    const navbarElement = this.shadowRoot?.querySelector('.navbar');
+    console.log('Navbar element in firstUpdated:', navbarElement);
+    this.backgroundState = new BackgroundState(navbarElement as HTMLElement | null);
+    this.backgroundState.changeBackground();
+    window.addEventListener('scroll', this.backgroundState.onScroll.bind(this.backgroundState));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.backgroundState) {
+      window.removeEventListener('scroll', this.backgroundState.onScroll.bind(this.backgroundState));
+    }
   }
 
   private onSignOut() {
@@ -36,6 +57,7 @@ export class Navbar extends LitElement {
   }
 
   render() {
+    console.log('Before render:', this.refLinks);
     return html`
       <!-- Navbar container -->
       <nav class="navbar">
@@ -64,7 +86,7 @@ export class Navbar extends LitElement {
                               </button>
                             `
                           : html`
-                              <button class="link-button" @click="${this.toggleMenuWithSubLinks}">
+                              <button class="link-button" @click="${this.navbarState.toggleMenuWithSubLinks}">
                                 ${refLink.name}
                               </button>
                             `}
@@ -76,7 +98,7 @@ export class Navbar extends LitElement {
             : html`
                 <button
                   class="menu-icon text-3xl cursor-pointer animate__animated animate__flipInX animate__fast"
-                  @click="${this.toggleMenu}"
+                  @click="${this.navbarState.toggleMenu}"
                 >
                   <sl-icon name="list"></sl-icon>
                 </button>

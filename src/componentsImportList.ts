@@ -4,7 +4,7 @@ import './components/header';
 import './styles/global.css';
 
 //Components added
-import './components/navbar';
+import './components/navbar/navbar';
 import './components/footer';
 
 import './components/card/cardPresentation';
