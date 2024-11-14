@@ -8,7 +8,7 @@ export const style = css`
     justify-content: space-between;
     align-items: center;
     height: 70px;
-    padding: 0 1%;
+    padding: 0 2%;
     transition: 0.3s ease-in-out;
     position: fixed;
     top: 0;
@@ -59,17 +59,7 @@ export const style = css`
     overflow: hidden;
   }
 
-  @media screen and (max-width: 1264px) {
-    .navbar {
-      padding: 0 10%;
-    }
-  }
-
   @media screen and (max-width: 1000px) {
-    .navbar {
-      padding: 0 5%;
-    }
-
     .menu {
       flex-direction: column;
       transform: translate(-50%, 70px);
