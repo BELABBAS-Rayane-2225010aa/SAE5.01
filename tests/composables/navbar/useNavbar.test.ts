@@ -9,7 +9,7 @@ describe('useNavbar', () => {
     navbarComposable = useNavbar();
   });
 
-  it('devrait initialiser le menu comme fermé et afficher les liens principaux', () => {
+  it('should initialize the menu as closed and display the main links', () => {
     const { isMenuOpen, refLinks } = navbarComposable;
 
     expect(isMenuOpen.value).toBe(false);
@@ -23,7 +23,7 @@ describe('useNavbar', () => {
     ]);
   });
 
-  it("devrait ouvrir le menu lors de l'appel à toggleMenu", () => {
+  it("should toggle the menu open when calling toggleMenu", () => {
     const { isMenuOpen, toggleMenu } = navbarComposable;
 
     toggleMenu();
@@ -33,7 +33,7 @@ describe('useNavbar', () => {
     expect(isMenuOpen.value).toBe(false);
   });
 
-  it("devrait afficher les sous-liens pour 'Photovoltaïque' lors de l'appel à toggleMenuWithSubLinks", () => {
+  it("should display the sub-links for 'Photovoltaïque' when calling toggleMenuWithSubLinks", () => {
     const { refLinks, toggleMenuWithSubLinks } = navbarComposable;
 
     toggleMenuWithSubLinks();
@@ -44,26 +44,26 @@ describe('useNavbar', () => {
     ]);
   });
 
-  it('devrait fermer le menu lors de l\'appel à resetMenu', () => {
+  it('should close the menu when calling resetMenu', () => {
     const { isMenuOpen, resetMenu, toggleMenu } = navbarComposable;
 
-    toggleMenu(); // ouvre le menu
+    toggleMenu(); // open the menu
     expect(isMenuOpen.value).toBe(true);
 
-    resetMenu(); // réinitialise et ferme le menu
+    resetMenu(); // reset and close the menu
     expect(isMenuOpen.value).toBe(false);
   });
 
-  it('devrait retourner aux liens principaux lorsque "Retour" est cliqué dans les sous-liens', () => {
+  it('should return to the main links when "Back" is clicked in the sub-links', () => {
     const { refLinks, toggleMenuWithSubLinks } = navbarComposable;
 
-    // Activer les sous-liens
+    // Activate the sub-links
     toggleMenuWithSubLinks();
     expect(refLinks.value[0].name).toBe('Retour');
 
-    // Exécuter l'action onClick de "Retour"
-    const retourLink = refLinks.value[0];
-    retourLink.onClick?.();
+    // Execute the onClick action of "Back"
+    const backLink = refLinks.value[0];
+    backLink.onClick?.();
 
     expect(refLinks.value).toEqual([
       { name: 'Technologies', path: '/technologies' },
