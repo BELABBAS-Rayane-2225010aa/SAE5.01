@@ -45,6 +45,17 @@ export const router = new Router({
           <app-navbar></app-navbar>
           <app-epicerie></app-epicerie>
           <app-footer></app-footer>`
+      },
+      {
+        path: resolveRouterPath('contact'),
+        title: 'Contact',
+        plugins: [
+          lazy(() => import('./pages/app-contact.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-contact></app-contact>
+          <app-footer></app-footer>`
       }
     ]
   });
