@@ -13,3 +13,8 @@ import './components/defaultBackground';
 import './components/globalWrapper';
 import './components/parteners';
 import './components/scrollButton';
+
+import './components/epicerieSolidaire/tabs';
+import './components/epicerieSolidaire/shopImages';
+import './components/epicerieSolidaire/shopSchedules';
+import './components/epicerieSolidaire/shopAddress';

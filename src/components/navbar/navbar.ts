@@ -6,8 +6,8 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/tooltip/tooltip.js';
 import { style } from '../../styles/navbar';
-import { Link, NavbarState } from './useNavbar';
-import { BackgroundState } from './useBackground';
+import { Link, NavbarState } from '../../composables/navbar/useNavbar';
+import { BackgroundState } from '../../composables/navbar/useBackground';
 
 @customElement('app-navbar')
 export class Navbar extends LitElement {
@@ -39,7 +39,6 @@ export class Navbar extends LitElement {
 
   firstUpdated() {
     const navbarElement = this.shadowRoot?.querySelector('.navbar');
-    console.log('Navbar element in firstUpdated:', navbarElement);
     this.backgroundState = new BackgroundState(navbarElement as HTMLElement | null);
     this.backgroundState.changeBackground();
     window.addEventListener('scroll', this.backgroundState.onScroll.bind(this.backgroundState));
@@ -57,7 +56,6 @@ export class Navbar extends LitElement {
   }
 
   render() {
-    console.log('Before render:', this.refLinks);
     return html`
       <!-- Navbar container -->
       <nav class="navbar">

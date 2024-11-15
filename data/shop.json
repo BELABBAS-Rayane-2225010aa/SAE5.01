@@ -1,0 +1,149 @@
+[
+    {
+      "name": "AGORAé Etoile ",
+      "description": "Innauguration le 24 novembre 2022",
+      "social": "https://www.instagram.com/agorae_marseille_etoile/",
+      "linkTree": "https://www.linksight.me/agoraeaixmarseille",
+      "address": "142 Trav. Charles Susini, 13013 Marseille",
+      "images": [
+        "/logo_agorae.png",
+        "/interieur.png"
+      ],
+      "currentWeek": {
+        "number": 38,
+        "days": [
+          {
+            "day": "Monday",
+            "isOpen": true,
+            "withBreak": false,
+            "morningStart": "16:55",
+            "morningEnd": "18:58",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Tuesday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Wednesday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Thursday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Friday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Saturday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Sunday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          }
+        ]
+      },
+      "nextWeek": {
+        "number": 39,
+        "days": [
+          {
+            "day": "Monday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Tuesday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Wednesday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Thursday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Friday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Saturday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          },
+          {
+            "day": "Sunday",
+            "isOpen": false,
+            "withBreak": true,
+            "morningStart": "",
+            "morningEnd": "",
+            "afternoonStart": "",
+            "afternoonEnd": ""
+          }
+        ]
+      }
+    }
+  ]

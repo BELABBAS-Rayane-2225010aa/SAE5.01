@@ -34,6 +34,17 @@ export const router = new Router({
         <app-navbar></app-navbar>
         <app-about></app-about>
         <app-footer></app-footer>`
+      },
+      {
+        path: resolveRouterPath('epicerie-solidaire'),
+        title: 'Epicerie Solidaire',
+        plugins: [
+          lazy(() => import('./pages/app-epicerie.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-epicerie></app-epicerie>
+          <app-footer></app-footer>`
       }
     ]
   });
