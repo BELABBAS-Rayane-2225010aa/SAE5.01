@@ -15,6 +15,6 @@ import './components/parteners';
 import './components/scrollButton';
 
 import './components/epicerieSolidaire/tabs';
-// import './components/epicerieSolidaire/shopImages';
-// import './components/epicerieSolidaire/shopSchedules';
-// import './components/epicerieSolidaire/shopAddress';
+import './components/epicerieSolidaire/ShopImages';
+import './components/epicerieSolidaire/ShopSchedules';
+import './components/epicerieSolidaire/ShopAddress';
