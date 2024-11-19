@@ -32,7 +32,7 @@ export class EpicerieSolidaire extends LitElement {
 
   render() {
     return html`
-      <global-wrapper class="shop-wrapper">
+      <app-global-wrapper class="shop-wrapper">
         <main-title text="Epicerie solidaire"></main-title>
         <p class="introduction">
           La Fédération Aix-Marseille Interasso (FAMI) a été créée en 2012 pour défendre les droits des étudiants et
@@ -42,7 +42,7 @@ export class EpicerieSolidaire extends LitElement {
           associations étudiantes et le réseau Alumni.
         </p>
         <solidary-grocery-tabs .items=${this.items}></solidary-grocery-tabs>
-      </global-wrapper>
+      </app-global-wrapper>
     `;
   }
 }
