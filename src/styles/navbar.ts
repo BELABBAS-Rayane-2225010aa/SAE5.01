@@ -24,6 +24,15 @@ export const style = css`
     transition: background-color 0.3s ease;
   }
 
+  h1 {
+    font-size: 50px;
+  }
+
+  a{
+    color: white;
+    text-decoration: none;
+  }
+
   .bg-white {
     background-color: white;
   }
