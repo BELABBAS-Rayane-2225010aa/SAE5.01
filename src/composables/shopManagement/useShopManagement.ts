@@ -1,6 +1,7 @@
 import moment from "moment";
-import { DEFAULT_DAYS } from "~/constants/defaultValues";
-import type { Day, Shop } from "~/models/shop";
+import { DEFAULT_DAYS } from "../../constant/defaultValues";
+import type { Day, Shop } from "../../models/shop";
+import { useWeek } from "./useWeek";
 
 type UseShopManagementReturn = {
   loadState: (shops: Shop[]) => Shop[];

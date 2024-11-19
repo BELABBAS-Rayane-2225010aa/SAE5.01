@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { useWeek } from '../../composables/shopManagement/useWeek';
-import { Item } from '~/models/shop';
+import { Item } from '../../models/shop';
 
 @customElement('solidary-grocery-tabs')
 export class SolidaryGroceryTabs extends LitElement {

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Item } from '~/models/shop';
+import { Item } from '../../models/shop';
 
 @customElement('solidary-grocery-shop-images')
 export class SolidaryGroceryShopImages extends LitElement {
