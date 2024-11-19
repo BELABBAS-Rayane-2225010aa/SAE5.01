@@ -23,3 +23,7 @@ export type Day = {
     currentWeek: Week;
     nextWeek: Week;
   };
+
+  export type Item = {
+    label: string;
+  } & Shop;

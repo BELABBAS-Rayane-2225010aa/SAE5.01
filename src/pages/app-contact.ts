@@ -21,7 +21,7 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 @customElement('app-contact')
-class ContactForm extends LitElement {
+export class ContactForm extends LitElement {
   @state() state: Schema = {
     identity: "student",
     subject: "",

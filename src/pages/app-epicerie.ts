@@ -1,10 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { Shop } from '../models/shop';
-
-type Item = {
-  label: string;
-} & Shop;
+import { Shop, Item } from '../models/shop';
 
 @customElement('app-epicerie')
 export class EpicerieSolidaire extends LitElement {
@@ -15,15 +11,15 @@ export class EpicerieSolidaire extends LitElement {
   `;
 
   async connectedCallback() {
+    super.connectedCallback();
     try {
-      const response = await fetch("../server/api/shop/shops", { method: "GET" });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const shops: Shop[] = await response.json();
+      const { ShopGet } = await import("../server/api/shop/shops.get");
+      const response = new ShopGet();
+      const shops: Shop[] = await response.get();
       this.items = this.createItems(shops);
     } catch (error) {
-      console.error("Error fetching shops:", error);
+      console.error('Error in shopsHandler:', error);
+      throw error;
     }
   }
 

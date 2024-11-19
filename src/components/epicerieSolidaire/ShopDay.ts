@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import moment from 'moment';
-import { Day } from '~/models/shop';
-import { useDate } from '~/utils/useDate';
+import { Day } from '../../models/shop';
+import { useDate } from '../../composables/shopManagement/useDate';
 
 @customElement('solidary-grocery-shop-day')
 export class SolidaryGroceryShopDay extends LitElement {
