@@ -56,6 +56,17 @@ export const router = new Router({
           <app-navbar></app-navbar>
           <app-contact></app-contact>
           <app-footer></app-footer>`
+      },
+      {
+        path: resolveRouterPath('login'),
+        title: 'Login',
+        plugins: [
+          lazy(() => import('./pages/app-login.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-login></app-login>
+          <app-footer></app-footer>`
       }
     ]
   });

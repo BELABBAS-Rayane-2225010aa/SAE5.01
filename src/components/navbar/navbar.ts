@@ -104,7 +104,7 @@ export class Navbar extends LitElement {
 
           <!-- Administration link with a tooltip -->
           <sl-tooltip content="Espace administration">
-            <a href="/administration" class="menu-icon">
+            <a href="/login" class="menu-icon">
               <sl-icon name="person"></sl-icon>
             </a>
           </sl-tooltip>
