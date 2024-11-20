@@ -19,7 +19,7 @@ export type Day = {
     address: string;
     images: string[];
     social: string;
-    other: string;
+    linkTree: string;
     currentWeek: Week;
     nextWeek: Week;
   };
