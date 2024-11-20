@@ -29,9 +29,11 @@ export class ScrollButton extends LitElement {
         <sl-button
           class="animate-bounce hover:animate-none rounded-full"
           @click="${this.scrollToHash}"
-          size="medium"
+          size="large"
+          variant="primary"
+          circle
         >
-          <sl-icon name="arrow-down"></sl-icon> <!-- Utilisez une icône disponible -->
+          <sl-icon name="arrow-down" label="Scroll"></sl-icon> <!-- Utilisez une icône disponible -->
         </sl-button>
       </div>
     `;

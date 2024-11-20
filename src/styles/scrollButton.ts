@@ -4,11 +4,14 @@ import { css } from 'lit';
   // for an example of how to use this, check /pages/about-about.ts
   export const style = css`
     .scroll-button {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, -100%);
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, -100%);
+    }
 
-
+    .scroll-button sl-icon{
+      /*width: 50px;
+      height: 50px;*/
     }
   `;
