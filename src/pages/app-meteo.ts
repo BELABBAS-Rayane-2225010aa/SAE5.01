@@ -24,7 +24,7 @@ export class WeatherComponent extends LitElement {
     } catch (error) {
         useToast.add({
             title: "Erreur",
-            description: "Problème lors de la récupération des données météo ",
+            description: "Problème lors de la récupération des données météo, veuillez réessayer plus-tard. ",
             color: "red"
           });
       console.error("Erreur lors de la récupération des données météo : ", error);
