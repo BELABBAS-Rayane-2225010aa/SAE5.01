@@ -69,6 +69,17 @@ export const router = new Router({
           <app-footer></app-footer>`
       },
       {
+        path: resolveRouterPath('administration'),
+        title: 'Admin',
+        plugins: [
+          lazy(() => import('./pages/app-admin.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-admin></app-admin>
+          <app-footer></app-footer>`
+      },
+      {
         path: resolveRouterPath('meteo'),
         title: 'Meteo',
         plugins: [

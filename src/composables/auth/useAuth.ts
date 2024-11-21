@@ -14,6 +14,16 @@ class UseAuth {
         }
         return user;
     }
+
+    async getSession() {
+        const session = localStorage.getItem('session');
+        return session ? JSON.parse(session) : {};
+    }
+
+    async isAdmin() {
+        const session = await this.getSession();
+        return session.role === 'admin';
+    }
 }
 
 export const useAuth = new UseAuth();

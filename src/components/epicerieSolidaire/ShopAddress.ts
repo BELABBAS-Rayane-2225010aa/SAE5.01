@@ -1,10 +1,10 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Item } from '../../models/shop';
+import { Shop } from '../../models/shop';
 
 @customElement('solidary-grocery-shop-address')
 export class SolidaryGroceryShopAddress extends LitElement {
-  @property({ type: Object }) item!: Item;
+  @property({ type: Object }) shop!: Shop;
 
   static styles = css`
     @import url("~/assets/css/solidaryGrocery/shopHours.css");
@@ -22,7 +22,7 @@ export class SolidaryGroceryShopAddress extends LitElement {
             scrolling="no"
             marginheight="0"
             marginwidth="0"
-            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=${encodeURIComponent(this.item.address)}+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=${encodeURIComponent(this.shop.address)}+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
           ></iframe>
         </div>
       </div>

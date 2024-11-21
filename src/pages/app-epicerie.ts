@@ -1,10 +1,11 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { Shop, Item } from '../models/shop';
+import { Shop } from '../models/shop';
 
 @customElement('app-epicerie')
 export class EpicerieSolidaire extends LitElement {
-  @state() items: Item[] = [];
+  @state() shops: Shop[] = [];
+  @state() isLoading = true;
 
   static styles = css`
     @import url("~/assets/css/solidaryGrocery.css");
@@ -16,21 +17,24 @@ export class EpicerieSolidaire extends LitElement {
       const { ShopGet } = await import("../server/api/shop/shops.get");
       const response = new ShopGet();
       const shops: Shop[] = await response.get();
-      this.items = this.createItems(shops);
+      this.shops = shops;
     } catch (error) {
       console.error('Error in shopsHandler:', error);
       throw error;
+    } finally {
+      this.isLoading = false;
     }
   }
 
-  createItems(shops: Shop[]): Item[] {
-    return shops.map((shop: Shop) => ({
-      label: shop.name,
-      ...shop,
-    }));
-  }
-
   render() {
+    if (this.isLoading) {
+      return html`
+      <app-global-wrapper>
+        <p>Chargement...</p>
+      </app-global-wrapper>
+      `;
+    }
+
     return html`
       <app-global-wrapper class="shop-wrapper">
         <main-title text="Epicerie solidaire"></main-title>
@@ -41,7 +45,7 @@ export class EpicerieSolidaire extends LitElement {
           diverses activités. Un nouveau projet d'épicerie solidaire ouvrira fin 2023 au campus aixois, soutenu par des
           associations étudiantes et le réseau Alumni.
         </p>
-        <solidary-grocery-tabs .items=${this.items}></solidary-grocery-tabs>
+        <solidary-grocery-tabs .shops=${this.shops}></solidary-grocery-tabs>
       </app-global-wrapper>
     `;
   }

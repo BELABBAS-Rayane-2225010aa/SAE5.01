@@ -18,3 +18,12 @@ import './components/epicerieSolidaire/tabs';
 import './components/epicerieSolidaire/ShopImages';
 import './components/epicerieSolidaire/ShopSchedules';
 import './components/epicerieSolidaire/ShopAddress';
+
+import './components/admin/eventManagementEvent';
+import './components/admin/eventManager';
+import './components/admin/popupEvent';
+import './components/admin/popupEventSuppression';
+import './components/admin/shopManagementDay';
+import './components/admin/shopsManagement';
+import './components/admin/userManagement';
+import './components/admin/userManager';

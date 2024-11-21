@@ -21,4 +21,13 @@ export class ShopRepository {
       throw new Error("Error getting shops");
     }
   }
+
+  public static async updateShop(shops: Shop[]): Promise<Shop[]> {
+    try {
+      await JsonConnector.saveData(shops,this.filePath);
+      return (await JsonConnector.getData(this.filePath)) as Shop[];
+    } catch (error) {
+      throw new Error("Error updating shops");
+    }
+  }
 }
