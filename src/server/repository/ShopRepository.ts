@@ -3,7 +3,7 @@ import { JsonConnector } from "../connector/jsonConnector";
 
 // Be careful with the path, if the file is not found, it will throw an error
 export class ShopRepository {
-  static filePath: string = process.cwd() + "/data/shop.json";
+  static filePath: string = "/data/shop.json";
 
   public static async saveShops(shops: Shop[]): Promise<Shop[]> {
     try {
