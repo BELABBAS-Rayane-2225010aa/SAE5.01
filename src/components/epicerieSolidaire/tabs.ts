@@ -1,11 +1,11 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { useWeek } from '../../composables/shopManagement/useWeek';
-import { Item } from '../../models/shop';
+import { Shop } from '../../models/shop';
 
 @customElement('solidary-grocery-tabs')
 export class SolidaryGroceryTabs extends LitElement {
-  @property({ type: Array }) items: Item[] = [];
+  @property({ type: Array }) shops: Shop[] = [];
   @state() week: number = 0;
 
   static styles = css`
@@ -21,18 +21,18 @@ export class SolidaryGroceryTabs extends LitElement {
   render() {
     return html`
       <u-tabs
-        .items=${this.items}
+        .shops=${this.shops}
         class="shop__tabs"
         orientation="vertical"
-        ui="{ wrapper: 'flex items-start gap-10', list: { width: 'w-48' } }"
+        ui="{ wrapper: 'flex shops-start gap-10', list: { width: 'w-48' } }"
       >
-        ${this.items.map(item => html`
+        ${this.shops.map(shop => html`
           <div class="shop">
-            <solidary-grocery-shop-images .item=${item}></solidary-grocery-shop-images>
-            <h3 class="font-bold">${item.name}</h3>
-            <p>${item.description}</p>
-            <u-button variant="link" .to=${item.social} target="_blank" style="width: fit-content">⸱ Instagram</u-button>
-            <u-button variant="link" .to=${item.linkTree} target="_blank" style="width: fit-content">⸱ Autres liens</u-button>
+            <solidary-grocery-shop-images .shop=${shop}></solidary-grocery-shop-images>
+            <h3 class="font-bold">${shop.name}</h3>
+            <p>${shop.description}</p>
+            <u-button variant="link" .to=${shop.social} target="_blank" style="width: fit-content">⸱ Instagram</u-button>
+            <u-button variant="link" .to=${shop.linkTree} target="_blank" style="width: fit-content">⸱ Autres liens</u-button>
             <p class="shop__select">
               Semaine :
               <u-select
@@ -44,8 +44,8 @@ export class SolidaryGroceryTabs extends LitElement {
                 @change=${(e: Event) => this.week = Number((e.target as HTMLSelectElement).value)}
               ></u-select>
             </p>
-            <solidary-grocery-shop-schedules .item=${item} .week=${this.week}></solidary-grocery-shop-schedules>
-            <solidary-grocery-shop-address .item=${item}></solidary-grocery-shop-address>
+            <solidary-grocery-shop-schedules .shop=${shop} .week=${this.week}></solidary-grocery-shop-schedules>
+            <solidary-grocery-shop-address .shop=${shop}></solidary-grocery-shop-address>
           </div>
         `)}
       </u-tabs>
