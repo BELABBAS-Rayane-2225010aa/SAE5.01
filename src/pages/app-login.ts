@@ -23,10 +23,11 @@ export class LoginPage extends LitElement {
   async onSubmit() {
     this.isLoading = true;
     try {
-      await useAuth.signIn({
+      const user = await useAuth.signIn({
         email: this.email,
         password: sha256(this.password).toString()
       });
+      localStorage.setItem('session', JSON.stringify(user));
       useToast.add({
         title: "Connexion",
         description: "Vous êtes connecté avec succès",
