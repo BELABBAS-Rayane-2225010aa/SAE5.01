@@ -3,6 +3,7 @@ import { property } from 'lit/decorators.js';
 import { customElement } from 'lit/decorators.js';
 import { Weather } from '../models/weather';
 import { style } from '../styles/weather';
+import { useToast } from '../composables/useToast';
 import { handleWeatherRequest } from '../server/api/wheather';
 
 @customElement('app-meteo')
@@ -21,8 +22,12 @@ export class WeatherComponent extends LitElement {
       const weatherData = await handleWeatherRequest();
       this.weather = weatherData;
     } catch (error) {
+        useToast.add({
+            title: "Erreur",
+            description: "Problème lors de la récupération des données météo ",
+            color: "red"
+          });
       console.error("Erreur lors de la récupération des données météo : ", error);
-      // Handle toast notification here if needed
     }
   }
 
