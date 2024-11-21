@@ -3,6 +3,8 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { useWeek } from '../../composables/shopManagement/useWeek';
 import { Shop } from '../../models/shop';
 
+import '../custom-tabs';
+
 @customElement('solidary-grocery-tabs')
 export class SolidaryGroceryTabs extends LitElement {
   @property({ type: Array }) shops: Shop[] = [];
@@ -20,7 +22,7 @@ export class SolidaryGroceryTabs extends LitElement {
 
   render() {
     return html`
-      <u-tabs
+      <custom-tabs
         .shops=${this.shops}
         class="shop__tabs"
         orientation="vertical"
@@ -48,7 +50,7 @@ export class SolidaryGroceryTabs extends LitElement {
             <solidary-grocery-shop-address .shop=${shop}></solidary-grocery-shop-address>
           </div>
         `)}
-      </u-tabs>
+      </custom-tabs>
     `;
   }
 }

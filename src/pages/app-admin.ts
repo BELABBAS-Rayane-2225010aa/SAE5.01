@@ -4,6 +4,7 @@ import { Shop } from '../models/shop';
 import { User } from '../models/user';
 import { EventPage } from '../models/event';
 import { useAuth } from '../composables/auth/useAuth';
+import '../components/custom-tabs';
 
 @customElement('app-admin')
 export class AppAdmin extends LitElement {
@@ -75,6 +76,7 @@ export class AppAdmin extends LitElement {
     return html`
       <app-global-wrapper>
         <h2>Administration</h2>
+        <custom-tabs .items=${this.items} .selectedTab=${this.selectedTab} @tab-selected=${this.onTabSelected}>
           ${this.items.map(
             (item) => html`
               <div ?hidden=${this.selectedTab !== item.label}>
@@ -90,6 +92,7 @@ export class AppAdmin extends LitElement {
               </div>
             `
           )}
+        </custom-tabs>
       </app-global-wrapper>
     `;
   }
