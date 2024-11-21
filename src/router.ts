@@ -89,6 +89,17 @@ export const router = new Router({
           <app-navbar></app-navbar>
           <app-meteo></app-meteo>
           <app-footer></app-footer>`
+      },
+      {
+        path: resolveRouterPath('photovoltaique'),
+        title: 'Panneaux photovoltaïques',
+        plugins: [
+          lazy(() => import('./pages/photovoltaique/app-solaire.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-solaire></app-solaire>
+          <app-footer></app-footer>`
       }
     ]
   });
