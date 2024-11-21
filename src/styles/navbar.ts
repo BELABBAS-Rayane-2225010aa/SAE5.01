@@ -59,6 +59,12 @@ export const style = css`
 
   .menu-icon {
     color: white;
+    background: transparent;
+    border: none;
+  }
+
+  .menu-icon sl-icon {
+    font-size: 3rem;
   }
 
   .navbar-menu-container {
