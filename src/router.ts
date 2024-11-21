@@ -67,6 +67,17 @@ export const router = new Router({
           <app-navbar></app-navbar>
           <app-login></app-login>
           <app-footer></app-footer>`
+      },
+      {
+        path: resolveRouterPath('administration'),
+        title: 'Admin',
+        plugins: [
+          lazy(() => import('./pages/app-admin.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-admin></app-admin>
+          <app-footer></app-footer>`
       }
     ]
   });
