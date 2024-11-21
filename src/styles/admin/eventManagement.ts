@@ -17,8 +17,7 @@ export const style = css`
     }
 
     /* table header */
-    .event-table th,
-    .event-table td {
+    .event-table th {
     padding: 8px;
     text-align: left;
     background-color: #555555;

@@ -34,13 +34,16 @@ export class AppAdmin extends LitElement {
       }
 
       const { ShopGet } = await import("../server/api/shop/shops.get");
-      const response = new ShopGet();
-      const shops: Shop[] = await response.get();
+      const shopResponse = new ShopGet();
+      const shops: Shop[] = await shopResponse.get();
       this.shops = shops;
 
-      // Uncomment the following lines if you need to fetch users and events
-      // this.users = await ShopRepository.getUsers();
-      // this.events = await ShopRepository.getEvents();
+      this.fetchEvents();
+
+      const { UserGet } = await import("../server/api/user/user.get");
+      const userResponse = new UserGet();
+      const users: User[] = await userResponse.get();
+      this.users = users;
 
       if (this.isAdmin) {
         this.items.push({ label: 'Utilisateurs' });
@@ -54,7 +57,10 @@ export class AppAdmin extends LitElement {
   }
 
   async fetchEvents() {
-    // this.events = await ShopRepository.getEvents();
+    const { EventGet } = await import("../server/api/event/event.get");
+    const eventResponse = new EventGet();
+    const events: EventPage[] = await eventResponse.get();
+    this.events = events;
   }
 
   updateEventList() {

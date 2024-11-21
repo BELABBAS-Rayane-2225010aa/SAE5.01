@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { EventPage } from '../../models/event';
 
@@ -92,28 +92,28 @@ export class AdminPopUpEvent extends LitElement {
           <form @submit=${(e: Event) => { e.preventDefault(); this.handleSubmit(); }}>
             <div class="form-group">
               <label for="title">Titre : </label>
-              <input type="text" id="title" .value=${this.formData.title} @input=${(e: Event) => this.formData.title = (e.target as HTMLInputElement).value} required />
+              <input type="text" id="title" .value=${this.formData.title || ''} @input=${(e: Event) => this.formData.title = (e.target as HTMLInputElement).value} required />
             </div>
 
             <div class="form-group">
               <label for="description">Description : </label>
-              <textarea id="description" .value=${this.formData.description} @input=${(e: Event) => this.formData.description = (e.target as HTMLTextAreaElement).value} required></textarea>
+              <textarea id="description" .value=${this.formData.description || ''} @input=${(e: Event) => this.formData.description = (e.target as HTMLTextAreaElement).value} required></textarea>
             </div>
 
             <div class="form-group">
               <label for="date">Date : </label>
-              <input type="date" id="date" .value=${this.formData.date} @input=${(e: Event) => this.formData.date = (e.target as HTMLInputElement).value} required />
+              <input type="date" id="date" .value=${this.formData.date || ''} @input=${(e: Event) => this.formData.date = (e.target as HTMLInputElement).value} required />
             </div>
 
             <div class="form-group">
               <label for="location">Lieu : </label>
-              <input type="text" id="location" .value=${this.formData.location} @input=${(e: Event) => this.formData.location = (e.target as HTMLInputElement).value} required />
+              <input type="text" id="location" .value=${this.formData.location || ''} @input=${(e: Event) => this.formData.location = (e.target as HTMLInputElement).value} required />
             </div>
 
             <div class="form-group">
               <label for="imageUrl">Ajouter ou modifier une image (URL) : </label>
               <div class="input-button-group">
-                <input type="text" id="imageUrl" .value=${this.imageUrl} @input=${(e: Event) => this.imageUrl = (e.target as HTMLInputElement).value} />
+                <input type="text" id="imageUrl" .value=${this.imageUrl || ''} @input=${(e: Event) => this.imageUrl = (e.target as HTMLInputElement).value} />
                 <button type="button" @click=${this.addImage}>${this.editImageIndex !== null ? 'Modifier' : 'Ajouter'} l'image</button>
               </div>
             </div>
@@ -139,7 +139,7 @@ export class AdminPopUpEvent extends LitElement {
             <div class="form-group">
               <label for="link">Ajouter ou modifier un lien (URL) : </label>
               <div class="input-button-group">
-                <input type="text" id="link" .value=${this.link} @input=${(e: Event) => this.link = (e.target as HTMLInputElement).value} />
+                <input type="text" id="link" .value=${this.link || ''} @input=${(e: Event) => this.link = (e.target as HTMLInputElement).value} />
                 <button type="button" @click=${this.addLink}>${this.editLinkIndex !== null ? 'Modifier' : 'Ajouter'} le lien</button>
               </div>
             </div>
