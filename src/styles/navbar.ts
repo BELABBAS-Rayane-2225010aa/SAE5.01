@@ -78,10 +78,25 @@ export const style = css`
     align-items: center;
     position: absolute;
     transform: translateX(-100%);
-    gap: 10px;
+    gap: 25px;
     width: max-content;
-    padding: 10px;
+    padding: 20px;
     overflow: hidden;
+    list-style: none;
+  }
+
+  .menu a{
+    font-size: 1.3rem;
+  }
+
+  .menu sl-icon{
+    font-size: 3rem;
+  }
+
+  .menu button{
+    font-size: 1.3rem;
+    border: none;
+    background: transparent;
   }
 
   @media screen and (max-width: 1000px) {
