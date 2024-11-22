@@ -63,7 +63,7 @@ export class Navbar extends LitElement {
       <nav class="navbar">
         <!-- Navbar title with a link to the home page -->
         <h1 class="text-xl md:text-3xl text-white font-bold animate__animated animate__fadeInLeft animate__fast">
-          <a href="/">Magasin Connecté 4.0</a>
+          <a class="title" href="/">Magasin Connecté 4.0</a>
         </h1>
 
         <!-- Navbar menu container -->

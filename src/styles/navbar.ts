@@ -8,7 +8,7 @@ export const style = css`
     justify-content: space-between;
     align-items: center;
     height: 70px;
-    padding: 0 2%;
+    padding: 0 8%;
     transition: 0.3s ease-in-out;
     position: fixed;
     top: 0;
@@ -22,15 +22,6 @@ export const style = css`
   .navbar-scrolled {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
-  }
-
-  h1 {
-    font-size: 33px;
-  }
-
-  a{
-    color: white;
-    text-decoration: none;
   }
 
   .bg-white {
@@ -64,7 +55,8 @@ export const style = css`
   }
 
   .menu-icon sl-icon {
-    font-size: 3rem;
+    font-size: 2rem;
+    margin: 1rem;
   }
 
   .navbar-menu-container {
@@ -85,18 +77,30 @@ export const style = css`
     list-style: none;
   }
 
-  .menu a{
-    font-size: 1.3rem;
-  }
-
   .menu sl-icon{
-    font-size: 3rem;
+    font-size: 2rem;
+    color: white;
   }
 
-  .menu button{
-    font-size: 1.3rem;
+  .link-button{
+    font-size: 1.1rem;
+    color: #10d2f5;
     border: none;
     background: transparent;
+    text-decoration: none;
+  }
+
+  .title{
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+  }
+
+  .link-button:hover {
+    color: #1095ca;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.1rem;
   }
 
   @media screen and (max-width: 1000px) {
