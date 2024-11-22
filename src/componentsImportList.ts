@@ -27,3 +27,5 @@ import './components/admin/shopManagementDay';
 import './components/admin/shopsManagement';
 import './components/admin/userManagement';
 import './components/admin/userManager';
+
+import './components/photovoltaique/solarOverview';

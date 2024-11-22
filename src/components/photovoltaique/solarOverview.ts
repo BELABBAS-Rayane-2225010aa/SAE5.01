@@ -55,6 +55,7 @@ export class SolarPanelOverview extends LitElement {
   `;
 
   async connectedCallback() {
+    console.log("connectedCallback");
     super.connectedCallback();
     try {
       const response = await fetch("/api/solarPanel/v1/overview");
@@ -74,9 +75,9 @@ export class SolarPanelOverview extends LitElement {
   }
 
   render() {
+    console.log("zeeeebi",this.overviewData);
     return html`
       <page-header title="Laissons parler les chiffres" image="/photovoltaique/visualisation/header.jpg" image-alt="Panneaux solaires"></page-header>
-        <p>Les chiffres parlent d'eux-mêmes. Découvrez les performances de nos panneaux solaires.</p>
       <section class="powers mt-5 relative">
         <div class="current-power">
           <div class="information">
