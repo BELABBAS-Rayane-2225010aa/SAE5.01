@@ -100,6 +100,17 @@ export const router = new Router({
           <app-navbar></app-navbar>
           <app-solaire></app-solaire>
           <app-footer></app-footer>`
+      },
+      {
+        path: resolveRouterPath('visualisation'),
+        title: 'Vusualisation des panneaux photovoltaïques',
+        plugins: [
+          lazy(() => import('./pages/photovoltaique/app-visualisation.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-visualisation></app-visualisation>
+          <app-footer></app-footer>`
       }
     ]
   });
