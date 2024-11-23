@@ -1,24 +1,18 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { Infos } from '@/models/infos';
 
 import { style } from '../../styles/card/presentation';
 
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/divider/divider.js';
 
-export type CardInfos = {
-  title: string;
-  subTitle?: string;
-  description: string;
-  publicImage?: string;
-  isReversed?: boolean;
-};
 
 @customElement('app-card-presentation')
 export class CardPresentation extends LitElement {
 
   // Define a property to conditionally hide the title
-  @property({ attribute: false }) cardInfos: CardInfos = { title: '', description: '' };
+  @property({ attribute: false }) cardInfos: Infos = { title: '', description: '' };
 
   static styles = style;
 

@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { style } from '../../../styles/technologie/cardTechno';
 
 import { Techno } from '../../../models/techno';
 
@@ -17,6 +18,10 @@ export class CardTechno extends LitElement {
     functioningDescription: '',
     installDescription: '',
     link: '',};
+
+  static styles = [
+    style
+  ];
 
   render() {
     return html`
