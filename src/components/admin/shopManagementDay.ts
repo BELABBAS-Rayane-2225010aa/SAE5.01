@@ -1,5 +1,5 @@
-import { LitElement, html, css} from 'lit';
-import { customElement, property  } from 'lit/decorators.js';
+import { LitElement, html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { Day } from '../../models/shop';
 
 @customElement('admin-shop-management-day')
@@ -26,19 +26,23 @@ export class AdminShopManagementDay extends LitElement {
   `;
 
   toggleClose(isOpen: boolean): void {
+    this.day.isOpen = isOpen;
     if (!isOpen) {
       this.day.morningStart = '';
       this.day.morningEnd = '';
       this.day.afternoonStart = '';
       this.day.afternoonEnd = '';
     }
+    this.requestUpdate();
   }
 
   toggleBreak(withBreak: boolean): void {
+    this.day.withBreak = withBreak;
     if (!withBreak) {
       this.day.afternoonStart = '';
       this.day.afternoonEnd = '';
     }
+    this.requestUpdate();
   }
 
   render() {
@@ -50,14 +54,20 @@ export class AdminShopManagementDay extends LitElement {
             class="w-fit"
             type="time"
             .value=${this.day.morningStart ?? ''}
-            @input=${(e: Event) => this.day.morningStart = (e.target as HTMLInputElement).value}
+            @input=${(e: Event) => {
+              this.day.morningStart = (e.target as HTMLInputElement).value;
+              this.requestUpdate();
+            }}
             ?disabled=${!this.day.isOpen}
           />
           <input
             class="w-fit"
             type="time"
             .value=${this.day.morningEnd ?? ''}
-            @input=${(e: Event) => this.day.morningEnd = (e.target as HTMLInputElement).value}
+            @input=${(e: Event) => {
+              this.day.morningEnd = (e.target as HTMLInputElement).value;
+              this.requestUpdate();
+            }}
             ?disabled=${!this.day.isOpen}
           />
 
@@ -68,14 +78,20 @@ export class AdminShopManagementDay extends LitElement {
               class="w-fit"
               type="time"
               .value=${this.day.afternoonStart ?? ''}
-              @input=${(e: Event) => this.day.afternoonStart = (e.target as HTMLInputElement).value}
+              @input=${(e: Event) => {
+                this.day.afternoonStart = (e.target as HTMLInputElement).value;
+                this.requestUpdate();
+              }}
               ?disabled=${!this.day.isOpen}
             />
             <input
               class="w-fit"
               type="time"
               .value=${this.day.afternoonEnd ?? ''}
-              @input=${(e: Event) => this.day.afternoonEnd = (e.target as HTMLInputElement).value}
+              @input=${(e: Event) => {
+                this.day.afternoonEnd = (e.target as HTMLInputElement).value;
+                this.requestUpdate();
+              }}
               ?disabled=${!this.day.isOpen}
             />
           ` : ''}

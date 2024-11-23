@@ -10,8 +10,8 @@ export class AdminPopUpEvent extends LitElement {
     id: 0,
     title: '',
     description: '',
-    images: [],
-    links: [],
+    images: '',
+    links: '',
     date: '',
     time: '',
     location: '',
@@ -28,55 +28,65 @@ export class AdminPopUpEvent extends LitElement {
   updated(changedProperties: Map<string | number | symbol, unknown>) {
     if (changedProperties.has('event')) {
       this.formData = { ...this.event };
+      /*
       if (!Array.isArray(this.formData.images)) {
         this.formData.images = [];
       }
       if (!Array.isArray(this.formData.links)) {
         this.formData.links = [];
       }
+      */
     }
   }
 
   addImage() {
     if (this.imageUrl) {
       if (this.editImageIndex !== null) {
-        this.formData.images[this.editImageIndex] = this.imageUrl;
+        //this.formData.images[this.editImageIndex] = this.imageUrl;
+        this.formData.images = this.imageUrl;
         this.editImageIndex = null;
       } else {
-        this.formData.images.push(this.imageUrl);
+        //this.formData.images.push(this.imageUrl);
+        this.formData.images = this.imageUrl;
       }
       this.imageUrl = '';
     }
   }
 
-  editImage(index: number) {
-    this.imageUrl = this.formData.images[index];
-    this.editImageIndex = index;
+  editImage() {
+    //this.imageUrl = this.formData.images[index];
+    //this.editImageIndex = index;
+    this.imageUrl = this.formData.images;
   }
 
-  deleteImage(index: number) {
-    this.formData.images.splice(index, 1);
+  deleteImage() {
+    //this.formData.images.splice(index, 1);
+    this.formData.images = '';
   }
 
   addLink() {
     if (this.link) {
       if (this.editLinkIndex !== null) {
-        this.formData.links[this.editLinkIndex] = this.link;
+        //this.formData.links[this.editLinkIndex] = this.link;
+        this.formData.links = this.link;
         this.editLinkIndex = null;
       } else {
-        this.formData.links.push(this.link);
+        //this.formData.links.push(this.link);
+        this.formData.links = this.link;
       }
       this.link = '';
     }
   }
 
-  editLink(index: number) {
-    this.link = this.formData.links[index];
-    this.editLinkIndex = index;
+  editLink() {
+    //this.link = this.formData.links[index];
+    //this.editLinkIndex = index;
+    this.link = this.formData.links;
   }
 
-  deleteLink(index: number) {
-    this.formData.links.splice(index, 1);
+  deleteLink() {
+    //this.formData.links.splice(index, 1);
+    this.formData.links = '';
   }
 
   handleSubmit() {
@@ -121,17 +131,15 @@ export class AdminPopUpEvent extends LitElement {
               <h3>Images ajoutées : </h3>
               <table class="added-items-table">
                 <tbody>
-                  ${this.formData.images.map((image, index) => html`
                     <tr>
                       <td class="link-cell">
-                        <a href=${image} target="_blank">${image}</a>
+                        <a href=${this.event.images} target="_blank">${this.event.images}</a>
                       </td>
                       <td class="button-cell">
-                        <button type="button" @click=${() => this.editImage(index)}>Modifier</button>
-                        <button type="button" @click=${() => this.deleteImage(index)}>Supprimer</button>
+                        <button type="button" @click=${() => this.editImage()}>Modifier</button>
+                        <button type="button" @click=${() => this.deleteImage()}>Supprimer</button>
                       </td>
                     </tr>
-                  `)}
                 </tbody>
               </table>
             </div>
@@ -147,17 +155,15 @@ export class AdminPopUpEvent extends LitElement {
               <h3>Liens ajoutés : </h3>
               <table class="added-items-table">
                 <tbody>
-                  ${this.formData.links.map((link, index) => html`
                     <tr>
                       <td class="link-cell">
-                        <p>${link}</p>
+                        <p>${this.event.links}</p>
                       </td>
                       <td class="button-cell">
-                        <button type="button" @click=${() => this.editLink(index)}>Modifier</button>
-                        <button type="button" @click=${() => this.deleteLink(index)}>Supprimer</button>
+                        <button type="button" @click=${() => this.editLink()}>Modifier</button>
+                        <button type="button" @click=${() => this.deleteLink()}>Supprimer</button>
                       </td>
                     </tr>
-                  `)}
                 </tbody>
               </table>
             </div>
