@@ -2,7 +2,6 @@ import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Shop } from '../../models/shop';
 import { useWeek } from '../../composables/shopManagement/useWeek';
-import { useShopManagement } from '../../composables/shopManagement/useShopManagement';
 import { useToast } from '../../composables/useToast';
 
 import { style } from '../../styles/admin/shopsManagement';
@@ -17,7 +16,6 @@ export class ShopManagement extends LitElement {
   @state() week: number = 0;
   @state() isLoading: boolean = false;
   @state() shopNumber: number = 0;
-  @state() state: Shop[] = [];
   @state() items: Item[] = [];
 
   static styles = style;
@@ -29,9 +27,7 @@ export class ShopManagement extends LitElement {
 
   initializeState() {
     const { weeks } = useWeek();
-    const { loadState } = useShopManagement();
     this.week = weeks[0].value;
-    this.state = loadState(this.shops || []);
     this.items = this.createItems(this.shops || []);
   }
 
@@ -44,7 +40,7 @@ export class ShopManagement extends LitElement {
 
   async onSubmit(event: Event) {
     event.preventDefault();
-    const shopsCopy = [...this.state];
+    const shopsCopy = [...this.shops];
 
     try {
       this.isLoading = true;
@@ -59,9 +55,22 @@ export class ShopManagement extends LitElement {
   }
 
   async updateShops(shops: Shop[]) {
-    const { ShopUpdate } = await import("../../server/api/shop/shops.update");
-    const response = new ShopUpdate();
-    this.state = await response.update(shops);
+    try {
+      console.log(shops);
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/put.php', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(shops),
+      });
+      if (!response.ok) {
+        throw new Error('Error in updateShops');
+      }
+    } catch (error) {
+      console.error('Error in updateShops:', error);
+      throw error;
+    }
   }
 
   render() {
@@ -86,16 +95,18 @@ export class ShopManagement extends LitElement {
           <button type="submit" ?disabled=${this.isLoading}>Enregistrer</button>
 
           <ul class="shop__ul">
-            ${['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'].map((dayName, index) => html`
-              <li>
-                <admin-shop-management-day
-                  .dayName=${dayName}
-                  .day=${this.week === this.state[this.shopNumber].currentWeek.number
-                    ? this.state[this.shopNumber].currentWeek.days[index]
-                    : this.state[this.shopNumber].nextWeek.days[index]}
-                ></admin-shop-management-day>
-              </li>
-            `)}
+            ${this.shops.length > 0 ? html`
+              ${['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'].map((dayName, index) => html`
+                <li>
+                  <admin-shop-management-day
+                    .dayName=${dayName}
+                    .day=${this.week === this.shops[this.shopNumber].currentWeek.number
+                      ? this.shops[this.shopNumber].currentWeek.days[index]
+                      : this.shops[this.shopNumber].nextWeek.days[index]}
+                  ></admin-shop-management-day>
+                </li>
+              `)}
+            ` : html`<p>Aucun magasin disponible.</p>`}
           </ul>
         </form>
       </div>

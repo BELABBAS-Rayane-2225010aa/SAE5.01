@@ -13,7 +13,7 @@ export class UsersManagement extends LitElement {
   @state() isLoading: boolean = false;
   @state() indexUserSelected: number = 0;
   @state() managedUsers: UserWithConfirmPassword[] = [
-    { email: 'Nouvel utilisateur', role: 'seller', password: '', confirmPassword: '' },
+    { email: 'Nouvel utilisateur', role: 'admin', password: '', confirmPassword: '' },
   ];
 
   static styles = css`

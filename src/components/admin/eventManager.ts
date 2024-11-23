@@ -17,12 +17,17 @@ export class EventManagement extends LitElement {
 
   async addEvent(eventData: CustomEvent) {
     try {
-      const { EventPost } = await import("../../server/api/event/event.post");
-      const response = new EventPost();
-      const postResult = await response.post(eventData.detail) as EventPage;
-      this.dispatchEvent(new CustomEvent('updateEventList'));
-      this.showPopup = false;
-      if (postResult && typeof postResult === 'object' && 'id' in postResult) {
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/events/post.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData.detail),
+      });
+      if (response.ok) {
+        await response.json();
+        this.dispatchEvent(new CustomEvent('updateEventList'));
+        this.showPopup = false;
         useToast.add({ title: 'Succès', description: 'L\'événement a bien été ajouté', color: 'green' });
       } else {
         useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de l\'ajout de l\'événement', color: 'red' });
@@ -33,14 +38,19 @@ export class EventManagement extends LitElement {
     }
   }
 
-  async updateEvent(updatedEvent: EventPage) {
+  async updateEvent(updatedEvent: CustomEvent) {
     try {
-      const { EventUpdate } = await import("../../server/api/event/event.update");
-      const response = new EventUpdate();
-      const updateResult = await response.post(updatedEvent);
-      this.dispatchEvent(new CustomEvent('updateEventList'));
-      this.showPopup = false;
-      if (updateResult && typeof updateResult === 'object' && 'id' in updateResult) {
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/events/put.php', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedEvent.detail),
+      });
+      if (response.ok) {
+        await response.json();
+        this.dispatchEvent(new CustomEvent('updateEventList'));
+        this.showPopup = false;
         useToast.add({ title: 'Succès', description: 'L\'événement a bien été modifié', color: 'green' });
       } else {
         useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de la modification de l\'événement', color: 'red' });
@@ -55,12 +65,13 @@ export class EventManagement extends LitElement {
     if (!this.selectedEvent) return;
 
     try {
-      const { EventDelete } = await import("../../server/api/event/event.delete");
-      const response = new EventDelete();
-      const deleteResult = await response.delete(this.selectedEvent.id);
-      this.dispatchEvent(new CustomEvent('updateEventList'));
-      this.showConfirmationPopup = false;
-      if (deleteResult && typeof deleteResult === 'object' && 'id' in deleteResult) {
+      const response = await fetch(`https://api-magasinconnecte.alwaysdata.net/src/endpoint/events/delete.php?id=${this.selectedEvent.id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        await response.json();
+        this.dispatchEvent(new CustomEvent('updateEventList'));
+        this.showConfirmationPopup = false;
         useToast.add({ title: 'Succès', description: 'L\'événement a bien été supprimé', color: 'green' });
       } else {
         useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de la suppression de l\'événement', color: 'red' });

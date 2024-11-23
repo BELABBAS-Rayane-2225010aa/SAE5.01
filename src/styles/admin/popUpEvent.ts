@@ -18,10 +18,12 @@ export const style = css`
 
 /* Pop-up content */
 .popup-content {
-    background: rgb(0, 0, 0);
+    background: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 5px;
     width: 45vw;
+    max-height: 80vh; /* Set a maximum height */
+    overflow: auto; /* Enable scrolling */
     font-size: 1.1rem;
 }
 
