@@ -33,17 +33,11 @@ export class AppAdmin extends LitElement {
         return;
       }
 
-      const { ShopGet } = await import("../server/api/shop/shops.get");
-      const shopResponse = new ShopGet();
-      const shops: Shop[] = await shopResponse.get();
-      this.shops = shops;
+      this.fetchShops();
 
       this.fetchEvents();
 
-      const { UserGet } = await import("../server/api/user/user.get");
-      const userResponse = new UserGet();
-      const users: User[] = await userResponse.get();
-      this.users = users;
+      this.fetchUsers();
 
       if (this.isAdmin) {
         this.items.push({ label: 'Utilisateurs' });
@@ -56,11 +50,49 @@ export class AppAdmin extends LitElement {
     }
   }
 
+  async fetchShops() {
+    try {
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/get.php');
+      if (response.ok) {
+        const data = await response.json();
+        this.shops = data;
+      } else {
+        console.error('Error in shopsHandler:', response);
+      }
+    } catch (error) {
+      console.error('Error in shopsHandler:', error);
+      throw error;
+    }
+  }
+
   async fetchEvents() {
-    const { EventGet } = await import("../server/api/event/event.get");
-    const eventResponse = new EventGet();
-    const events: EventPage[] = await eventResponse.get();
-    this.events = events;
+    try {
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/events/get.php');
+      if (response.ok) {
+        const data = await response.json();
+        this.events = data;
+      } else {
+        console.error('Error in eventsHandler:', response);
+      }
+    } catch (error) {
+      console.error('Error in eventsHandler:', error);
+      throw error;
+    }
+  }
+
+  async fetchUsers() {
+    try {
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/users/get.php');
+      if (response.ok) {
+        const data = await response.json();
+        this.users = data;
+      } else {
+        console.error('Error in usersHandler:', response);
+      }
+    } catch (error) {
+      console.error('Error in usersHandler:', error);
+      throw error;
+    }
   }
 
   updateEventList() {

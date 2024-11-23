@@ -14,10 +14,13 @@ export class EpicerieSolidaire extends LitElement {
   async connectedCallback() {
     super.connectedCallback();
     try {
-      const { ShopGet } = await import("../server/api/shop/shops.get");
-      const response = new ShopGet();
-      const shops: Shop[] = await response.get();
-      this.shops = shops;
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/get.php');
+      if (response.ok) {
+        const data = await response.json();
+        this.shops = data;
+      } else {
+        console.error('Error in shopsHandler:', response);
+      }
     } catch (error) {
       console.error('Error in shopsHandler:', error);
       throw error;

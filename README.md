@@ -1,35 +1,32 @@
-# PWA Starter
+# SAE5.01 - Magasin Connecté
 
-[**Straight to Full Documentation**](https://docs.pwabuilder.com/#/starter/quick-start)
+## Introduction
+Ce projet est un travail universitaire constituant une SAE (Situation d’Apprentissage et d’Évaluation) du cinquième semestre de l’année scolaire 2024-2025.
 
-The PWABuilder pwa-starter is our opinionated, best practices, production tested starter that we use to build all of our PWAs, including [PWABuilder itself](https://blog.pwabuilder.com/posts/introducing-the-brand-new-pwa-builder/)! The pwa-starter is a starter codebase, just like create-react-app or the Angular CLI can generate, that uses the PWABuilder team&#39;s preferred front-end tech stack. We also have a CLI tool to allow you to create a PWA template from the command line.
+Il a pour objectif la création d’un site web pour le **Magasin Connecté 4.0**.  
 
-## Jump Right In
+Ce site est une **Progressive Web App (PWA)**, prévue pour pouvoir être transformée en application mobile (APK). **(UPDATING)**  
 
-Install the PWABuilder CLI:
+Le **Magasin Connecté 4.0** est une boutique située sur le campus universitaire de l’IUT de Saint-Jérôme à Marseille.  
+Il propose des objets connectés ainsi qu’un service alimentaire destiné aux étudiants dans le besoin.  
 
-`npm i -g @pwabuilder/cli`
+Ce projet est une amélioration du travail réalisé par un autre groupe lors de l’année précédente.  
 
-And create a new app with this command:
+GitHub du groupe précédent : https://github.com/MattiasGervilliers/MagasinConnecte4.0
 
-`pwa create`
+## Documentation **(UPDATING)**
+Ce projet est documenté pour permettre à d’autres groupes de le reprendre et de l’améliorer dans le futur.  
 
-And start your app locally with:
+Pour plus d’informations, vous pouvez consulter :  
+- Notre [wiki](https://github.com/BELABBAS-Rayane-2225010aa/SAE5.01/wiki), qui présente tout le nécessaire.  
+- Nos différents [projets](https://github.com/BELABBAS-Rayane-2225010aa/SAE5.01/projects?query=is%3Aopen), pour un aperçu du travail effectué tout au long de cette SAE.  
 
-`pwa start`
+## Architecture
+En résumé, ce dépôt contient uniquement le **front-end** du site.  
+Nous avons développé ce projet à l’aide de [PWABuilder](https://www.pwabuilder.com), qui s’appuie sur [Lit](https://lit.dev), un framework exclusivement orienté front-end.  
 
-And that's it! Good luck on your Progressive Web App adventure!
+Le **back-end** est hébergé sur un autre serveur et développé via une API en PHP 8.2, disponible dans un dépôt distinct :  
+GitHub de l’API : https://github.com/CRESPIN-Alexandre-2225022aa/API-MagasinConnecte
 
-## More Info
-
-[![Get started with the pwa-starter!](https://img.youtube.com/vi/u3pWKpmic_k/0.jpg)](https://www.youtube.com/watch?v=u3pWKpmic_k)
-
-With it you get an app that:
-- Has no build system to set up and no boilerplate code to add. Everything is included out of the box.
-- Has a Service Worker system using [Workbox](https://developers.google.com/web/tools/workbox/)
-- Scores close to 100 on Lighthouse out of the box
-- Has everything needed to be installable in the browser
-- Is ready to be package for the app stores using [PWABuilder](https://www.pwabuilder.com)
-- Uses the [Azure Static Web Apps CLI](https://azure.github.io/static-web-apps-cli) which enables emulating your production environment locally, and gets you ready for deploying to Azure Static Web Apps!
-
-and all with just a few button clicks 😊.
+L’ancien groupe avait utilisé [Nuxt](https://nuxt.com), un framework basé sur [Vue.js](https://vuejs.org).  
+Bien que Nuxt présente de nombreux avantages, nous avons constaté qu’il ne permettait pas de mettre en place de serveur, de PWA, ni de version mobile.  

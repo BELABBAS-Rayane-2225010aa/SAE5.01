@@ -56,26 +56,37 @@ export class UserManager extends LitElement {
 
     try {
       if (this.isNew) {
-        const { UserPost } = await import("../../server/api/user/users.post");
-        const response = new UserPost();
-        const user = await response.post(userData);
-        this.addUser(userData);
-        if (user) {
+        const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/users/post.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          this.addUser(data);
           useToast.add({ title: 'Succès', description: 'L\'utilisateur a bien été ajouté', color: 'green' });
         }
         else {
-            useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de l\'ajout de l\'utilisateur', color: 'red' });
+          useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de l\'ajout de l\'utilisateur', color: 'red' });
         }
       }
       else {
-        const { UserUpdate } = await import("../../server/api/user/user.update");
-        const response = new UserUpdate();
-        const user = await response.update(userData);
-        if (user) {
-          useToast.add({ title: 'Succès', description: 'L\'utilisateur a bien été mis à jour', color: 'green' });
+        const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/users/put.php', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          this.addUser(data);
+          useToast.add({ title: 'Succès', description: 'L\'utilisateur a bien été modifié', color: 'green' });
         }
         else {
-            useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de la mise à jour de l\'utilisateur', color: 'red' });
+          useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de la modification de l\'utilisateur', color: 'red' });
         }
       }
       this.resetForm();

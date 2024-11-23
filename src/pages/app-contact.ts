@@ -39,14 +39,16 @@ export class ContactForm extends LitElement {
 
   async fetchShops() {
     try {
-      const response = await fetch("../server/api/shop/shops", { method: "GET" });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/get.php');
+      if (response.ok) {
+        const data = await response.json();
+        this.items = this.createItems(data);
+      } else {
+        console.error('Error in shopsHandler:', response);
       }
-      const shops: { name: string }[] = await response.json();
-      this.items = this.createItems(shops);
     } catch (error) {
-      console.error("Error fetching shops:", error);
+      console.error('Error in shopsHandler:', error);
+      throw error;
     }
   }
 

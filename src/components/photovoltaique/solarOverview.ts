@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { Overview } from "../../models/photovoltaique/overview";
 
+
 @customElement('solar-panel-overview')
 export class SolarPanelOverview extends LitElement {
   @state() overviewData: Overview = {
@@ -75,7 +76,6 @@ export class SolarPanelOverview extends LitElement {
   }
 
   render() {
-    console.log("zeeeebi",this.overviewData);
     return html`
       <page-header title="Laissons parler les chiffres" image="/photovoltaique/visualisation/header.jpg" image-alt="Panneaux solaires"></page-header>
       <section class="powers mt-5 relative">

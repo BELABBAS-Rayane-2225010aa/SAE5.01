@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { EventPage } from '../../models/event';
 
@@ -10,8 +10,8 @@ export class AdminEventManagementEvent extends LitElement {
     id: 0,
     title: '',
     description: '',
-    images: [],
-    links: [],
+    images: '',
+    links: '',
     date: '',
     time: '',
     location: '',

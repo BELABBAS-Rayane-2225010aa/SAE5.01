@@ -20,8 +20,10 @@ export class LoginPage extends LitElement {
     password: z.string().min(1, "Requis")
   });
 
-  async onSubmit() {
+  async onSubmit(event: Event) {
+    event.preventDefault(); // Prevent the default form submission behavior
     this.isLoading = true;
+
     try {
       const user = await useAuth.signIn({
         email: this.email,
