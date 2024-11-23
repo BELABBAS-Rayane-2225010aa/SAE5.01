@@ -1,6 +1,8 @@
 import { LitElement, html } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import 'animate.css';
+
 
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
@@ -61,7 +63,7 @@ export class Navbar extends LitElement {
       <nav class="navbar">
         <!-- Navbar title with a link to the home page -->
         <h1 class="text-xl md:text-3xl text-white font-bold animate__animated animate__fadeInLeft animate__fast">
-          <a href="/">Magasin Connecté 4.0</a>
+          <a class="title" href="/">Magasin Connecté 4.0</a>
         </h1>
 
         <!-- Navbar menu container -->
@@ -95,7 +97,7 @@ export class Navbar extends LitElement {
               `
             : html`
                 <button
-                  class="menu-icon text-3xl cursor-pointer animate__animated animate__flipInX animate__fast"
+                  class="menu-icon text-3xl cursor-pointer animate-__animated animate__flipInX animate__fast"
                   @click="${this.navbarState.toggleMenu}"
                 >
                   <sl-icon name="list"></sl-icon>

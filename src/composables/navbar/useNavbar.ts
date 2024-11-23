@@ -24,7 +24,7 @@ export class NavbarState {
     subLinks: Link[] = [
         { icon: 'arrow-left', name: 'Retour', onClick: () => this.toggleBackMenuWithSubLinks() },
         { name: 'Informations', path: '/photovoltaique' },
-        { name: 'Visualisation', path: '/photovoltaique/visualisation' }
+        { name: 'Visualisation', path: '/visualisation' }
     ];
 
     constructor() {
