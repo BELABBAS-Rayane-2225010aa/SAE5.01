@@ -23,7 +23,7 @@ export class SolarPanelVisualisation extends LitElement {
 
       <!-- Bénéfices environmentaux -->
       <div class="greenwashing-wrapper">
-        <solar-panel-greenwashing></solar-panel-greenwashing>
+        <app-green-washing></app-green-washing>
       </div>
 
       <!-- production de l'énergie -->
