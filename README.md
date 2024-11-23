@@ -1,30 +1,32 @@
-# SAE5.01 - Magasin Connecte
+# SAE5.01 - Magasin Connecté
 
 ## Introduction
-Ce projet est un travail universitaire consituant une SAE du cinquième semestre de l'année scolaire 2024-2025.
+Ce projet est un travail universitaire constituant une SAE (Situation d’Apprentissage et d’Évaluation) du cinquième semestre de l’année scolaire 2024-2025.
 
-Ce projet a pour but la création d'un site web pour le compte du Magasin Connecte 4.0.
+Il a pour objectif la création d’un site web pour le **Magasin Connecté 4.0**.  
 
-Ce site est un PWA qui devrait être utilisable pour créer un APK mobile. **(UPDATING)**
+Ce site est une **Progressive Web App (PWA)**, prévue pour pouvoir être transformée en application mobile (APK). **(UPDATING)**  
 
-Le Magasin Connecte 4.0 est un magasin situer sur le campus universitaire de l'IUT de Saint-Jerôme à Marseille. Il propose des objets connectes mais aussi un service de magasin alimentaire pour les étudiants dans le besoin.
+Le **Magasin Connecté 4.0** est une boutique située sur le campus universitaire de l’IUT de Saint-Jérôme à Marseille.  
+Il propose des objets connectés ainsi qu’un service alimentaire destiné aux étudiants dans le besoin.  
 
-Ce projet est une amélioration du projet d'un autre groupe de l'année dernière.
+Ce projet est une amélioration du travail réalisé par un autre groupe lors de l’année précédente.  
 
-GitHub du groupe de l'année dernière : https://github.com/MattiasGervilliers/MagasinConnecte4.0
+GitHub du groupe précédent : https://github.com/MattiasGervilliers/MagasinConnecte4.0
 
 ## Documentation **(UPDATING)**
-Ce projet est documenté au mieux pour permetter à d'autre groupe de travail de le reprendre dans le but de l'améliorer dans le futur.
+Ce projet est documenté pour permettre à d’autres groupes de le reprendre et de l’améliorer dans le futur.  
 
-Pour vous documenté sur ce projet vous pouvez aller voir notre [wiki](https://github.com/BELABBAS-Rayane-2225010aa/SAE5.01/wiki) présentant tout ce dont vous avez besoins.
-
-Vous pouvez aussi aller voir nos différents [projets](https://github.com/BELABBAS-Rayane-2225010aa/SAE5.01/projects?query=is%3Aopen) pour vous rendre compte de notre travail tout au long de cette SAE.
+Pour plus d’informations, vous pouvez consulter :  
+- Notre [wiki](https://github.com/BELABBAS-Rayane-2225010aa/SAE5.01/wiki), qui présente tout le nécessaire.  
+- Nos différents [projets](https://github.com/BELABBAS-Rayane-2225010aa/SAE5.01/projects?query=is%3Aopen), pour un aperçu du travail effectué tout au long de cette SAE.  
 
 ## Architecture
-Pour faire court, dans ce repository vous trouverez seulement le front-end du site. Nous anvons mis en place ce projet par le biais de [PWABuilder](https://www.pwabuilder.com), qui est lui même mis en place grâce à [lit](https://lit.dev) qui ne marche que en front-end.
+En résumé, ce dépôt contient uniquement le **front-end** du site.  
+Nous avons développé ce projet à l’aide de [PWABuilder](https://www.pwabuilder.com), qui s’appuie sur [Lit](https://lit.dev), un framework exclusivement orienté front-end.  
 
-Nous avons donc mis en place dans un autre repository une API en PHP 8.2 sur un autre serveur pour faire office de back-end.
+Le **back-end** est hébergé sur un autre serveur et développé via une API en PHP 8.2, disponible dans un dépôt distinct :  
+GitHub de l’API : https://github.com/CRESPIN-Alexandre-2225022aa/API-MagasinConnecte
 
-lien du GitHub : https://github.com/CRESPIN-Alexandre-2225022aa/API-MagasinConnecte
-
-L'ancien groupe avait utiliser [nuxt](https://nuxt.com) un framework de [Vue](https://vuejs.org). Nous avons découvert que ce framework, même s'il possède beaucoup d'avantage, ne permettait pas de mettre en place de serveur, ni de PWA, ni de version mobile.
+L’ancien groupe avait utilisé [Nuxt](https://nuxt.com), un framework basé sur [Vue.js](https://vuejs.org).  
+Bien que Nuxt présente de nombreux avantages, nous avons constaté qu’il ne permettait pas de mettre en place de serveur, de PWA, ni de version mobile.  
