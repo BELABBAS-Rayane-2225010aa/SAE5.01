@@ -30,4 +30,6 @@ import './components/admin/userManager';
 
 import './components/photovoltaique/solarOverview';
 import './components/photovoltaique/GreenWashing';
+import './components/photovoltaique/EnergyChart';
+
 

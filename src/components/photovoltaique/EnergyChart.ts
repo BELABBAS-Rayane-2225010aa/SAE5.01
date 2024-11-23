@@ -145,7 +145,7 @@ export class SolarPanelEnergyChart extends LitElement {
 
   }
 
-  getStringByTimeUnit(timeUnit: string) {
+  getStringByTimeUnit(timeUnit: st ring) {
     switch (timeUnit) {
       case "QUARTER_OF_AN_HOUR":
         return "15 min";
