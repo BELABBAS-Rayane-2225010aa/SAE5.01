@@ -102,13 +102,14 @@ const technoCards: Techno[] = [
 export class AppTechnologie extends LitElement {
 
   render() {
+
     return html`
       <app-global-wrapper class="techno-wrapper">
         <main-title text="Nos technologies"></main-title>
 
         <div class="content-techno">
-          ${technoCards.map(techno => html`
-            <app-techno-card .Techno=${techno}></app-techno-card>
+          ${technoCards.map(technoCard => html`
+            <app-techno-card .technoCard=${technoCard}></app-techno-card>
           `)}
         </div>
 
