@@ -6,10 +6,8 @@ import { SolarPanelTheoreticalProduction } from '../../models/photovoltaique/wea
 import { useToast } from '../../composables/useToast';
 import { useEnergyChartData } from '../../composables/photovoltaique/useEnergyChartData';
 import moment from 'moment';
-import colors from 'tailwindcss/colors';
-import tailwindConfig from '~/tailwind.config';
 
-@customElement('solar-panel-energy-chart')
+@customElement('solar-panel-energychart')
 export class SolarPanelEnergyChart extends LitElement {
   @property({ type: Object }) filters: Filters = {
     startDate: navigator?.maxTouchPoints > 0 ? moment().subtract(1, 'days').toDate() : moment().subtract(7, "days").toDate(),
@@ -93,7 +91,7 @@ export class SolarPanelEnergyChart extends LitElement {
     try {
       const results = await Promise.allSettled([
         // Fetch energy details from API
-        fetch(`/api/solarPanel/v1/energyDetails?serialNumber=${serialNumber}&from=${formatDateTime(this.filters.startDate)}&to=${formatDateTime(this.filters.endDate)}&resolution=${this.filters.timeUnit}`, {
+        fetch(`/api/solarPanel/v1/energyDetails?serialNumber=156&from=${formatDateTime(this.filters.startDate)}&to=${formatDateTime(this.filters.endDate)}&resolution=${this.filters.timeUnit}`, {
           method: "GET",
         }).then(res => res.json()),
 
@@ -180,26 +178,26 @@ export class SolarPanelEnergyChart extends LitElement {
     this.chartContext.datasets = [
       {
         label: `Production de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-        backgroundColor: colors.black,
-        borderColor: tailwindConfig?.theme?.extend?.colors?._primary[700],
+        backgroundColor: '#000000', // Couleur noire en hexadécimal
+        borderColor: '#2D3748', // Couleur personnalisée en hexadécimal
         data: productionData,
       },
       {
         label: `Production théorique de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-        backgroundColor: colors.black,
-        borderColor: tailwindConfig?.theme?.extend?.colors?._primary[200],
+        backgroundColor: '#000000', // Couleur noire en hexadécimal
+        borderColor: '#A0AEC0', // Couleur personnalisée en hexadécimal
         data: theoreticalData,
       },
       {
         label: `Consommation de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-        backgroundColor: colors.black,
-        borderColor: tailwindConfig?.theme?.extend?.colors?._tertiary[700],
+        backgroundColor: '#000000', // Couleur noire en hexadécimal
+        borderColor: '#4A5568', // Couleur personnalisée en hexadécimal
         data: consumptionData,
       },
       {
         label: `Différence entre la production et la consommation de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-        backgroundColor: colors.black,
-        borderColor: tailwindConfig?.theme?.extend?.colors?._tertiary[200],
+        backgroundColor: '#000000', // Couleur noire en hexadécimal
+        borderColor: '#CBD5E0', // Couleur personnalisée en hexadécimal
         data: differenceData,
         hidden: true,
       },
@@ -212,30 +210,30 @@ export class SolarPanelEnergyChart extends LitElement {
       datasets: [
         {
           label: `Production de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-          backgroundColor: colors.black,
-          borderColor: tailwindConfig?.theme?.extend?.colors?._primary[700],
+          backgroundColor: '#000000', // Couleur noire en hexadécimal
+          borderColor: '#2D3748', // Couleur personnalisée en hexadécimal
           data: this.energyDetails.meters.find(meter => meter.type === "Production")?.values.map(v => {
             return { x: v.date, y: v.value ?? 0 };
           }),
         },
         {
           label: `Production théorique de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-          backgroundColor: colors.black,
-          borderColor: tailwindConfig?.theme?.extend?.colors?._primary[200],
+          backgroundColor: '#000000', // Couleur noire en hexadécimal
+          borderColor: '#A0AEC0', // Couleur personnalisée en hexadécimal
           data: this.theoreticalProduction.map((v: SolarPanelTheoreticalProduction) => ({ x: v.date, y: v.production })),
         },
         {
           label: `Consommation de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-          backgroundColor: colors.black,
-          borderColor: tailwindConfig?.theme?.extend?.colors?._tertiary[700],
+          backgroundColor: '#000000', // Couleur noire en hexadécimal
+          borderColor: '#4A5568', // Couleur personnalisée en hexadécimal
           data: this.energyDetails.meters.find(meter => meter.type === "Consumption")?.values.map(v => {
             return { x: v.date, y: v.value ?? 0 };
           }),
         },
         {
           label: `Différence entre la production et la consommation de l'énergie par ${this.getStringByTimeUnit(this.energyDetails.timeUnit)} (${this.energyDetails.unit})`,
-          backgroundColor: colors.black,
-          borderColor: tailwindConfig?.theme?.extend?.colors?._tertiary[200],
+          backgroundColor: '#000000', // Couleur noire en hexadécimal
+          borderColor: '#CBD5E0', // Couleur personnalisée en hexadécimal
           data: this.energyDetails.meters.find(meter => meter.type === "Production")?.values.map((v, i) => {
             return {
               x: v.date,

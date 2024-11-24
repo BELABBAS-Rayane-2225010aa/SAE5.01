@@ -29,7 +29,7 @@ export class SolarPanelVisualisation extends LitElement {
       <!-- production de l'énergie -->
       <app-global-wrapper>
         <div class="chart mt-5">
-          <solar-panel-energy-chart></solar-panel-energy-chart>
+          <solar-panel-energychart></solar-panel-energychart>
         </div>
       </app-global-wrapper>
     `;
