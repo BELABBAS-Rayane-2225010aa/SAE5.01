@@ -4,6 +4,7 @@ import { EnergyDetails, EnergyDetailsData, EnergyDetailsMeter } from '../../mode
 import { Filters } from '../../models/photovoltaique/filters';
 import { SolarPanelTheoreticalProduction } from '../../models/photovoltaique/weatherReport';
 import { useToast } from '../../composables/useToast';
+import { useEnergyChartData } from '../../composables/photovoltaique/useEnergyChartData';
 import moment from 'moment';
 import colors from 'tailwindcss/colors';
 import tailwindConfig from '~/tailwind.config';
@@ -78,6 +79,7 @@ export class SolarPanelEnergyChart extends LitElement {
   }
 
   async getData() {
+    const { formatDateTime, formatWeatherValue } = useEnergyChartData();
     let energyDetailsResponse: EnergyDetails = {
       timeUnit: "HOUR",
       unit: "kWh",
@@ -91,12 +93,12 @@ export class SolarPanelEnergyChart extends LitElement {
     try {
       const results = await Promise.allSettled([
         // Fetch energy details from API
-        fetch(`/api/solarPanel/v1/energyDetails?serialNumber=${serialNumber}&from=${this.formatDateTime(this.filters.startDate)}&to=${this.formatDateTime(this.filters.endDate)}&resolution=${this.filters.timeUnit}`, {
+        fetch(`/api/solarPanel/v1/energyDetails?serialNumber=${serialNumber}&from=${formatDateTime(this.filters.startDate)}&to=${formatDateTime(this.filters.endDate)}&resolution=${this.filters.timeUnit}`, {
           method: "GET",
         }).then(res => res.json()),
 
         // Fetch theoretical production values
-        this.formatWeatherValue(this.filters),
+        formatWeatherValue(this.filters),
       ]);
 
       // Handle the response for energy details
@@ -104,9 +106,9 @@ export class SolarPanelEnergyChart extends LitElement {
         energyDetailsResponse = results[0].value as EnergyDetails;
       } else {
         console.error("Failed to fetch energy details:", results[0].reason);
-        toast.add({
-          title: "Une erreur est survenue lors de la récupération des détails énergétiques",
-          icon: "i-heroicons-exclamation-circle",
+        useToast.add({
+          description: "Une erreur est survenue lors de la récupération des détails énergétiques",
+          title: "Erreur",
           color: "red",
         });
       }
@@ -141,11 +143,7 @@ export class SolarPanelEnergyChart extends LitElement {
     return moment(date).format('YYYY-MM-DDTHH:mm:ss');
   }
 
-  formatWeatherValue(filters: Filters) {
-
-  }
-
-  getStringByTimeUnit(timeUnit: st ring) {
+  getStringByTimeUnit(timeUnit: string) {
     switch (timeUnit) {
       case "QUARTER_OF_AN_HOUR":
         return "15 min";
