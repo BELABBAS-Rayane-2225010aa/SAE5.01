@@ -3,7 +3,7 @@ import { property, customElement, state } from 'lit/decorators.js';
 import moment from 'moment';
 import { Filters } from '../../../models/photovoltaique/filters'; // Assurez-vous de mettre le bon chemin vers votre fichier de type Filters
 
-@customElement('filters-popover')
+@customElement('solar-panel-chart-filters')
 export class FiltersPopover extends LitElement {
   @property({ type: Object }) filters: Filters = {
     startDate: moment().subtract(7, 'days').toDate(),

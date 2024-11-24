@@ -31,5 +31,8 @@ import './components/admin/userManager';
 import './components/photovoltaique/solarOverview';
 import './components/photovoltaique/GreenWashing';
 import './components/photovoltaique/EnergyChart';
+import './components/photovoltaique/chart/filters';
+import './components/photovoltaique/chart/view';
+
 
 

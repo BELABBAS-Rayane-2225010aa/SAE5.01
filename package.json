@@ -19,6 +19,7 @@
     "@thepassle/app-tools": "^0.9.12",
     "animate.css": "^4.1.1",
     "chart.js": "^4.4.6",
+    "chartjs-adapter-moment": "^1.0.1",
     "crypto-js": "^4.2.0",
     "fs-extra": "^11.2.0",
     "h3": "^1.13.0",

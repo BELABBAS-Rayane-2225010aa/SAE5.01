@@ -3,7 +3,7 @@ import { property, customElement } from 'lit/decorators.js';
 import Chart, { ChartData } from 'chart.js/auto';
 import 'chartjs-adapter-moment';
 
-@customElement('charts-line-chart')
+@customElement('solar-panel-chart-view')
 export class ChartsLineChart extends LitElement {
     @property({ type: Object }) chartContext: ChartData<'line'> = {
         labels: [],
