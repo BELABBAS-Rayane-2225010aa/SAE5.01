@@ -244,7 +244,7 @@ export class AppSolaire extends LitElement {
           </section>
 
           <section class="mt-5">
-            <a href="/photovoltaique/visualisation" class="font-extrabold text-_primary-500 text-2xl hover:underline">
+            <a href="/visualisation" class="font-extrabold text-_primary-500 text-2xl hover:underline">
               Découvrir l'installation actuelle
             </a>
           </section>
