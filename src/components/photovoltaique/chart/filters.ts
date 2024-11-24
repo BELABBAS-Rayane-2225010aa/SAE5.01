@@ -1,10 +1,11 @@
 import { html, css, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import moment from 'moment';
+import { Filters } from '../../../models/photovoltaique/filters'; // Assurez-vous de mettre le bon chemin vers votre fichier de type Filters
 
 @customElement('filters-popover')
 export class FiltersPopover extends LitElement {
-  @property({ type: Object }) filters = {
+  @property({ type: Object }) filters: Filters = {
     startDate: moment().subtract(7, 'days').toDate(),
     endDate: new Date(),
     timeUnit: 'HOUR',
@@ -22,8 +23,8 @@ export class FiltersPopover extends LitElement {
   @state() startDateISO = moment(this.filters.startDate).format('YYYY-MM-DDTHH:mm:ss');
   @state() endDateISO = moment(this.filters.endDate).format('YYYY-MM-DDTHH:mm:ss');
 
-  undoStack = [];
-  redoStack = [];
+  undoStack: Filters[] = [];
+  redoStack: Filters[] = [];
 
   static styles = css`
     .chart-wrap {
@@ -76,9 +77,14 @@ export class FiltersPopover extends LitElement {
 
   undo() {
     if (this.undoStack.length > 1) {
-      this.redoStack.push(this.undoStack.pop());
+      const popStack = this.undoStack.pop();
+      if (popStack) {
+        this.redoStack.push(popStack);
+      }
       const lastState = this.undoStack[this.undoStack.length - 1];
-      this.filters = { ...lastState };
+      if (lastState) {
+        this.filters = { ...lastState };
+      }
     }
   }
 
@@ -86,11 +92,13 @@ export class FiltersPopover extends LitElement {
     if (this.redoStack.length > 0) {
       this.undoStack.push({ ...this.filters });
       const nextState = this.redoStack.pop();
-      this.filters = { ...nextState };
+      if (nextState) {
+        this.filters = { ...nextState };
+      }
     }
   }
 
-  handleKeyDown(event) {
+  handleKeyDown(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     if ((event.key === 'z' || event.key === 'Z') && (event.ctrlKey || event.metaKey)) {
       event.shiftKey ? this.redo() : this.undo();
@@ -121,7 +129,7 @@ export class FiltersPopover extends LitElement {
               (option) => html`
                 <div
                   class="custom-option ${this.filters.timeUnit === option.value ? 'selected-option' : ''}"
-                  @click="${() => (this.filters.timeUnit = option.value)}"
+                  @click="${() => (this.filters.timeUnit = option.value as 'HOUR' | 'QUARTER_OF_AN_HOUR' | 'DAY' | 'WEEK' | 'MONTH' | 'YEAR')}"
                 >
                   ${option.text}
                 </div>
@@ -132,10 +140,10 @@ export class FiltersPopover extends LitElement {
             <label for="startDate">Date de début</label>
             <input
               type="datetime-local"
-              .value="${this.startDateISO}"
-              @input="${(e) => {
-                this.startDateISO = e.target.value;
-                this.filters.startDate = new Date(e.target.value);
+              .value="${moment(this.filters.startDate).format('YYYY-MM-DDTHH:mm:ss')}"
+              @input="${(e: Event) => {
+                const input = e.target as HTMLInputElement;
+                this.filters.startDate = new Date(input.value);
               }}"
               id="startDate"
             />
@@ -144,10 +152,10 @@ export class FiltersPopover extends LitElement {
             <label for="endDate">Date de fin</label>
             <input
               type="datetime-local"
-              .value="${this.endDateISO}"
-              @input="${(e) => {
-                this.endDateISO = e.target.value;
-                this.filters.endDate = new Date(e.target.value);
+              .value="${moment(this.filters.endDate).format('YYYY-MM-DDTHH:mm:ss')}"
+              @input="${(e: Event) => {
+                const input = e.target as HTMLInputElement;
+                this.filters.endDate = new Date(input.value);
               }}"
               id="endDate"
             />
