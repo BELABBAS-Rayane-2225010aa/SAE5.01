@@ -5,8 +5,7 @@ import '@shoelace-style/shoelace/dist/components/card/card.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 import { style } from '../styles/homepage';
-import type { CardInfos } from "../components/card/cardPresentation";
-import type { CardNavigationInfos } from "../components/card/cardNavigation";
+import type { CardInfos ,CardNavigationInfos } from "../models/card";
 import { definePageMeta } from "../meta";
 import '../components/defaultBackground';
 

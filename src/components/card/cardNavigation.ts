@@ -1,14 +1,6 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-
-// Define a type for the card navigation information
-export type CardNavigationInfos = {
-  title: string;
-  description: string;
-  path: string;
-  iconUrl: string;
-};
-
+import type { CardNavigationInfos } from '../../models/card';
 import { style } from '../../styles/card/navigation';
 
 import '@shoelace-style/shoelace/dist/components/button/button.js';
