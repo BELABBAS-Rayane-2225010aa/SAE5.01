@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { style } from '../../../styles/technologie/cardDescription';
 import '../cardPresentation';
