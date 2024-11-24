@@ -18,6 +18,7 @@
     "@shoelace-style/shoelace": "^2.18.0",
     "@thepassle/app-tools": "^0.9.12",
     "animate.css": "^4.1.1",
+    "chart.js": "^4.4.6",
     "crypto-js": "^4.2.0",
     "fs-extra": "^11.2.0",
     "h3": "^1.13.0",
