@@ -21,6 +21,7 @@ export default defineConfig({
         globPatterns: [
           '**/*.{html,js,css,json,png}',
         ],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
       injectRegister: false,
       manifest: false,
