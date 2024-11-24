@@ -1,5 +1,5 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { style } from '../styles/technologie';
 import { Techno } from '../models/techno';
 import { definePageMeta } from "../meta";
