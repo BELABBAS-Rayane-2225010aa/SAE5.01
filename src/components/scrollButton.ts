@@ -27,7 +27,6 @@ export class ScrollButton extends LitElement {
       <div class="scroll-button">
         <!-- Button that scrolls to the element with the specified hash -->
         <sl-button
-          class="animate-bounce hover:animate-none rounded-full"
           @click="${this.scrollToHash}"
           size="large"
           variant="primary"
