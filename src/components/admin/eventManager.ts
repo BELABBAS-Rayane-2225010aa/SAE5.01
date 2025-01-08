@@ -12,6 +12,8 @@ export class EventManagement extends LitElement {
   @state() showConfirmationPopup: boolean = false;
   @state() isUpdateAction: boolean = false;
   @state() selectedEvent: EventPage | null = null;
+  @state() searchQuery: string = '';
+  @state() visibleEventsCount: number = 10;
 
   static styles = style;
 
@@ -99,11 +101,27 @@ export class EventManagement extends LitElement {
     this.showPopup = true;
   }
 
+  handleSearch(event: Event) {
+    this.searchQuery = (event.target as HTMLInputElement).value.toLowerCase();
+  }
+
+  showMoreEvents() {
+    this.visibleEventsCount += 10;
+  }
+
   render() {
+    const filteredEvents = this.events.filter(event =>
+      event.title.toLowerCase().includes(this.searchQuery) ||
+      event.description.toLowerCase().includes(this.searchQuery)
+    );
+
     return html`
       <div>
         <!-- Button to create an Event -->
         <button @click=${this.handleShowAddPopup}>Créer un événement</button>
+
+        <!-- Search bar -->
+        <input type="text" placeholder="Rechercher un événement" @input=${this.handleSearch} />
 
         <!-- Popup to add or update an Event -->
         ${this.showPopup ? html`
@@ -134,7 +152,7 @@ export class EventManagement extends LitElement {
               </tr>
             </thead>
             <tbody>
-              ${this.events.map(event => html`
+              ${filteredEvents.slice(0, this.visibleEventsCount).map(event => html`
                 <tr>
                   <td>${event.title}</td>
                   <td>${event.date}</td>
@@ -147,6 +165,11 @@ export class EventManagement extends LitElement {
               `)}
             </tbody>
           </table>
+          ${this.visibleEventsCount < filteredEvents.length ? html`
+            <div class="show-more-container">
+              <button @click=${this.showMoreEvents}>Afficher plus</button>
+            </div>
+          ` : ''}
         </div>
       </div>
     `;
