@@ -1,14 +1,15 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { style } from '../../styles/epicerieSolidaire/shopHour';
 import { Shop } from '../../models/shop';
 
 @customElement('solidary-grocery-shop-address')
 export class SolidaryGroceryShopAddress extends LitElement {
   @property({ type: Object }) shop!: Shop;
 
-  static styles = css`
-    @import url("~/assets/css/solidaryGrocery/shopHours.css");
-  `;
+  static styles = [
+    style
+  ];
 
   render() {
     return html`
