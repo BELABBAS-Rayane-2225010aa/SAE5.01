@@ -1,17 +1,18 @@
 import { html, LitElement, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { style } from "../../styles/solaire";
 
 @customElement('app-solaire')
 export class AppSolaire extends LitElement {
-  static styles = css`
-    @import url('~/assets/css/photovoltaique.css');
-  `;
+  static styles = [
+    style
+  ];
 
   render() {
     return html`
       <app-global-wrapper>
         <div class="container photovoltaique-wrap mx-auto text-lg">
-          <page-header image="/photovoltaique/header.png" image-alt="Panneaux photovoltaïques" title="Panneaux photovoltaïques"></page-header>
+          <page-header image=/assets/images/solaire/header.png" image-alt="Panneaux photovoltaïques" title="Panneaux photovoltaïques"></page-header>
 
           <section class="mt-5 description">
             <h2 class="font-extrabold text-3xl text-_primary-500">La technologie</h2>
@@ -43,8 +44,8 @@ export class AppSolaire extends LitElement {
               </div>
 
               <aside class="w-full md:w-1/3 flex flex-col">
-                <a href="/photovoltaique/visualisation" class="font-extrabold text-_primary-500 text-2xl hover:underline ml-16">Découvrir l'installation actuelle</a>
-                <img src="/photovoltaique/schema.webp" alt="Schéma d'un panneau photovoltaïque" />
+                <a href="/assets/images/solaire/visualisation" class="font-extrabold text-_primary-500 text-2xl hover:underline ml-16">Découvrir l'installation actuelle</a>
+                <img src="/assets/images/solaire/schema.webp" alt="Schéma d'un panneau photovoltaïque" />
               </aside>
             </div>
           </section>
@@ -57,7 +58,7 @@ export class AppSolaire extends LitElement {
             </p>
             <div class="custom-cards mt-4">
               <div class="custom-card">
-                <img src="/photovoltaique/panneau.png" alt="Panneaux photovoltaïques" />
+                <img src="/assets/images/solaire/panneau.png" alt="Panneaux photovoltaïques" />
                 <div class="text">
                   <h3 class="font-medium text-xl mt-2">Panneaux Solaires</h3>
                   <p>36 panneaux photovoltaïques de marque TRINA SOLAR, chaque panneau ayant une puissance de 435 Wc. Ces panneaux sont garantis pour 15 ans pour le matériel et 25 ans pour une performance minimale de 85% du rendement initial.</p>
@@ -65,7 +66,7 @@ export class AppSolaire extends LitElement {
               </div>
 
               <div class="custom-card">
-                <img src="/photovoltaique/onduleur.png" alt="Onduleur" />
+                <img src="/assets/images/solaire/onduleur.png" alt="Onduleur" />
                 <div class="text">
                   <h3 class="font-medium text-xl mt-2">Onduleur</h3>
                   <p> Un onduleur SOLAREDGE 16k est utilisé pour convertir le courant continu produit par les panneaux en courant alternatif. Cet onduleur est garanti 12 ans.</p>
@@ -73,7 +74,7 @@ export class AppSolaire extends LitElement {
               </div>
 
               <div class="custom-card">
-                <img src="/photovoltaique/optimiseur.jpg" alt="Optimiseurs" />
+                <img src="/assets/images/solaire/optimiseur.jpg" alt="Optimiseurs" />
                 <div class="text">
                   <h3 class="font-medium text-xl mt-2">Optimiseurs</h3>
                   <p>18 optimiseurs SOLAREDGE P850, garantis 25 ans, sont intégrés pour maximiser la production d'énergie en cas d'ombrage ou de saleté sur certains panneaux.</p>
@@ -81,7 +82,7 @@ export class AppSolaire extends LitElement {
               </div>
 
               <div class="custom-card">
-                <img src="/photovoltaique/kit_de_fixation.webp" alt="Structure de fixation" />
+                <img src="/assets/images/solaire/kit_de_fixation.webp" alt="Structure de fixation" />
                 <div class="text">
                   <h3 class="font-medium text-xl mt-2">Structure de Fixation</h3>
                   <p>Kit de fixation K2 Systems garanti 12 ans pour l'installation des panneaux sur une toiture en bac acier.</p>

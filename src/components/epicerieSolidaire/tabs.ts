@@ -1,18 +1,19 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { useWeek } from '../../composables/shopManagement/useWeek';
-import { Shop } from '../../models/shop';
+import { useWeek } from "../../composables/shopManagement/useWeek";
+import { Shop } from "@/models/shop";
 
 import '../custom-tabs';
+import { style } from "../../styles/epicerieSolidaire/tabs";
 
 @customElement('solidary-grocery-tabs')
 export class SolidaryGroceryTabs extends LitElement {
   @property({ type: Array }) shops: Shop[] = [];
   @state() week: number = 0;
 
-  static styles = css`
-    @import url("~/assets/css/solidaryGrocery/tabs.css");
-  `;
+  static styles = [
+    style
+  ];
 
   connectedCallback() {
     super.connectedCallback();

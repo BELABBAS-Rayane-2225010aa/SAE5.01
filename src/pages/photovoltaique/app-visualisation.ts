@@ -7,7 +7,7 @@ export class SolarPanelVisualisation extends LitElement {
     .chart {
       padding: 24px;
     }
-    .mt-5 {}
+    .mt-5 {
       margin-top: 1.25rem;
     }
   `;
