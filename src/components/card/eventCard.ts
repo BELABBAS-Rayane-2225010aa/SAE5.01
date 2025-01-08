@@ -45,6 +45,15 @@ export class EventCard extends LitElement {
       color: #555;
       margin: 4px 0;
     }
+    .card-link {
+      display: block;
+      margin-top: 8px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    .card-link:hover {
+      text-decoration: underline;
+    }
   `;
 
   render() {
@@ -56,6 +65,7 @@ export class EventCard extends LitElement {
           <p class="card-date">Date: ${this.event.date}</p>
           <p class="card-time">Time: ${this.event.time}</p>
           <p class="card-location">Location: ${this.event.location}</p>
+          <a class="card-link" href="/event/${this.event.id}">Voir Plus</a>
         </div>
       </div>
     `;
