@@ -18,10 +18,10 @@ const technoCards: Techno[] = [
   {
     title: "LI-FI",
     icon: "i-heroicons-wifi-16-solid",
-    image: "../../public/assets/technologie/lifi.png",
+    image: "/assets/images/technologie/lifi.png",
     shortDescription:
       "Utilise la lumière pour transmettre des données, offrant une alternative rapide et sécurisée au Wi-Fi traditionnel.",
-    functioningImage: "../../public/assets/screenshots/LIFI.png",
+    functioningImage: "/assets/images/technologie/screenshots/LIFI.png",
     installImage: "",
     functioningDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
@@ -34,70 +34,70 @@ const technoCards: Techno[] = [
     icon: "i-heroicons-light-bulb-16-solid",
     shortDescription:
       "Le VLC (Visible Light Communication) est une technologie de transmission de données unidirectionnelle via la lumière LED.",
-    functioningImage: "../../public/assets/screenshots/VLC.png",
+    functioningImage: "/assets/images/technologie/screenshots/VLC.png",
     installImage: "",
     functioningDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     installDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     link: "vlc",
-    image: "../../public/assets/technologie/vlc.png",
+    image: "/assets/images/technologie/vlc.png",
   },
   {
     title: "Drones",
     icon: "i-heroicons-rocket-launch-16-solid",
     shortDescription:
       "Les drones sont des appareils sans équipage, pilotés automatiquement ou à distance, utilisés dans le civil ou par les forces armées et de sécurité.",
-    functioningImage: "../../public/assets/screenshots/drone.jpg",
+    functioningImage: "/assets/images/technologie/screenshots/drone.jpg",
     installImage: "",
     functioningDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     installDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     link: "drones",
-    image: "../../public/assets/technologie/drone.png",
+    image: "/assets/images/technologie/drone.png",
   },
   {
     title: "Diffuseur de Parfum",
     icon: "i-heroicons-arrow-up-on-square-16-solid",
     shortDescription:
       "Crée une ambiance olfactive agréable dans le magasin, enrichissant l'expérience des visiteurs.",
-    functioningImage: "../../public/assets/technologie/diffuseur_parfum.png",
+    functioningImage: "/assets/images/technologie/diffuseur_parfum.png",
     installImage: "",
     functioningDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     installDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     link: "cso",
-    image: "../../public/assets/technologie/diffuseur_parfum.png",
+    image: "/assets/images/technologie/diffuseur_parfum.png",
   },
   {
     title: "RFID",
     icon: "i-heroicons-circle-stack-16-solid",
     shortDescription:
       "Facilitent la gestion et le suivi des stocks grâce à l'identification par radiofréquence, améliorant ainsi l'efficacité logistique.",
-    functioningImage: "../../public/assets//screenshots/RFID.png",
+    functioningImage: "/assets/images/technologie/screenshots/RFID.png",
     installImage: "",
     functioningDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     installDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     link: "rfid",
-    image: "../../public/assets/technologie/rfid.png",
+    image: "/assets/images/technologie/rfid.png",
   },
   {
     title: "Acoustique",
     icon: "i-heroicons-megaphone-16-solid",
     shortDescription:
       "Améliorent l'acoustique de l'espace, réduisant les nuisances sonores et créant un environnement propice à la concentration et à l'apprentissage.",
-    functioningImage: "../../public/assets//screenshots/acoustique.png",
+    functioningImage: "/assets/images/technologie/screenshots/acoustique.png",
     installImage: "",
     functioningDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     installDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nobis. Corporis quod deleniti repellat deserunt ratione expedita dicta rem odit, culpa, ipsa esse doloribus tenetur doloremque, dolorem quisquam repellendus? Sunt",
     link: "acoustique",
-    image: "../../public/assets/technologie/acoustique.png",
+    image: "/assets/images/technologie/acoustique.png",
   },
 ];
 

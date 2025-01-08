@@ -15,7 +15,6 @@ export class SolarPanelOverview extends LitElement {
   };
 
   static styles = css`
-    @import url("~/assets/css/solarPanel/overview.css");
     .powers {
       margin-top: 1.25rem;
       position: relative;
@@ -77,7 +76,7 @@ export class SolarPanelOverview extends LitElement {
 
   render() {
     return html`
-      <page-header title="Laissons parler les chiffres" image="/photovoltaique/visualisation/header.jpg" image-alt="Panneaux solaires"></page-header>
+      <page-header title="Laissons parler les chiffres" image="/assets/images/solaire/visualisation/header.jpg" image-alt="Panneaux solaires"></page-header>
       <section class="powers mt-5 relative">
         <div class="current-power">
           <div class="information">
@@ -90,7 +89,7 @@ export class SolarPanelOverview extends LitElement {
             <div class="point border-black dark:border-white"></div>
           </div>
 
-          <img src="/photovoltaique/visualisation/solarPanel.svg" alt="Solar panel illustration" class="solar-panel-illustration" />
+          <img src="/assets/images/solaire/visualisation/solarPanel.svg" alt="Solar panel illustration" class="solar-panel-illustration" />
 
           <div class="arrow right">
             <div class="line bg-black dark:bg-white"></div>
