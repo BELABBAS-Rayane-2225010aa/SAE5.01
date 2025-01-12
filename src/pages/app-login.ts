@@ -4,6 +4,7 @@ import { z } from 'zod';
 import sha256 from 'crypto-js/sha256';
 import { useAuth } from '../composables/auth/useAuth';
 import { useToast } from '../composables/useToast';
+import {style} from '../styles/login';
 
 @customElement('app-login')
 export class LoginPage extends LitElement {
@@ -11,9 +12,9 @@ export class LoginPage extends LitElement {
   @state() password = '';
   @state() isLoading = false;
 
-  static styles = css`
-    /* Add your styles here */
-  `;
+  static styles = [
+      style
+    ];
 
   schema = z.object({
     email: z.string().email("L'adresse mail est invalide").min(1, "Requis"),
