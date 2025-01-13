@@ -12,7 +12,7 @@ export class AppSolaire extends LitElement {
     return html`
       <app-global-wrapper>
         <div class="container photovoltaique-wrap mx-auto text-lg">
-          <page-header image=/assets/images/solaire/header.png" image-alt="Panneaux photovoltaïques" title="Panneaux photovoltaïques"></page-header>
+          <page-header image="/assets/images/solaire/header.png" image-alt="Panneaux photovoltaïques" title="Panneaux photovoltaïques"></page-header>
 
           <section class="mt-5 description">
             <h2 class="font-extrabold text-3xl text-_primary-500">La technologie</h2>
