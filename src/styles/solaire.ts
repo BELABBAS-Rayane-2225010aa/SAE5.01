@@ -5,7 +5,7 @@ export const style = css`
     page-header {
         display: block;
         width: 100%;
-        height: 200px;
+        height: 60px;
         background-size: cover;
         background-position: center;
     }
@@ -16,12 +16,10 @@ export const style = css`
         background-size: cover;
         background-position: center;
         width: 100%;
-        height: 100%;
+        height: 150%;
     }
 
     .photovoltaique-wrap {
-        margin-top: 70px;
-        padding-top: 48px;
         padding-bottom: 48px;
 
         section {
