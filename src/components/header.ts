@@ -1,14 +1,17 @@
 import { LitElement, css, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { resolveRouterPath } from '../router';
-
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+
 @customElement('app-header')
 export class AppHeader extends LitElement {
+  // Define a property 'title' of type String with a default value
   @property({ type: String }) title = 'PWA Starter';
 
-  @property({ type: Boolean}) enableBack: boolean = false;
+  // Define a property 'enableBack' of type Boolean with a default value
+  @property({ type: Boolean }) enableBack: boolean = false;
 
+  // Define the styles for this component
   static styles = css`
     header {
       display: flex;
@@ -18,7 +21,6 @@ export class AppHeader extends LitElement {
       color: white;
       padding: 12px;
       padding-top: 4px;
-
       position: fixed;
       left: env(titlebar-area-x, 0);
       top: env(titlebar-area-y, 0);
@@ -56,15 +58,18 @@ export class AppHeader extends LitElement {
     }
   `;
 
+  // Render method to describe the component's template
   render() {
     return html`
       <header>
-
         <div id="back-button-block">
-          ${this.enableBack ? html`<sl-button size="small" href="${resolveRouterPath()}">
-            Back
-          </sl-button>` : null}
-
+          <!-- Conditionally render the back button based on the enableBack property -->
+          ${this.enableBack ? html`
+            <sl-button size="small" href="${resolveRouterPath()}">
+              Back
+            </sl-button>
+          ` : null}
+          <!-- Display the title -->
           <h1>${this.title}</h1>
         </div>
       </header>

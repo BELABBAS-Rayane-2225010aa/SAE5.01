@@ -3,9 +3,12 @@ import { customElement, property } from 'lit/decorators.js';
 
 @customElement('custom-tabs')
 export class CustomTabs extends LitElement {
+  // Define a property 'items' of type array with default empty array
   @property({ type: Array }) items: { label: string }[] = [];
+  // Define a property 'selectedTab' of type string with default empty string
   @property({ type: String }) selectedTab: string = '';
 
+  // Define the styles for this component
   static styles = css`
     .tabs {
       display: flex;
@@ -25,6 +28,7 @@ export class CustomTabs extends LitElement {
     }
   `;
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="tabs">
@@ -43,6 +47,7 @@ export class CustomTabs extends LitElement {
     `;
   }
 
+  // Method to select a tab and dispatch a custom event
   selectTab(label: string) {
     this.selectedTab = label;
     this.dispatchEvent(new CustomEvent('tab-selected', { detail: { label } }));
