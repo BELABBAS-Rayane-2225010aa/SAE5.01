@@ -5,18 +5,24 @@ import 'chartjs-adapter-moment';
 
 @customElement('solar-panel-chart-view')
 export class ChartsLineChart extends LitElement {
-    @property({ type: Object }) chartContext: ChartData<'line'> = {
-        labels: [],
-        datasets: [],
-      };  @property({ type: String }) title = '';
+  // Define a property 'chartContext' of type ChartData<'line'> with default values
+  @property({ type: Object }) chartContext: ChartData<'line'> = {
+    labels: [],
+    datasets: [],
+  };
+  // Define a property 'title' of type String
+  @property({ type: String }) title = '';
+  // Define a property 'chartKey' of type Number
   @property({ type: Number }) chartKey = 0;
 
+  // Define the styles for this component
   static styles = css`
     .chart-wrap {
       height: 75vh;
     }
   `;
 
+  // Lifecycle method called when the component is first updated
   firstUpdated() {
     this.createChart();
     window.addEventListener('resize', () => {
@@ -25,6 +31,7 @@ export class ChartsLineChart extends LitElement {
     });
   }
 
+  // Lifecycle method called when the component is updated
   updated(changedProperties: PropertyValues) {
     if (changedProperties.has('chartContext') || changedProperties.has('title')) {
       this.chartKey++;
@@ -32,6 +39,7 @@ export class ChartsLineChart extends LitElement {
     }
   }
 
+  // Method to create the chart
   createChart() {
     if (!this.shadowRoot) return;
     const canvas = this.shadowRoot.getElementById('myChart') as HTMLCanvasElement;
@@ -78,6 +86,7 @@ export class ChartsLineChart extends LitElement {
     });
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="chart-wrap mb-10">
