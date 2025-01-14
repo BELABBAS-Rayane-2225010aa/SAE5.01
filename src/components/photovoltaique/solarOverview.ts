@@ -2,9 +2,9 @@ import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { Overview } from "../../models/photovoltaique/overview";
 
-
 @customElement('solar-panel-overview')
 export class SolarPanelOverview extends LitElement {
+  // Define a state variable 'overviewData' of type Overview with default values
   @state() overviewData: Overview = {
     currentPower: 0,
     lifeTimeDataEnergy: 0,
@@ -14,6 +14,7 @@ export class SolarPanelOverview extends LitElement {
     lastUpdateTime: "",
   };
 
+  // Define the styles for this component
   static styles = css`
     @import url("~/assets/css/solarPanel/overview.css");
     .powers {
@@ -55,6 +56,7 @@ export class SolarPanelOverview extends LitElement {
     }
   `;
 
+  // Lifecycle method called when the component is added to the DOM
   async connectedCallback() {
     console.log("connectedCallback");
     super.connectedCallback();
@@ -70,11 +72,13 @@ export class SolarPanelOverview extends LitElement {
     }
   }
 
+  // Method to show a toast notification
   showToast(message: string, color: string) {
     // Implement your toast notification logic here
     console.log(`Toast: ${message}, Color: ${color}`);
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <page-header title="Laissons parler les chiffres" image="/photovoltaique/visualisation/header.jpg" image-alt="Panneaux solaires"></page-header>
