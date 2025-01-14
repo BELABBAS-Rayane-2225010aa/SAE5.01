@@ -4,17 +4,22 @@ import { Shop } from '../../models/shop';
 
 @customElement('solidary-grocery-shop-address')
 export class SolidaryGroceryShopAddress extends LitElement {
+  // Define a property 'shop' of type Shop
   @property({ type: Object }) shop!: Shop;
 
+  // Define the styles for this component
   static styles = css`
     @import url("~/assets/css/solidaryGrocery/shopHours.css");
   `;
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="shop__address">
-        <h3 class="font-bold"><icon name="i-heroicons-map-pin"></icon> Addresse :</h3>
+        <!-- Shop address header -->
+        <h3 class="font-bold"><icon name="i-heroicons-map-pin"></icon> Address :</h3>
         <div style="width: 100%; margin-top: 20px;">
+          <!-- Google Maps iframe to display the shop location -->
           <iframe
             width="100%"
             height="200"
