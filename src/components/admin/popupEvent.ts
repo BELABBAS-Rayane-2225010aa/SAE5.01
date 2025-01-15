@@ -1,11 +1,12 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { EventPage } from '../../models/event';
-
 import { style } from '../../styles/admin/popUpEvent';
 
+// Define a new custom element with the name 'admin-popup-event'
 @customElement('admin-popup-event')
 export class AdminPopUpEvent extends LitElement {
+  // Define a property 'event' of type EventPage with default values
   @property({ type: Object }) event: EventPage = {
     id: 0,
     title: '',
@@ -17,82 +18,75 @@ export class AdminPopUpEvent extends LitElement {
     location: '',
   };
 
+  // Define state variables for form data and managing image/link edits
   @state() formData: EventPage = { ...this.event };
   @state() imageUrl: string = '';
   @state() link: string = '';
   @state() editImageIndex: number | null = null;
   @state() editLinkIndex: number | null = null;
 
+  // Apply the imported styles to this component
   static styles = style;
 
+  // Update formData when the event property changes
   updated(changedProperties: Map<string | number | symbol, unknown>) {
     if (changedProperties.has('event')) {
       this.formData = { ...this.event };
-      /*
-      if (!Array.isArray(this.formData.images)) {
-        this.formData.images = [];
-      }
-      if (!Array.isArray(this.formData.links)) {
-        this.formData.links = [];
-      }
-      */
     }
   }
 
+  // Method to add an image
   addImage() {
     if (this.imageUrl) {
       if (this.editImageIndex !== null) {
-        //this.formData.images[this.editImageIndex] = this.imageUrl;
         this.formData.images = this.imageUrl;
         this.editImageIndex = null;
       } else {
-        //this.formData.images.push(this.imageUrl);
         this.formData.images = this.imageUrl;
       }
       this.imageUrl = '';
     }
   }
 
+  // Method to edit an existing image
   editImage() {
-    //this.imageUrl = this.formData.images[index];
-    //this.editImageIndex = index;
     this.imageUrl = this.formData.images;
   }
 
+  // Method to delete an image
   deleteImage() {
-    //this.formData.images.splice(index, 1);
     this.formData.images = '';
   }
 
+  // Method to add a link
   addLink() {
     if (this.link) {
       if (this.editLinkIndex !== null) {
-        //this.formData.links[this.editLinkIndex] = this.link;
         this.formData.links = this.link;
         this.editLinkIndex = null;
       } else {
-        //this.formData.links.push(this.link);
         this.formData.links = this.link;
       }
       this.link = '';
     }
   }
 
+  // Method to edit an existing link
   editLink() {
-    //this.link = this.formData.links[index];
-    //this.editLinkIndex = index;
     this.link = this.formData.links;
   }
 
+  // Method to delete a link
   deleteLink() {
-    //this.formData.links.splice(index, 1);
     this.formData.links = '';
   }
 
+  // Method to handle form submission
   handleSubmit() {
     this.dispatchEvent(new CustomEvent('submit', { detail: this.formData }));
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="popup">

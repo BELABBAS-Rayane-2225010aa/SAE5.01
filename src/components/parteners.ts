@@ -1,8 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-
 import { style } from '../styles/parteners';
-
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 @customElement('app-parteners')
@@ -21,8 +19,10 @@ export class Parteners extends LitElement {
     "parteners/eurofins.webp",
   ];
 
+  // Apply the imported styles to this component
   static styles = style;
 
+  // Render method to describe the component's template
   render() {
     return html`
       <!-- Container for the partners section -->

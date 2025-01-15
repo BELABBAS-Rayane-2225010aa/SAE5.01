@@ -3,34 +3,40 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { Shop } from '../../models/shop';
 import { useWeek } from '../../composables/shopManagement/useWeek';
 import { useToast } from '../../composables/useToast';
-
 import { style } from '../../styles/admin/shopsManagement';
 
 interface Item extends Shop {
   label: string;
 }
 
+// Define a new custom element with the name 'admin-shops-management'
 @customElement('admin-shops-management')
 export class ShopManagement extends LitElement {
+  // Define a property 'shops' of type Shop array with default empty array
   @property({ type: Array }) shops: Shop[] = [];
+  // Define state variables for managing week, loading state, shop number, and items
   @state() week: number = 0;
   @state() isLoading: boolean = false;
   @state() shopNumber: number = 0;
   @state() items: Item[] = [];
 
+  // Apply the imported styles to this component
   static styles = style;
 
+  // Lifecycle method called when the component is added to the DOM
   connectedCallback() {
     super.connectedCallback();
     this.initializeState();
   }
 
+  // Initialize the state variables
   initializeState() {
     const { weeks } = useWeek();
     this.week = weeks[0].value;
     this.items = this.createItems(this.shops || []);
   }
 
+  // Create items from the shops array
   createItems(shops: Shop[]): Item[] {
     return shops.map((shop: Shop) => ({
       label: shop.name,
@@ -38,6 +44,7 @@ export class ShopManagement extends LitElement {
     }));
   }
 
+  // Method to handle form submission
   async onSubmit(event: Event) {
     event.preventDefault();
     const shopsCopy = [...this.shops];
@@ -54,9 +61,9 @@ export class ShopManagement extends LitElement {
     }
   }
 
+  // Method to update the shops
   async updateShops(shops: Shop[]) {
     try {
-      console.log(shops);
       const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/put.php', {
         method: 'PUT',
         headers: {
@@ -73,6 +80,7 @@ export class ShopManagement extends LitElement {
     }
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="container">

@@ -1,19 +1,23 @@
 import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-
 import { style } from '../styles/footer';
 
 @customElement('app-footer')
 export class Footer extends LitElement {
+  // Define a state variable to track if the dark theme is enabled
   @state() isDarkTheme = false;
 
+  // Apply the imported styles to this component
   static styles = style;
 
+  // Lifecycle method called when the component is added to the DOM
   connectedCallback() {
     super.connectedCallback();
+    // Check if the dark theme is enabled
     this.isDarkTheme = document.documentElement.classList.contains('dark');
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <footer class="footer">

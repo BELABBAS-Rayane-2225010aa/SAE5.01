@@ -3,6 +3,7 @@ import moment from "moment/moment";
 import type { Filters } from "../../models/photovoltaique/filters";
 
 export function useEnergyChartData() {
+  // Function to format weather values based on the provided filters
   async function formatWeatherValue(filters: Filters): Promise<SolarPanelTheoreticalProduction[]> {
     let frequency, startDate, endDate;
     let solarPanelTheoreticalValue: SolarPanelTheoreticalProduction[];
@@ -53,6 +54,7 @@ export function useEnergyChartData() {
     return solarPanelTheoreticalValue;
   }
 
+  // Function to adjust the production values for quarter-hour intervals
   function quarterHour(value: SolarPanelTheoreticalProduction[]): SolarPanelTheoreticalProduction[] {
     let quarterHourValue: SolarPanelTheoreticalProduction[] = [];
     for (let i = 0; i < value.length; i++) {
@@ -61,12 +63,14 @@ export function useEnergyChartData() {
     return quarterHourValue;
   }
 
+  // Function to call the weather API and fetch theoretical production values
   async function callWeatherApi(startDate: Date, endDate: Date, frequency: string, nominalPower: number, performanceRatio: number): Promise<SolarPanelTheoreticalProduction[]> {
     return await fetch(`/api/weatherReport?beginningDate=${formatDateTimeWeather(startDate)}&endDate=${formatDateTimeWeather(endDate)}&frequency=${frequency}&nominalPower=${nominalPower}&performanceRatio=${performanceRatio}`, {
       method: "GET",
     }).then(res => res.json());
   }
 
+  // Function to group production values by date
   function groupByDate(numberDays: number, value: SolarPanelTheoreticalProduction[]): SolarPanelTheoreticalProduction[] {
     let averageValue: SolarPanelTheoreticalProduction[] = [];
     let counter = 0;
@@ -87,10 +91,12 @@ export function useEnergyChartData() {
     return averageValue;
   }
 
+  // Function to format date and time
   function formatDateTime(date: Date): string {
     return moment(date).format("YYYY-MM-DD HH:mm:ss");
   }
 
+  // Function to format date and time for weather API
   function formatDateTimeWeather(date: Date): string {
     return moment(date).format("YYYY-MM-DD:HH");
   }

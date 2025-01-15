@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+// Interface to define the options for the toast message
 interface ToastOptions {
   title: string;
   description: string;
@@ -8,13 +9,16 @@ interface ToastOptions {
   duration?: number; // Duration in milliseconds
 }
 
+// Define a new custom element with the name 'toast-message'
 @customElement('toast-message')
 export class ToastMessage extends LitElement {
+  // Define properties for the toast message
   @property({ type: String }) title = '';
   @property({ type: String }) description = '';
   @property({ type: String }) color = 'black';
   @property({ type: Number }) duration = 3000; // Default duration 3 seconds
 
+  // Define the styles for this component
   static styles = css`
     .toast {
       position: fixed;
@@ -49,6 +53,7 @@ export class ToastMessage extends LitElement {
     }
   `;
 
+  // Lifecycle method called when the component is added to the DOM
   connectedCallback() {
     super.connectedCallback();
     this.style.setProperty('--toast-color', this.color);
@@ -58,26 +63,31 @@ export class ToastMessage extends LitElement {
     this.startTimer();
   }
 
+  // Lifecycle method called when the component is removed from the DOM
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('mouseenter', this.stopTimer);
     this.removeEventListener('mouseleave', this.startTimer);
   }
 
+  // Timer to control the duration of the toast message
   private timer: number | undefined;
 
+  // Method to start the timer for the toast message
   private startTimer() {
     this.timer = window.setTimeout(() => {
       this.remove();
     }, this.duration);
   }
 
+  // Method to stop the timer for the toast message
   private stopTimer() {
     if (this.timer) {
       clearTimeout(this.timer);
     }
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="toast">
@@ -88,7 +98,9 @@ export class ToastMessage extends LitElement {
   }
 }
 
+// Class to manage toast messages
 class UseToast {
+  // Method to add a new toast message
   add(options: ToastOptions) {
     const toast = document.createElement('toast-message') as ToastMessage;
     toast.title = options.title;
@@ -99,4 +111,5 @@ class UseToast {
   }
 }
 
+// Export an instance of the UseToast class
 export const useToast = new UseToast();

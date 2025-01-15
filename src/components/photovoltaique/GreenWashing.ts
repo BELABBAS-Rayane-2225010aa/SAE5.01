@@ -5,6 +5,7 @@ import { useToast } from '../../composables/useToast';
 
 @customElement('app-green-washing')
 export class GreenWashing extends LitElement {
+  // Define a property 'benefit' of type Benefit with default values
   @property({ type: Object }) benefit: Benefit = {
     gasEmissionSaved: {
       co2: 0,
@@ -16,6 +17,7 @@ export class GreenWashing extends LitElement {
     lightBulbs: 0,
   };
 
+  // Define the styles for this component
   static styles = css`
     .greenwashing {
       padding: 24px;
@@ -71,13 +73,14 @@ export class GreenWashing extends LitElement {
     }
   `;
 
+  // Lifecycle method called when the component is added to the DOM
   async connectedCallback() {
     super.connectedCallback();
     await this.fetchBenefitData();
   }
 
+  // Method to fetch benefit data from the API
   async fetchBenefitData() {
-
     try {
       const benefits = await fetch('/api/solarPanel/v1/benefit', {
         method: 'GET',
@@ -94,6 +97,7 @@ export class GreenWashing extends LitElement {
     }
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="greenwashing">

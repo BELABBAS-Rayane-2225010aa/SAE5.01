@@ -2,9 +2,12 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Day } from '../../models/shop';
 
+// Define a new custom element with the name 'admin-shop-management-day'
 @customElement('admin-shop-management-day')
 export class AdminShopManagementDay extends LitElement {
+  // Define a property 'dayName' of type String with default empty string
   @property({ type: String }) dayName: string = '';
+  // Define a property 'day' of type Day with default values
   @property({ type: Object }) day: Day = {
     day: '',
     morningStart: '',
@@ -15,6 +18,7 @@ export class AdminShopManagementDay extends LitElement {
     withBreak: false,
   };
 
+  // Define the styles for this component
   static styles = css`
     .form-container {
       display: flex;
@@ -25,6 +29,7 @@ export class AdminShopManagementDay extends LitElement {
     }
   `;
 
+  // Method to toggle the open/close status of the shop
   toggleClose(isOpen: boolean): void {
     this.day.isOpen = isOpen;
     if (!isOpen) {
@@ -36,6 +41,7 @@ export class AdminShopManagementDay extends LitElement {
     this.requestUpdate();
   }
 
+  // Method to toggle the break status of the shop
   toggleBreak(withBreak: boolean): void {
     this.day.withBreak = withBreak;
     if (!withBreak) {
@@ -45,11 +51,13 @@ export class AdminShopManagementDay extends LitElement {
     this.requestUpdate();
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <label class="font-bold">${this.dayName}</label>
       <div class="form-container">
         <div class="flex gap-4">
+          <!-- Input for morning start time -->
           <input
             class="w-fit"
             type="time"
@@ -60,6 +68,7 @@ export class AdminShopManagementDay extends LitElement {
             }}
             ?disabled=${!this.day.isOpen}
           />
+          <!-- Input for morning end time -->
           <input
             class="w-fit"
             type="time"
@@ -71,8 +80,10 @@ export class AdminShopManagementDay extends LitElement {
             ?disabled=${!this.day.isOpen}
           />
 
+          <!-- Display 'et' if there is a break -->
           ${this.day.withBreak ? html`<span>et</span>` : ''}
 
+          <!-- Inputs for afternoon start and end time if there is a break -->
           ${this.day.withBreak ? html`
             <input
               class="w-fit"
@@ -98,6 +109,7 @@ export class AdminShopManagementDay extends LitElement {
         </div>
 
         <div class="flex gap-3">
+          <!-- Checkbox to toggle lunch break -->
           <div class="flex flex-col">
             <label>Lunch Break</label>
             <input
@@ -107,6 +119,7 @@ export class AdminShopManagementDay extends LitElement {
             />
           </div>
 
+          <!-- Checkbox to toggle open status -->
           <div class="flex flex-col">
             <label>Open</label>
             <input
