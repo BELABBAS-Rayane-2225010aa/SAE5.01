@@ -1,16 +1,18 @@
 import { html, css, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import moment from 'moment';
-import { Filters } from '../../../models/photovoltaique/filters'; // Assurez-vous de mettre le bon chemin vers votre fichier de type Filters
+import { Filters } from '../../../models/photovoltaique/filters'; // Ensure the correct path to your Filters type file
 
 @customElement('solar-panel-chart-filters')
 export class FiltersPopover extends LitElement {
+  // Define a property 'filters' of type Filters with default values
   @property({ type: Object }) filters: Filters = {
     startDate: moment().subtract(7, 'days').toDate(),
     endDate: new Date(),
     timeUnit: 'HOUR',
   };
 
+  // Define state variables for options and date formats
   @state() options = [
     { value: 'QUARTER_OF_AN_HOUR', text: '15 min' },
     { value: 'HOUR', text: 'heure' },
@@ -23,9 +25,11 @@ export class FiltersPopover extends LitElement {
   @state() startDateISO = moment(this.filters.startDate).format('YYYY-MM-DDTHH:mm:ss');
   @state() endDateISO = moment(this.filters.endDate).format('YYYY-MM-DDTHH:mm:ss');
 
+  // Stacks for undo and redo functionality
   undoStack: Filters[] = [];
   redoStack: Filters[] = [];
 
+  // Define the styles for this component
   static styles = css`
     .chart-wrap {
       height: 75vh;
@@ -61,6 +65,7 @@ export class FiltersPopover extends LitElement {
     this.undoStack.push({ ...this.filters });
   }
 
+  // Method to reset the filters to default values
   reset() {
     this.filters.startDate = moment().subtract(7, 'days').toDate();
     this.filters.endDate = new Date();
@@ -68,6 +73,7 @@ export class FiltersPopover extends LitElement {
     this.updateFilters();
   }
 
+  // Method to update the filters and manage undo/redo stacks
   updateFilters() {
     if (this.undoStack.length === 0 || JSON.stringify(this.undoStack[this.undoStack.length - 1]) !== JSON.stringify(this.filters)) {
       this.undoStack.push({ ...this.filters });
@@ -75,6 +81,7 @@ export class FiltersPopover extends LitElement {
     }
   }
 
+  // Method to undo the last filter change
   undo() {
     if (this.undoStack.length > 1) {
       const popStack = this.undoStack.pop();
@@ -88,6 +95,7 @@ export class FiltersPopover extends LitElement {
     }
   }
 
+  // Method to redo the last undone filter change
   redo() {
     if (this.redoStack.length > 0) {
       this.undoStack.push({ ...this.filters });
@@ -98,6 +106,7 @@ export class FiltersPopover extends LitElement {
     }
   }
 
+  // Method to handle keyboard shortcuts for undo/redo
   handleKeyDown(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     if ((event.key === 'z' || event.key === 'Z') && (event.ctrlKey || event.metaKey)) {
@@ -106,16 +115,19 @@ export class FiltersPopover extends LitElement {
     }
   }
 
+  // Lifecycle method called when the component is added to the DOM
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener('keydown', this.handleKeyDown.bind(this));
   }
 
+  // Lifecycle method called when the component is removed from the DOM
   disconnectedCallback() {
     window.removeEventListener('keydown', this.handleKeyDown.bind(this));
     super.disconnectedCallback();
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="popover-content">

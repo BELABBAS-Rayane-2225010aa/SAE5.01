@@ -1,13 +1,12 @@
-import { html,  LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { style } from '../../../styles/technologie/cardTechno';
-
 import { Techno } from '../../../models/techno';
 
-
+// Define a new custom element with the name 'app-techno-card'
 @customElement('app-techno-card')
 export class CardTechno extends LitElement {
-
+  // Define a property 'technoCard' of type Techno with default values
   @property({ type: Object }) technoCard: Techno = {
     title: '',
     icon: '',
@@ -17,12 +16,13 @@ export class CardTechno extends LitElement {
     installImage: '',
     functioningDescription: '',
     installDescription: '',
-    link: '',};
+    link: '',
+  };
 
-  static styles = [
-    style
-  ];
+  // Apply the imported styles to this component
+  static styles = [style];
 
+  // Render method to describe the component's template
   render() {
     return html`
       <div class="cardTechno">
@@ -34,7 +34,7 @@ export class CardTechno extends LitElement {
             alt="${this.technoCard.title || 'Techno image'}"
           />
 
-          <!-- Texte -->
+          <!-- Text -->
           <div class="cardTextTechno">
             <h3 class="text-xl font-bold text-primary-500">
               ${this.technoCard.title}
@@ -43,7 +43,7 @@ export class CardTechno extends LitElement {
           </div>
         </div>
 
-        <!-- Bouton -->
+        <!-- Button -->
         <a
           class="cardButtonTechno"
           href="#${this.technoCard.link}"

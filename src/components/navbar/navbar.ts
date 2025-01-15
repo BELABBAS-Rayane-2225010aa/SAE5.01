@@ -3,7 +3,6 @@ import { property, customElement, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import 'animate.css';
 
-
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/tooltip/tooltip.js';
@@ -13,14 +12,17 @@ import { BackgroundState } from '../../composables/navbar/useBackground';
 
 @customElement('app-navbar')
 export class Navbar extends LitElement {
-
+  // Define the state for the navbar
   private navbarState = new NavbarState();
 
+  // Define state variables for menu open status and reference links
   @state() isMenuOpen = false;
   @state() refLinks: Link[] = [];
 
+  // Define a property for authentication status
   @property({ type: Boolean }) authenticated = false;
 
+  // Apply the imported styles to this component
   static styles = style;
   private backgroundState: BackgroundState | null = null;
 
@@ -39,6 +41,7 @@ export class Navbar extends LitElement {
     document.head.appendChild(link);
   }
 
+  // Lifecycle method called when the component is first updated
   firstUpdated() {
     const navbarElement = this.shadowRoot?.querySelector('.navbar');
     this.backgroundState = new BackgroundState(navbarElement as HTMLElement | null);
@@ -46,6 +49,7 @@ export class Navbar extends LitElement {
     window.addEventListener('scroll', this.backgroundState.onScroll.bind(this.backgroundState));
   }
 
+  // Lifecycle method called when the component is removed from the DOM
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this.backgroundState) {
@@ -53,10 +57,12 @@ export class Navbar extends LitElement {
     }
   }
 
+  // Method to handle sign out
   private onSignOut() {
     // Implement the logic for sign out
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <!-- Navbar container -->

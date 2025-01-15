@@ -4,22 +4,29 @@ import { User } from '../../models/user';
 import sha256 from 'crypto-js/sha256';
 import { useToast } from '../../composables/useToast';
 
+// Define role constants
 const ROLE_ENUM = ["admin"] as const;
 const ROLE_RADIO = [
   { label: "Administrateur", value: ROLE_ENUM[0] },
 ];
 
+// Define a new custom element with the name 'user-manager'
 @customElement('user-manager')
 export class UserManager extends LitElement {
+  // Define a property 'user' of type User with default values
   @property({ type: Object }) user: User = { email: '', role: 'admin', password: '' };
+  // Define a property 'isNew' to indicate if the user is new
   @property({ type: Boolean }) isNew: boolean = false;
+  // Define a property 'addUser' which is a function to add a user
   @property({ attribute: false }) addUser: (user: User) => void = () => {};
 
+  // Define state variables for form fields
   @state() email: string = this.user.email;
   @state() role: string = this.user.role;
   @state() password: string = '';
   @state() confirmPassword: string = '';
 
+  // Define the styles for this component
   static styles = css`
     .user-management-container {
       display: flex;
@@ -29,6 +36,7 @@ export class UserManager extends LitElement {
     }
   `;
 
+  // Lifecycle method called when the component is updated
   updated(changedProperties: Map<string | number | symbol, unknown>) {
     if (changedProperties.has('user')) {
       this.email = this.user.email;
@@ -41,6 +49,7 @@ export class UserManager extends LitElement {
     }
   }
 
+  // Method to handle form submission
   async onSubmit(event: Event) {
     event.preventDefault();
     if (this.password !== this.confirmPassword) {
@@ -56,6 +65,7 @@ export class UserManager extends LitElement {
 
     try {
       if (this.isNew) {
+        // Send a POST request to add a new user
         const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/users/post.php', {
           method: 'POST',
           headers: {
@@ -67,12 +77,11 @@ export class UserManager extends LitElement {
           const data = await response.json();
           this.addUser(data);
           useToast.add({ title: 'Succès', description: 'L\'utilisateur a bien été ajouté', color: 'green' });
-        }
-        else {
+        } else {
           useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de l\'ajout de l\'utilisateur', color: 'red' });
         }
-      }
-      else {
+      } else {
+        // Send a PUT request to update an existing user
         const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/users/put.php', {
           method: 'PUT',
           headers: {
@@ -84,8 +93,7 @@ export class UserManager extends LitElement {
           const data = await response.json();
           this.addUser(data);
           useToast.add({ title: 'Succès', description: 'L\'utilisateur a bien été modifié', color: 'green' });
-        }
-        else {
+        } else {
           useToast.add({ title: 'Erreur', description: 'Une erreur est survenue lors de la modification de l\'utilisateur', color: 'red' });
         }
       }
@@ -95,6 +103,7 @@ export class UserManager extends LitElement {
     }
   }
 
+  // Method to reset the form fields
   resetForm() {
     this.email = '';
     this.role = ROLE_ENUM[0];
@@ -102,6 +111,7 @@ export class UserManager extends LitElement {
     this.confirmPassword = '';
   }
 
+  // Render method to describe the component's template
   render() {
     return html`
       <form @submit=${this.onSubmit} class="user-management-container">
