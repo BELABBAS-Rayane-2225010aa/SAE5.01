@@ -21,12 +21,12 @@ export class Footer extends LitElement {
   render() {
     return html`
       <footer class="footer">
-        <div class="container py-5 justify-center lg:justify-between">
+        <div class="container">
           <div class="logo">
             <!-- Conditionally render the logo based on the dark theme state -->
             ${this.isDarkTheme
               ? html`<img src="footer/amu_logo_white.png" alt="Logo amu white" class="w-fit" />`
-              : html`<img src="footer/amu_logo.png" alt="Logo amu" class="w-fit" />`}
+              : html`<img src="/assets/images/logo-amu.png" alt="Logo amu" class="w-fit" />`}
           </div>
 
           <div>

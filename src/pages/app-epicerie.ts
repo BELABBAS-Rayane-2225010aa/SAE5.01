@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+import { style } from '../styles/epicerieSolidaire/epicerieSolidaire';
 import { Shop } from '../models/shop';
 
 @customElement('app-epicerie')
@@ -7,9 +8,9 @@ export class EpicerieSolidaire extends LitElement {
   @state() shops: Shop[] = [];
   @state() isLoading = true;
 
-  static styles = css`
-    @import url("~/assets/css/solidaryGrocery.css");
-  `;
+  static styles = [
+    style
+  ];
 
   async connectedCallback() {
     super.connectedCallback();

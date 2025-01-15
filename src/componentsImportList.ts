@@ -9,6 +9,7 @@ import './components/footer';
 
 import './components/card/cardPresentation';
 import './components/card/cardNavigation';
+import './components/card/eventCard';
 import './components/defaultBackground';
 import './components/globalWrapper';
 import './components/parteners';

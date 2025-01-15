@@ -27,14 +27,6 @@ export class CardDescription extends LitElement {
   render() {
     return html`
       <div class="description__container" id="${this.technoCard.link}">
-        <!-- Page Header -->
-        <page-header
-          .title="${this.technoCard.title}"
-          .image="${this.technoCard.image ?? ''}"
-          .imageAlt="${this.technoCard.title}"
-          is-small
-        ></page-header>
-
         <!-- Short Description -->
         <p>${this.technoCard.shortDescription}</p>
 

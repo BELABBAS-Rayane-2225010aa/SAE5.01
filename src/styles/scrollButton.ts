@@ -8,10 +8,23 @@ import { css } from 'lit';
       bottom: 0;
       left: 50%;
       transform: translate(-50%, -100%);
+      animation: bounce 2s infinite ease-in-out;
     }
 
     .scroll-button sl-icon{
       /*width: 50px;
       height: 50px;*/
     }
+
+    @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translate(-50%, -100%);
+    }
+    40% {
+      transform: translate(-50%, -120%);
+    }
+    60% {
+      transform: translate(-50%, -110%);
+    }
+  }
   `;

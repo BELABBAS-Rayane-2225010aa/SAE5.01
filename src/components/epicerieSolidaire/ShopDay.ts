@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import moment from 'moment';
 import { Day } from '../../models/shop';
 import { useDate } from '../../composables/shopManagement/useDate';
+import { style } from "../../styles/epicerieSolidaire/shopHour";
 
 @customElement('solidary-grocery-shop-day')
 export class SolidaryGroceryShopDay extends LitElement {
@@ -13,10 +14,11 @@ export class SolidaryGroceryShopDay extends LitElement {
   // Define a property 'weekNumber' of type Number
   @property({ type: Number }) weekNumber!: number;
 
+
   // Define the styles for this component
-  static styles = css`
-    @import url("~/assets/css/solidaryGrocery/shopHours.css");
-  `;
+  static styles = [
+    style
+  ];
 
   // Method to check if the shop is currently open
   isCurrentlyOpen() {

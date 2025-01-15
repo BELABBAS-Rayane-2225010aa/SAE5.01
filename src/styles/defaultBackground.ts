@@ -8,7 +8,7 @@ export const style = css`
     height: 100%;
     top: 0;
     left: 0;
-    background-image: url("/images/background.webp");
+    background-image: url("/assets/images/background.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

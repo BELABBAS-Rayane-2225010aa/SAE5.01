@@ -1,9 +1,10 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { useWeek } from '../../composables/shopManagement/useWeek';
-import { Shop } from '../../models/shop';
+import { useWeek } from "../../composables/shopManagement/useWeek";
+import { Shop } from "@/models/shop";
 
 import '../custom-tabs';
+import { style } from "../../styles/epicerieSolidaire/tabs";
 
 @customElement('solidary-grocery-tabs')
 export class SolidaryGroceryTabs extends LitElement {
@@ -13,9 +14,9 @@ export class SolidaryGroceryTabs extends LitElement {
   @state() week: number = 0;
 
   // Define the styles for this component
-  static styles = css`
-    @import url("~/assets/css/solidaryGrocery/tabs.css");
-  `;
+  static styles = [
+    style
+  ];
 
   // Lifecycle method called when the component is added to the DOM
   connectedCallback() {

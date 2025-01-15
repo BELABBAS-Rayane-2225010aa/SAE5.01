@@ -21,9 +21,16 @@ import { css } from 'lit';
         gap: 3em;
 
         .logo {
-        width: 250px;
+        /* taille du logo amu */
+        width: 300px;
         max-width: 100%;
         height: auto;
+        }
+
+        .logo img {
+            /* l'image s'adapte à la taille de la div logo*/
+            width: 100%;
+            height: auto;
         }
 
         .footer-menu {

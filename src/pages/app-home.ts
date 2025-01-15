@@ -51,7 +51,7 @@ const cardsInfos: CardInfos[] = [
       '"Nous proposons à ces étudiants des produits à 10% des prix du marchés, comme des paquets de pâtes à 7 centimes' +
       "\" - Alexandre Siméoni, président de la fédération Aix-Marseille Interasso.\n Depuis l'inoguration du magasin" +
       " connecté en 2019 plus de 650 étudiants ont bénéficié de ces tarifs préférentiels.",
-    publicImage: "/images/mainPage_store.jpg",
+    publicImage: "/assets/images/mainPage_store.jpg",
     isReversed: false,
   },
 
@@ -62,7 +62,7 @@ const cardsInfos: CardInfos[] = [
       "Le magasin connecter a pour but de regroupé les technologies du futur et de les integré dans un contexte reel. " +
       "On y retrouve des technologies comme le LiFi, le recyclage de la lumière ambiante, l'eclairage circadien, " +
       "des drones, le RFID, l'IOT et la VLC",
-    publicImage: "/images/mainPage_tech_img.png",
+    publicImage: "/assets//images/mainPage_tech_img.png",
     isReversed: true,
   },
 ];

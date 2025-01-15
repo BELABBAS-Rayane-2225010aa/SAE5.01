@@ -122,6 +122,28 @@ export const router = new Router({
           <app-navbar></app-navbar>
           <app-visualisation></app-visualisation>
           <app-footer></app-footer>`
+      },
+      {
+        path: resolveRouterPath('evenements'),
+        title: 'Evenements',
+        plugins: [
+          lazy(() => import('./pages/app-evenement.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-evenement></app-evenement>
+          <app-footer></app-footer>`
+      },
+      {
+        path : resolveRouterPath('event/:id'),
+        title: 'Evenement',
+        plugins: [
+          lazy(() => import('./pages/app-eventDetail.js')),
+        ],
+        render: () => html`
+          <app-navbar></app-navbar>
+          <app-event-detail></app-event-detail>
+          <app-footer></app-footer>`
       }
     ]
   });

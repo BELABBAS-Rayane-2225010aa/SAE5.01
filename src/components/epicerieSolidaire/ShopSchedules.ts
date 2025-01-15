@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Shop } from '../../models/shop';
 import { useDate } from '../../composables/shopManagement/useDate';
+import { style } from "../../styles/epicerieSolidaire/shopHour";
 
 @customElement('solidary-grocery-shop-schedules')
 export class SolidaryGroceryShopSchedules extends LitElement {
@@ -11,9 +12,9 @@ export class SolidaryGroceryShopSchedules extends LitElement {
   @property({ type: Number }) week!: number;
 
   // Define the styles for this component
-  static styles = css`
-    @import url("~/assets/css/solidaryGrocery/shopHours.css");
-  `;
+  static styles = [
+    style
+  ];
 
   // Render method to describe the component's template
   render() {

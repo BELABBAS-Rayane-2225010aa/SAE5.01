@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { style } from '../../styles/epicerieSolidaire/shopHour';
 import { Shop } from '../../models/shop';
 
 @customElement('solidary-grocery-shop-address')
@@ -7,10 +8,11 @@ export class SolidaryGroceryShopAddress extends LitElement {
   // Define a property 'shop' of type Shop
   @property({ type: Object }) shop!: Shop;
 
+
   // Define the styles for this component
-  static styles = css`
-    @import url("~/assets/css/solidaryGrocery/shopHours.css");
-  `;
+  static styles = [
+    style
+  ];
 
   // Render method to describe the component's template
   render() {
