@@ -13,13 +13,13 @@ export const style = css`
         border-radius: 15px;
         max-width: 800px;
         margin: auto;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5), 0px 0px 15px rgba(0, 150, 255, 0.2);
+        /*box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5), 0px 0px 15px rgba(0, 150, 255, 0.2);*/
         transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.6), 0px 0px 25px rgba(0, 150, 255, 0.4);
+        /*box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.6), 0px 0px 25px rgba(0, 150, 255, 0.4);*/
     }
 
     @media screen and (max-width: 1024px) {
@@ -58,14 +58,14 @@ export const style = css`
     .card-description h2 {
         font-size: 1.8em;
         color: #00ffff;
-        text-shadow: 0px 0px 8px rgba(0, 255, 255, 0.8);
+        /*text-shadow: 0px 0px 8px rgba(0, 255, 255, 0.8);*/
         margin: 0;
     }
 
     .card-description h3 {
         font-size: 1.4em;
         color: #007bff;
-        text-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+        /*text-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);*/
     }
 
     .card-description p {

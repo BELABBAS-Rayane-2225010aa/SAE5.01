@@ -27,7 +27,7 @@ export class BackgroundState {
     const maxScroll = 1200; // Maximum scroll value for full opacity
     const opacity = Math.min(scrollTop / maxScroll, 1); // Calculate the opacity based on the scroll position
     if (this.navbar) {
-      this.navbar.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`; // Set the background color with the calculated opacity
+      this.navbar.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`; // Set the background color with the calculated opacity
       this.navbar.style.transition = 'background-color 0.3s ease'; // Add a transition effect for smooth opacity change
     }
   }
