@@ -36,7 +36,7 @@ export class SolidaryGroceryShopSchedules extends LitElement {
                   <span ?hidden=${!day.withBreak}>et ${day.afternoonStart} - ${day.afternoonEnd}</span>
                 </span>
                 <!-- Display 'closed' if the shop is not open -->
-                <span ?hidden=${day.isOpen}>${day.day} <span class="text-red-500">fermé</span></span>
+                <span ?hidden=${day.isOpen}>${day.day} <span class="text-red-500" style="color:red">fermé</span></span>
                 <!-- Display a ping animation if today is the current day -->
                 <span ?hidden=${!(index === useDate().currentDayIndex && this.week === useDate().currentWeek)} class="ping absolute top-0 left-0 flex h-3 w-3">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
