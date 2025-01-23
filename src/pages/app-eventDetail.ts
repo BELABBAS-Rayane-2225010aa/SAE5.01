@@ -8,7 +8,10 @@ export class EventDetail extends LitElement {
   @state() isLoading = true;
 
   static styles = css`
-    .event-detail {
+      img {
+          max-width: 30%;
+      }
+      .event-detail {
       padding: 16px;
       margin-top: 80px;
     }
