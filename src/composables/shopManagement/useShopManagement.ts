@@ -1,6 +1,6 @@
 import moment from "moment";
 import { DEFAULT_DAYS } from "../../constant/defaultValues";
-import type { Day, Shop } from "../../models/shop";
+import type { Day, Shop } from "../../models/calendar";
 import { useWeek } from "./useWeek";
 
 type UseShopManagementReturn = {

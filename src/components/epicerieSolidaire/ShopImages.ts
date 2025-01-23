@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Shop } from '../../models/shop';
+import { Shop } from '../../models/calendar';
 import { style } from "../../styles/epicerieSolidaire/shopHour";
 
 @customElement('solidary-grocery-shop-images')

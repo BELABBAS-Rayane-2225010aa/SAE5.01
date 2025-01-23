@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { style } from '../../styles/epicerieSolidaire/shopHour';
-import { Shop } from '../../models/shop';
+import { Shop } from '../../models/calendar';
 
 @customElement('solidary-grocery-shop-address')
 export class SolidaryGroceryShopAddress extends LitElement {

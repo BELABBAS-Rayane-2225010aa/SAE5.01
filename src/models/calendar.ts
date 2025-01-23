@@ -13,13 +13,7 @@ export type Day = {
     days: Day[];
   };
 
-  export type Shop = {
-    name: string;
-    description: string;
-    address: string;
-    images: string[];
-    social: string;
-    linkTree: string;
-    currentWeek: Week;
-    nextWeek: Week;
+  export type Calendar = {
+    year: number;
+    weeks: Week[];
   };

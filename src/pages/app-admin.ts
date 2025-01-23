@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { Shop } from '../models/shop';
+import { Calendar } from '../models/calendar';
 import { User } from '../models/user';
 import { EventPage } from '../models/event';
 import { useAuth } from '../composables/auth/useAuth';
@@ -8,7 +8,7 @@ import '../components/custom-tabs';
 
 @customElement('app-admin')
 export class AppAdmin extends LitElement {
-  @state() shops: Shop[] = [];
+  @state() calendar: Calendar[] = [];
   @state() users: User[] = [];
   @state() events: EventPage[] = [];
   @state() items = [
@@ -33,11 +33,11 @@ export class AppAdmin extends LitElement {
         return;
       }
 
-      this.fetchShops();
-
-      this.fetchEvents();
-
-      this.fetchUsers();
+      await Promise.all([
+        this.fetchShops(),
+        this.fetchEvents(),
+        this.fetchUsers()
+      ]);
 
       if (this.isAdmin) {
         this.items.push({ label: 'Utilisateurs' });
@@ -52,10 +52,10 @@ export class AppAdmin extends LitElement {
 
   async fetchShops() {
     try {
-      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/get.php');
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/calendar/get.php');
       if (response.ok) {
         const data = await response.json();
-        this.shops = data;
+        this.calendar = data;
       } else {
         console.error('Error in shopsHandler:', response);
       }
@@ -119,7 +119,7 @@ export class AppAdmin extends LitElement {
             (item) => html`
               <div ?hidden=${this.selectedTab !== item.label}>
                 ${item.label === 'Horaires' ? html`
-                  <admin-shops-management .shops=${this.shops}></admin-shops-management>
+                  <admin-shops-management .calendar=${this.calendar}></admin-shops-management>
                 ` : ''}
                 ${item.label === 'Evenements' ? html`
                   <admin-event-management .events=${this.events} @updateEventList=${this.updateEventList}></admin-event-management>

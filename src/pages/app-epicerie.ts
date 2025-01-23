@@ -1,11 +1,11 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { style } from '../styles/epicerieSolidaire/epicerieSolidaire';
-import { Shop } from '../models/shop';
+import { Calendar } from '../models/calendar';
 
 @customElement('app-epicerie')
 export class EpicerieSolidaire extends LitElement {
-  @state() shops: Shop[] = [];
+  @state() calendar: Calendar[] = [];
   @state() isLoading = true;
 
   static styles = [
@@ -15,10 +15,10 @@ export class EpicerieSolidaire extends LitElement {
   async connectedCallback() {
     super.connectedCallback();
     try {
-      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/get.php');
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/calendar/get.php');
       if (response.ok) {
         const data = await response.json();
-        this.shops = data;
+        this.calendar = data;
       } else {
         console.error('Error in shopsHandler:', response);
       }
@@ -49,7 +49,7 @@ export class EpicerieSolidaire extends LitElement {
           diverses activités. Un nouveau projet d'épicerie solidaire ouvrira fin 2023 au campus aixois, soutenu par des
           associations étudiantes et le réseau Alumni.
         </p>
-        <solidary-grocery-tabs .shops=${this.shops}></solidary-grocery-tabs>
+        <solidary-grocery-tabs .shops=${this.calendar}></solidary-grocery-tabs>
       </app-global-wrapper>
     `;
   }

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { useWeek } from "../../composables/shopManagement/useWeek";
-import { Shop } from "@/models/shop";
+import { Shop } from "@/models/calendar";
 
 import '../custom-tabs';
 import { style } from "../../styles/epicerieSolidaire/tabs";

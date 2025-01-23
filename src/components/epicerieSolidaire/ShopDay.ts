@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import moment from 'moment';
-import { Day } from '../../models/shop';
+import { Day } from '../../models/calendar';
 import { useDate } from '../../composables/shopManagement/useDate';
 import { style } from "../../styles/epicerieSolidaire/shopHour";
 
