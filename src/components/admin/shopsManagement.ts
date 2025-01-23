@@ -1,57 +1,91 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { Shop } from '../../models/shop';
-import { useWeek } from '../../composables/shopManagement/useWeek';
+import { Calendar, Week } from '../../models/calendar';
 import { useToast } from '../../composables/useToast';
 import { style } from '../../styles/admin/shopsManagement';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+import { French } from 'flatpickr/dist/l10n/fr.js';
+import weekSelectPlugin from './weekSelectPlugin';
+import { getDayClean } from './DayCleanType';
 
-interface Item extends Shop {
-  label: string;
-}
-
-// Define a new custom element with the name 'admin-shops-management'
 @customElement('admin-shops-management')
 export class ShopManagement extends LitElement {
-  // Define a property 'shops' of type Shop array with default empty array
-  @property({ type: Array }) shops: Shop[] = [];
-  // Define state variables for managing week, loading state, shop number, and items
+  @property({ type: Object }) calendar: Calendar = { year: 2021, weeks: [] };
   @state() week: number = 0;
   @state() isLoading: boolean = false;
-  @state() shopNumber: number = 0;
-  @state() items: Item[] = [];
+  @state() weekStart: string = '';
+  @state() weekEnd: string = '';
+  @state() currentWeek: Week = getDayClean(0);
 
-  // Apply the imported styles to this component
   static styles = style;
 
-  // Lifecycle method called when the component is added to the DOM
   connectedCallback() {
     super.connectedCallback();
     this.initializeState();
   }
 
-  // Initialize the state variables
   initializeState() {
-    const { weeks } = useWeek();
-    this.week = weeks[0].value;
-    this.items = this.createItems(this.shops || []);
+    this.updateWeekRange(new Date());
+    this.updateDays();
   }
 
-  // Create items from the shops array
-  createItems(shops: Shop[]): Item[] {
-    return shops.map((shop: Shop) => ({
-      label: shop.name,
-      ...shop,
-    }));
+  firstUpdated() {
+    const weekPicker = this.shadowRoot!.querySelector('#weekPicker');
+    if (weekPicker) {
+      flatpickr(weekPicker, {
+        locale: French,
+        weekNumbers: true,
+        defaultDate: new Date(),
+        onChange: (selectedDates) => {
+          this.updateWeekRange(selectedDates[0]);
+          this.updateDays();
+        },
+        plugins: [weekSelectPlugin()],
+      });
+    }
   }
 
-  // Method to handle form submission
+  getWeekNumber(date: Date): number {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
+    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  }
+
+  updateWeekRange(date: Date) {
+    const weekNumber = this.getWeekNumber(date);
+    this.week = weekNumber;
+    const startOfWeek = new Date(date);
+    startOfWeek.setDate(date.getDate() - date.getDay() + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    this.weekStart = startOfWeek.toLocaleDateString('fr-FR');
+    this.weekEnd = endOfWeek.toLocaleDateString('fr-FR');
+
+    // Update currentWeek based on the selected week number
+    if (this.calendar.weeks) {
+      this.currentWeek = this.calendar.weeks.find(week => week.number === this.week) || getDayClean(this.week);
+    }
+  }
+
+  updateDays() {
+    this.requestUpdate();
+  }
+
   async onSubmit(event: Event) {
     event.preventDefault();
-    const shopsCopy = [...this.shops];
+    const calendarCopy = { ...this.calendar, weeks: [...this.calendar.weeks] };
+
+    // Add the current week to the calendar if it doesn't exist
+    const existingWeek = calendarCopy.weeks.find(week => week.number === this.currentWeek.number);
+    if (!existingWeek) {
+      calendarCopy.weeks.push(this.currentWeek);
+    }
 
     try {
       this.isLoading = true;
-      await this.updateShops(shopsCopy);
+      await this.updateCalendar(calendarCopy);
       useToast.add({ title: 'Succès', description: 'Les horaires ont bien été enregistrés', color: 'green' });
     } catch (error) {
       console.error(error);
@@ -61,26 +95,24 @@ export class ShopManagement extends LitElement {
     }
   }
 
-  // Method to update the shops
-  async updateShops(shops: Shop[]) {
+  async updateCalendar(calendar: Calendar) {
     try {
-      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/put.php', {
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/calendar/put.php', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(shops),
+        body: JSON.stringify(calendar),
       });
       if (!response.ok) {
-        throw new Error('Error in updateShops');
+        throw new Error('Error in updateCalendar');
       }
     } catch (error) {
-      console.error('Error in updateShops:', error);
+      console.error('Error in updateCalendar:', error);
       throw error;
     }
   }
 
-  // Render method to describe the component's template
   render() {
     return html`
       <div class="container">
@@ -88,33 +120,25 @@ export class ShopManagement extends LitElement {
 
         <p class="shop__select">
           Semaine :
-          <select @change=${(e: Event) => this.week = Number((e.target as HTMLSelectElement).value)}>
-            ${useWeek().weeks.map(week => html`<option value=${week.value}>${week.name}</option>`)}
-          </select>
+          <input id="weekPicker" type="text" placeholder="Choisir une semaine" />
+          <span>${this.week} : du ${this.weekStart} au ${this.weekEnd}</span>
         </p>
 
         <div class="tabs">
-          ${this.items.map((item, index) => html`
-            <button @click=${() => this.shopNumber = index}>${item.label}</button>
-          `)}
+          <button>${this.calendar.year}</button>
         </div>
 
         <form @submit=${this.onSubmit}>
           <button type="submit" ?disabled=${this.isLoading}>Enregistrer</button>
-
           <ul class="shop__ul">
-            ${this.shops.length > 0 ? html`
-              ${['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'].map((dayName, index) => html`
-                <li>
-                  <admin-shop-management-day
-                    .dayName=${dayName}
-                    .day=${this.week === this.shops[this.shopNumber].currentWeek.number
-                      ? this.shops[this.shopNumber].currentWeek.days[index]
-                      : this.shops[this.shopNumber].nextWeek.days[index]}
-                  ></admin-shop-management-day>
-                </li>
-              `)}
-            ` : html`<p>Aucun magasin disponible.</p>`}
+            ${this.currentWeek.days.map((day, index) => html`
+              <li>
+                <admin-shop-management-day
+                  .dayName=${['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'][index]}
+                  .day=${day}
+                ></admin-shop-management-day>
+              </li>
+            `)}
           </ul>
         </form>
       </div>

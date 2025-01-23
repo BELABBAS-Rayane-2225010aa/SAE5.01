@@ -1,4 +1,4 @@
-import type { Day } from "../models/shop";
+import type { Day } from "../models/calendar";
 
 export const DEFAULT_DAYS: Omit<Day, "day"> = {
   isOpen: false,

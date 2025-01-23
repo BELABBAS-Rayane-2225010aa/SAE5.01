@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { useShopManagement } from "../../../composables/shopManagement/useShopManagement";
-import type { Day, Shop } from "../../../models/shop";
+import type { Day, Shop } from "../../../models/calendar";
 
 // Mock du hook `useWeek`
 vi.mock("./useWeek", () => ({

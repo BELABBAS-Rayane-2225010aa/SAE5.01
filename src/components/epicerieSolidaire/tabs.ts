@@ -1,68 +1,70 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { useWeek } from "../../composables/shopManagement/useWeek";
-import { Shop } from "@/models/shop";
+import { Calendar, Week } from "@/models/calendar";
 
 import '../custom-tabs';
 import { style } from "../../styles/epicerieSolidaire/tabs";
 
 @customElement('solidary-grocery-tabs')
 export class SolidaryGroceryTabs extends LitElement {
-  // Define a property 'shops' of type Shop array with default empty array
-  @property({ type: Array }) shops: Shop[] = [];
-  // Define a state variable 'week' to store the current week number
+  @property({ type: Array }) calendar: Calendar = { year: 2021, weeks: [] };
   @state() week: number = 0;
+  @state() weekStart: string = '';
+  @state() weekEnd: string = '';
+  @state() currentWeek: Week = { number: 0, days: [] };
 
-  // Define the styles for this component
   static styles = [
     style
   ];
 
-  // Lifecycle method called when the component is added to the DOM
   connectedCallback() {
     super.connectedCallback();
     const { weeks } = useWeek();
     this.week = weeks[0].value;
+    this.updateWeekRange(new Date());
   }
 
-  // Render method to describe the component's template
+  updateWeekRange(date: Date) {
+    const weekNumber = this.getWeekNumber(date);
+    this.week = weekNumber;
+    const startOfWeek = new Date(date);
+    startOfWeek.setDate(date.getDate() - date.getDay() + 1);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+    this.weekStart = startOfWeek.toLocaleDateString('fr-FR');
+    this.weekEnd = endOfWeek.toLocaleDateString('fr-FR');
+
+    if (this.calendar.weeks) {
+      this.currentWeek = this.calendar.weeks.find(week => week.number === this.week) || { number: 0, days: [] };
+    }
+  }
+
+  getWeekNumber(date: Date): number {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
+    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  }
+
   render() {
     return html`
       <custom-tabs
-        .shops=${this.shops}
+        .shops=${this.calendar}
         class="shop__tabs"
         orientation="vertical"
         ui="{ wrapper: 'flex shops-start gap-10', list: { width: 'w-48' } }"
       >
-        ${this.shops.map(shop => html`
-          <div class="shop">
-            <!-- Shop images component -->
-            <solidary-grocery-shop-images .shop=${shop}></solidary-grocery-shop-images>
-            <!-- Shop name -->
-            <h3 class="font-bold">${shop.name}</h3>
-            <!-- Shop description -->
-            <p>${shop.description}</p>
-            <!-- Social media links -->
-            <u-button variant="link" .to=${shop.social} target="_blank" style="width: fit-content">⸱ Instagram</u-button>
-            <u-button variant="link" .to=${shop.linkTree} target="_blank" style="width: fit-content">⸱ Autres liens</u-button>
-            <!-- Week selection dropdown -->
-            <p class="shop__select">
-              Semaine :
-              <u-select
-                .value=${this.week}
-                .options=${useWeek().weeks}
-                option-attribute="name"
-                value-attribute="value"
-                icon="i-heroicons-calendar-days"
-                @change=${(e: Event) => this.week = Number((e.target as HTMLSelectElement).value)}
-              ></u-select>
-            </p>
-            <!-- Shop schedules component -->
-            <solidary-grocery-shop-schedules .shop=${shop} .week=${this.week}></solidary-grocery-shop-schedules>
-            <!-- Shop address component -->
-            <solidary-grocery-shop-address .shop=${shop}></solidary-grocery-shop-address>
-          </div>
-        `)}
+        <div class="shop">
+          <!-- Week selection dropdown -->
+          <p class="shop__select">
+            Semaine : ${this.week} - du ${this.weekStart} au ${this.weekEnd}
+          </p>
+          <!-- Shop schedules component -->
+          <solidary-grocery-shop-schedules .calendar=${this.calendar} .currentWeek=${this.currentWeek} .week=${this.week}></solidary-grocery-shop-schedules>
+          <!-- Shop address component -->
+          <solidary-grocery-shop-address .calendar=${this.calendar}></solidary-grocery-shop-address>
+        </div>
       </custom-tabs>
     `;
   }

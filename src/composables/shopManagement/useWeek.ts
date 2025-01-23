@@ -46,11 +46,7 @@ export const useWeek = (): UseWeekReturn => {
     {
       name: `${getStartAndEndOfWeek(currentWeekNumber, currentYear).start} au ${getStartAndEndOfWeek(currentWeekNumber, currentYear).end}`,
       value: currentWeekNumber,
-    },
-    {
-      name: `${getStartAndEndOfWeek(currentWeekNumber + 1, currentYear).start} au ${getStartAndEndOfWeek(currentWeekNumber + 1, currentYear).end}`,
-      value: currentWeekNumber + 1,
-    },
+    }
   ];
 
   // Return the current week number and the array of weeks

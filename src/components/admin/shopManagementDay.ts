@@ -1,12 +1,10 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Day } from '../../models/shop';
+import { Day } from '../../models/calendar';
 
 // Define a new custom element with the name 'admin-shop-management-day'
 @customElement('admin-shop-management-day')
 export class AdminShopManagementDay extends LitElement {
-  // Define a property 'dayName' of type String with default empty string
-  @property({ type: String }) dayName: string = '';
   // Define a property 'day' of type Day with default values
   @property({ type: Object }) day: Day = {
     day: '',
@@ -54,7 +52,7 @@ export class AdminShopManagementDay extends LitElement {
   // Render method to describe the component's template
   render() {
     return html`
-      <label class="font-bold">${this.dayName}</label>
+      <label class="font-bold">${this.day.day}</label>
       <div class="form-container">
         <div class="flex gap-4">
           <!-- Input for morning start time -->

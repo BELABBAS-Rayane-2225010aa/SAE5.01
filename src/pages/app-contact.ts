@@ -39,7 +39,7 @@ export class ContactForm extends LitElement {
 
   async fetchShops() {
     try {
-      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/shops/get.php');
+      const response = await fetch('https://api-magasinconnecte.alwaysdata.net/src/endpoint/calendar/get.php');
       if (response.ok) {
         const data = await response.json();
         this.items = this.createItems(data);

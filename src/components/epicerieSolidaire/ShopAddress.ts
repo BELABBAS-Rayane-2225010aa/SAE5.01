@@ -1,12 +1,9 @@
 import { LitElement, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { style } from '../../styles/epicerieSolidaire/shopHour';
-import { Shop } from '../../models/shop';
 
 @customElement('solidary-grocery-shop-address')
 export class SolidaryGroceryShopAddress extends LitElement {
-  // Define a property 'shop' of type Shop
-  @property({ type: Object }) shop!: Shop;
 
 
   // Define the styles for this component
@@ -29,7 +26,7 @@ export class SolidaryGroceryShopAddress extends LitElement {
             scrolling="no"
             marginheight="0"
             marginwidth="0"
-            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=${encodeURIComponent(this.shop.address)}+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=${encodeURIComponent("142 Trav. Charles Susini, 13013 Marseille")}+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
           ></iframe>
         </div>
       </div>
